@@ -7,5 +7,16 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: DIST_DIR
+  },
+  module: {
+    rules: [
+      {
+        test: /\.jsx?/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+        },
+      },
+    ],
   }
 }
