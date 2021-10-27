@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import Selectors from './components/overview/selectors.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -29,16 +30,8 @@ class App extends React.Component {
           <div className='product-detail'>
             Product details here!
           </div>
-
-          <div className='choose-styles'>
-            <div className='style-selector'>
-              Style selector here!
-            </div>
-            <div className='quantity-selector'>
-              Quantity selector here!
-            </div>
-            <button className='add-to-cart'>Add to Cart</button>
-          </div>
+          <br></br>
+          <Selectors />
         </div>
         <br></br>
         <div className='ratings-and-reviews'>
