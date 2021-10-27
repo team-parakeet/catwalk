@@ -9,7 +9,13 @@ class App extends React.Component {
     // TODO: What parts of state changes at this level?
 
     // TODO: Bind fns
+    this.addItemToCart = this.addItemToCart.bind(this);
+  }
 
+  // I am under construction :)
+  // TODO: Build out
+  addItemToCart( item ) {
+    console.log(`Adding ${item} to cart!`);
   }
 
   render() {
@@ -23,11 +29,15 @@ class App extends React.Component {
           <div className='product-detail'>
             Product details here!
           </div>
-          <div className='style-selector'>
-            Style selector here!
-          </div>
-          <div className='add-to-cart'>
-            Add to cart here!
+
+          <div className='choose-styles'>
+            <div className='style-selector'>
+              Style selector here!
+            </div>
+            <div className='quantity-selector'>
+              Quantity selector here!
+            </div>
+            <button className='add-to-cart'>Add to Cart</button>
           </div>
         </div>
         <br></br>
