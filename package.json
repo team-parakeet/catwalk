@@ -1,0 +1,20 @@
+{
+  "name": "catwalk",
+  "version": "1.0.0",
+  "description": "Not express, express shopping app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/team-parakeet/catwalk.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/team-parakeet/catwalk/issues"
+  },
+  "homepage": "https://github.com/team-parakeet/catwalk#readme"
+}
