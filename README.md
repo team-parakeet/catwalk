@@ -1,2 +1,2 @@
 # 🐈‍⬛ catwalk
-Not express, express shopping app
+Not-Express Express shopping app
