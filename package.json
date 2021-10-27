@@ -16,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/team-parakeet/catwalk/issues"
   },
-  "homepage": "https://github.com/team-parakeet/catwalk#readme"
+  "homepage": "https://github.com/team-parakeet/catwalk#readme",
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "webpack": "^5.60.0"
+  }
 }
