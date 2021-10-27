@@ -1,6 +1,6 @@
 const path = require('path');
-var SRC_DIR = path.join(__dirname, "/client/src");
-var DIST_DIR = path.join(__dirname, "/client/dist");
+var SRC_DIR = path.join(__dirname, "client/src");
+var DIST_DIR = path.join(__dirname, "client/dist");
 
 module.exports = {
   entry: path.join(SRC_DIR, 'index.jsx'),
@@ -16,7 +16,7 @@ module.exports = {
         use: {
           loader: "babel-loader",
           options: {
-            presets: [ "@babel/preset-react"]
+            presets: [ "@babel/preset-react", "@babel/preset-env"]
           }
         },
       },
