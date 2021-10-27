@@ -4,7 +4,9 @@
   "description": "Not express, express shopping app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx live-server",
+    "build": "webpack --watch --mode development"
   },
   "repository": {
     "type": "git",
@@ -16,5 +18,13 @@
   "bugs": {
     "url": "https://github.com/team-parakeet/catwalk/issues"
   },
-  "homepage": "https://github.com/team-parakeet/catwalk#readme"
+  "homepage": "https://github.com/team-parakeet/catwalk#readme",
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "webpack": "^5.60.0",
+    "webpack-cli": "^4.9.1"
+  }
 }
