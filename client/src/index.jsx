@@ -1,22 +1,72 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import { TOKEN } from '../../config.js';
 import Selectors from './components/overview/selectors.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+    // For our progress demo, let's hard-code an ID `39333`
 
     // TODO: What parts of state changes at this level?
+    this.state = {
+      styles: [],
+    };
 
     // TODO: Bind fns
     this.addItemToCart = this.addItemToCart.bind(this);
+    this.getStyles = this.getStyles.bind(this);
   }
 
-  // I am under construction :)
-  // TODO: Build out
+  // TODO: On mount, retrieve product and styles
+  componentDidMount() {
+    const config = {
+      method: 'get',
+      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/39333',
+      headers: {
+        'Authorization': `${TOKEN}`,
+      }
+    };
+
+    axios(config)
+      .then( () => {
+        this.getStyles();
+      })
+      .catch( (err) => {
+        console.error(err);
+        console.error('index.jsx | mount failed');
+      })
+  }
+
+  // Retrieve product's styles from API, set state to reflect those styles
+  getStyles() {
+    const config = {
+      method: 'get',
+      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/39333/styles',
+      headers: {
+        'Authorization': `${TOKEN}`,
+      }
+    };
+
+    axios(config)
+      .then( (styles) => {
+        console.log('styles: ', styles.data.results);
+
+        this.setState({
+          ...this.state,
+          styles: styles.data.results,
+        });
+      })
+      .catch( (err) => {
+        console.error(err);
+        console.error('index.jsx | failed to get styles');
+      });
+  }
+
+  // TODO: Add item object to the shopping cart table in the DB
   addItemToCart( item ) {
-    console.log(`Adding ${item} to cart!`);
+
   }
 
   render() {
@@ -31,7 +81,8 @@ class App extends React.Component {
             Product details here!
           </div>
           <br></br>
-          <Selectors />
+          { /* Selectors should receive current item's styles and quantities */}
+          <Selectors addItemToCart={this.addItemToCart} styles={this.state.styles}/>
         </div>
         <br></br>
         <div className='ratings-and-reviews'>
@@ -68,4 +119,4 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById('app'));
+ReactDOM.render(<App productId={39333}/>, document.getElementById('app'));

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 const StyleThumbnail = (props) => {
   return (
-    <image className='style-thumbnail'>I am a style thumbnail</image>
+    <div className='style-thumbnail'> I am a style thumbnail </div>
   );
 }
 
