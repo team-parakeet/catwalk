@@ -1,4 +1,3 @@
-import ReviewsHeader from './ReviewsHeader.js';
 import ReviewsColumn from './ReviewsColumn.js';
 import ReviewsList from './ReviewsList.js';
 
@@ -12,7 +11,9 @@ class Reviews extends React.Component {
   render() {
     return (
       <div class="reviews-container">
-        <ReviewsHeader />
+        <div class="reviews-header">
+          RATINGS & REVIEWS
+        </div>
         <div>
           <ReviewsColumn />
           <ReviewsList />
