@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import { TOKEN } from '../../config.js';
 import Selectors from './components/overview/selectors.jsx';
 
 class App extends React.Component {
@@ -24,7 +25,7 @@ class App extends React.Component {
       method: 'get',
       url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/39333',
       headers: {
-        'Authorization': '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',
+        'Authorization': `${TOKEN}`,
       }
     };
 
@@ -44,7 +45,7 @@ class App extends React.Component {
       method: 'get',
       url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/39333/styles',
       headers: {
-        'Authorization': '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',
+        'Authorization': `${TOKEN}`,
       }
     };
 
