@@ -7,19 +7,22 @@ import Selectors from './components/overview/selectors.jsx';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    // For our progress demo, let's hard-code an ID `39333`
+    // For our progress demo, we've hard-coded an ID of `39333`
 
     // TODO: What parts of state changes at this level?
     this.state = {
+      product: {},
       styles: [],
+      reviews: [],
     };
 
     // TODO: Bind fns
-    this.addItemToCart = this.addItemToCart.bind(this);
     this.getStyles = this.getStyles.bind(this);
+    this.getReviews = this.getReviews.bind(this);
+    this.addItemToCart = this.addItemToCart.bind(this);
   }
 
-  // TODO: On mount, retrieve product and styles
+  // On mount, retrieve product and styles
   componentDidMount() {
     const config = {
       method: 'get',
@@ -32,11 +35,12 @@ class App extends React.Component {
     axios(config)
       .then( () => {
         this.getStyles();
+        this.getReviews();
       })
       .catch( (err) => {
         console.error(err);
         console.error('index.jsx | mount failed');
-      })
+      });
   }
 
   // Retrieve product's styles from API, set state to reflect those styles
@@ -51,8 +55,6 @@ class App extends React.Component {
 
     axios(config)
       .then( (styles) => {
-        console.log('styles: ', styles.data.results);
-
         this.setState({
           ...this.state,
           styles: styles.data.results,
@@ -64,7 +66,32 @@ class App extends React.Component {
       });
   }
 
-  // TODO: Add item object to the shopping cart table in the DB
+  // TODO: GET all reviews for a product
+  getReviews() {
+    const config = {
+      method: 'get',
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/?sort="relevant"&product_id=${this.props.productId}`,
+      headers: {
+        'Authorization': `${TOKEN}`,
+      }
+    };
+
+    axios(config)
+      .then( (reviews) => {
+        console.log('reviews: ', reviews.data.results);
+
+        this.setState({
+          ...this.state,
+          reviews: reviews.data.results
+        })
+      })
+      .catch( (err) => {
+        console.error(err);
+        console.error('index.jsx | failed to fetch reviews');
+      })
+  }
+
+  // TODO: POST the item obj to the API
   addItemToCart( item ) {
 
   }
