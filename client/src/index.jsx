@@ -4,6 +4,7 @@ import axios from 'axios';
 import { TOKEN } from '../../config.js';
 import Selectors from './components/overview/selectors.jsx';
 import Reviews from './components/reviews/Reviews.jsx';
+import QuestionsAnswers from './components/QA/QASection.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -142,13 +143,14 @@ class App extends React.Component {
         <br></br>
         <div className='q-and-a'>
           <h2>Questions and answers!</h2>
-          <div className='search-questions'>Search for questions here</div>
+          <QuestionsAnswers />
+          {/* <div className='search-questions'>Search for questions here</div>
           <div className='questions-list'>Questions List
             <div>Individual question #1</div>
             <div>Individual question #2</div>
             <div>Individual question #3</div>
             More answered questions down below!
-          </div>
+          </div> */}
           <button className='add-question'>Add a question</button>
           <button className='add-answer'>Add an answer [modal]</button>
         </div>
