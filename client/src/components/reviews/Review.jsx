@@ -1,7 +1,11 @@
+import React from 'react';
+
 function Review(props) {
   return (
-    <div class="review">
-      {/* dynamically render single review content */}
+    <div className="review">
+      <div>Individual review tile #1</div>
+      <div>Individual review tile #2</div>
+      <div>Individual review tile #3</div>
     </div>
   )
 }

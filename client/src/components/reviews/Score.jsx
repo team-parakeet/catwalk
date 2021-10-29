@@ -1,7 +1,9 @@
+import React from 'react';
+
 function Score(props) {
   return (
-    <div class="score">
-      {/* dynamically render score */}
+    <div className="score">
+      Score
     </div>
   )
 }
