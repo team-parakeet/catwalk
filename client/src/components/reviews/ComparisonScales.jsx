@@ -1,7 +1,9 @@
+import React from 'react';
+
 function ComparisonScales(props) {
   return (
-    <div class="comparison-scales">
-      {/* dynamically render categories */}
+    <div className="comparison-scales">
+      Comparison scales
     </div>
   )
 }

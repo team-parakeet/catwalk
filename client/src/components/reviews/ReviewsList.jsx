@@ -1,4 +1,5 @@
-import Review from 'Review.js';
+import React from 'react';
+import Review from './Review.jsx';
 
 class ReviewsList extends React.Component {
   constructor(props) {
@@ -9,12 +10,12 @@ class ReviewsList extends React.Component {
 
   render() {
     return (
-      <div class="reviews-list-container">
+      <div className="reviews-list-container">
         <Review />
         {/* dynamically render single reviews */}
-        <div class="reviews-buttons">
-          <button class="more-reviews-button">MORE REVIEWS</button>
-          <button class="add-review-button">ADD A REVIEW</button>
+        <div className="reviews-buttons">
+          <button className="more-reviews-button">MORE REVIEWS</button>
+          <button className="add-review-button">ADD A REVIEW</button>
         </div>
       </div>
     )

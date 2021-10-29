@@ -1,6 +1,7 @@
-import RatingScore from "./RatingScore.js";
-import StarsChart from "./StarsChart.js"
-import ComparisonScales from "./ComparisonScales.js";
+import React from 'react';
+import RatingScore from "./RatingScore.jsx";
+import StarsChart from "./StarsChart.jsx"
+import ComparisonScales from "./ComparisonScales.jsx";
 
 class ReviewsColumn extends React.Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class ReviewsColumn extends React.Component {
 
   render() {
     return (
-      <div class="reviews-column-container">
+      <div className="reviews-column-container">
         <RatingScore />
         <StarsChart />
         <ComparisonScales/>

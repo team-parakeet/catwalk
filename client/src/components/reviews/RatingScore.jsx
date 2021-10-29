@@ -1,9 +1,10 @@
-import Score from './Score.js';
-import Stars from './Stars.js';
+import React from 'react';
+import Score from './Score.jsx';
+import Stars from './Stars.jsx';
 
 function RatingScore(props) {
   return (
-    <div class="rating-score-container">
+    <div className="rating-score-container">
       <Score />
       <Stars />
     </div>

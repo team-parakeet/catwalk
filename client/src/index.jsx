@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import { TOKEN } from '../../config.js';
 import Selectors from './components/overview/selectors.jsx';
+import Reviews from './components/reviews/Reviews.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -136,12 +137,7 @@ class App extends React.Component {
         <br></br>
         <div className='ratings-and-reviews'>
           <h2>Ratings and reviews!</h2>
-          <div className='write-new-review'>Write new review goes here!</div>
-          <div className='reviews-list'>Reviews List
-            <div>Individual review tile #1</div>
-            <div>Individual review tile #2</div>
-            <div>Individual review tile #3</div>
-          </div>
+          <Reviews />
         </div>
         <br></br>
         <div className='q-and-a'>

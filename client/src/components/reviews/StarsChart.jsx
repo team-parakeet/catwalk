@@ -1,7 +1,9 @@
+import React from 'react';
+
 function StarsChart(props) {
   return (
-    <div class="stars-chart">
-      {/* render stars ratings */}
+    <div className="stars-chart">
+      Stars chart
     </div>
   )
 }
