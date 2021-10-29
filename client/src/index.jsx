@@ -95,7 +95,6 @@ class App extends React.Component {
 
   // POST the item obj to the API
   addItemToCart( item ) {
-    console.log(item);
     let config = {
       method: POST,
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/cart`,

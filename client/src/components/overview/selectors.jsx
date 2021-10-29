@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import { TOKEN } from '../../../../config.js';
 
 import StyleThumbnail from './styleThumbnail.jsx';
 
@@ -16,9 +15,7 @@ class Selectors extends React.Component {
 
     this.state = {
       currentStyle: '',
-      sizes: [],
       currentSize: '',
-      quantities: [],
       currentQuantity: 1,
     };
 
@@ -31,9 +28,9 @@ class Selectors extends React.Component {
     this.handleAddToCart = this.handleAddToCart.bind(this);
   }
 
-  // On click, set state to reflect chosen style
+  // TODO: On click, set state to reflect chosen style
   handleStyleSelect(e) {
-    this.retrieveSizesByStyle( e.target.value );
+    retrieveSizesByStyle( e.target.value );
 
     this.setState({
       ...this.state,
@@ -41,32 +38,16 @@ class Selectors extends React.Component {
     });
   }
 
-  // TODO: Get style's sizes
+  // TODO: Get all the sizes for the selected style
   retrieveSizesByStyle( style ) {
-    console.log('Definitely retrieving sizes by style');
-
-
-  }
-
-  // On click, retrieve quantities for selected size
-  handleSizeSelect(e) {
-    let size = e.target.value;
-
-    this.setState({
-      ...this.state,
-      currentSize: e.target.value,
-    });
-
-    this.retrieveQuantitiesBySize(size);
-  }
-
-  // TODO: Get style's quantities
-  retrieveQuantitiesBySize( size ) {
     // If the max <= 15, have select menu options go only to max
 
     // Else, have select menu options go to 15
 
-    const config =
+  }
+
+  // TODO: On style select, make API call to retrieve its quantities
+  retrieveQuantitiesBySize( size ) {
     axios.get(`products/${this.props.productId}/styles`)
       .then( (styles) => {
         // styles.results[ productObj, productObj, productObj ]
@@ -78,6 +59,17 @@ class Selectors extends React.Component {
       })
   }
 
+  handleSizeSelect(e) {
+    let size = e.target.value;
+
+    // TODO: Retrieve quantities for selected size
+
+    this.setState({
+      ...this.state,
+      currentSize: e.target.value,
+    });
+  }
+
   // On click, set state to reflect chosen quantity
   handleQuantitySelect(e) {
     this.setState({
@@ -86,23 +78,21 @@ class Selectors extends React.Component {
     })
   }
 
-  // On click, add current state of style to cart
-  handleAddToCart() {
-    console.log(`Adding to the cart ${this.state.quantity}x '${this.state.style}' in size ${this.state.size}`);
-    let item = {
+  // TODO: On click, add current state of style to cart
+  handleAddToCart(e) {
+    console.log(`Adding to the cart ${this.state.style}, ${this.state.quantity}`);
+    this.props.addToCart({
       ...this.props.product,
       style: this.state.style,
       size: this.state.size,
       quantity: this.state.quantity,
-    }
-
-    this.props.addItemToCart(item);
+    })
   }
 
   render() {
+    console.log('selectors props: ', this.props);
     return (
       <div className='selectors'>
-
         <div className='style-selector'>
           Style selector
           <br></br>
@@ -112,24 +102,18 @@ class Selectors extends React.Component {
           <StyleThumbnail />
         </div>
         <br></br>
-
         <div className='size-selector'>
-          Size selector
-          <select className='size-selector' onSelect={this.handleSizeSelect}>
-            {/* TODO: Map out this.state.sizes into options */}
-          </select>
+          <div>Size selector</div>
         </div>
-
         <div className='quantity-selector'>
           <div>Quantity selector</div>
           <div>For now, users can select up to a max of 15</div>
-          <select onSelect={this.handleQuantitySelect} >
+          <select onSelect={this.handleQuantitySelect}>
             { dummyData.map( (data, i) => (
               <option className='quantity-option' key={i}>{data}</option>
             )) }
           </select>
         </div>
-
         <br></br>
         <button className='add-to-cart' onClick={this.handleAddToCart}>Add to Cart</button>
       </div>
