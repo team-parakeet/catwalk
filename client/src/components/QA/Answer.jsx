@@ -1,11 +1,16 @@
 import React from 'react';
+import { Container, ABlock, AnswerDiv } from '../styles/Answer.styled';
 
 const Answer = () => {
   return (
-    <div>
-      A:
-      <text></text>
-    </div>
+    <Container>
+      <ABlock>
+        A:
+      </ABlock>
+      <AnswerDiv>
+        Very good question.
+      </AnswerDiv>
+    </Container>
   )
 }
 

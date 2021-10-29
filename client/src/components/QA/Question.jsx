@@ -1,11 +1,11 @@
 import React from 'react';
+import {StyledDiv} from '../styles/Question.styled';
 
 const Question = () => {
   return (
-    <div>
-      Q:
-      <text></text>
-    </div>
+    <StyledDiv>
+      Q: What is the meaning of life?
+    </StyledDiv>
   )
 }
 
