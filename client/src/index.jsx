@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-import QuestionsAnswers from './components/QuestionsAnswers.jsx';
+import QuestionsAnswers from './components/QA/QASection.jsx';
 
 class App extends React.Component {
   constructor(props) {
@@ -55,13 +55,13 @@ class App extends React.Component {
         <div className='q-and-a'>
           <h2>Questions and answers!</h2>
           <QuestionsAnswers />
-          <div className='search-questions'>Search for questions here</div>
+          {/* <div className='search-questions'>Search for questions here</div>
           <div className='questions-list'>Questions List
             <div>Individual question #1</div>
             <div>Individual question #2</div>
             <div>Individual question #3</div>
             More answered questions down below!
-          </div>
+          </div> */}
           <button className='add-question'>Add a question</button>
           <button className='add-answer'>Add an answer [modal]</button>
         </div>
