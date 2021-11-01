@@ -8,7 +8,7 @@ const Search = () => (
       <StyledLabel htmlFor="search">Search</StyledLabel>
       <SearchContainer>
         <StyledInput id="search" placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."></StyledInput>
-        {/* THIS IS THE SEARCH ICON, SHOULD PROBABLY IMPORT SOMEHOW? */}
+        {/* TODO: THIS IS THE SEARCH ICON, WE SHOULD PROBABLY IMPORT instead of using src directly? */}
         <img src={"./images/search.svg"} alt="search bar" height="15" width="15"/>
       </SearchContainer>
     </form>
