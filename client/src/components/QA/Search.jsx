@@ -1,5 +1,5 @@
-import { StyledInput, SearchContainer } from '../styles/Search.styled';
-import { StyledLabel } from '../styles/Label.styled';
+import { StyledInput, SearchContainer } from '../styles/QA/Search.styled';
+import { StyledLabel } from '../styles/QA/Label.styled';
 import React from 'react';
 
 const Search = () => (

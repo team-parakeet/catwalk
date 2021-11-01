@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyledDiv} from '../styles/Question.styled';
+import {StyledDiv} from '../styles/QA/Question.styled';
 
 const Question = () => {
   return (

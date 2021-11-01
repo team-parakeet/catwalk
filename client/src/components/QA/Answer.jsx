@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, ABlock, AnswerDiv } from '../styles/Answer.styled';
+import { Container, ABlock, AnswerDiv } from '../styles/QA/Answer.styled';
 
 const Answer = () => {
   return (

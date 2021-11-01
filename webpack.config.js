@@ -1,12 +1,12 @@
 const path = require('path');
-var SRC_DIR = path.join(__dirname, "client/src");
-var DIST_DIR = path.join(__dirname, "client/dist");
+var SRC_DIR = path.join(__dirname, 'client/src');
+var DIST_DIR = path.join(__dirname, 'client/dist');
 
 module.exports = {
   entry: path.join(SRC_DIR, 'index.jsx'),
   output: {
     filename: 'bundle.js',
-    path: DIST_DIR
+    path: DIST_DIR,
   },
   module: {
     rules: [
@@ -14,12 +14,19 @@ module.exports = {
         test: /\.jsx?/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
-            presets: [ "@babel/preset-react", "@babel/preset-env"]
-          }
+            presets: ['@babel/preset-react', '@babel/preset-env']
+          },
         },
       },
     ],
-  }
-}
+  },
+  // externals: {
+  //   'styled-components': {
+  //     commonjs: 'styled-components',
+  //     commonjs2: 'styled-components',
+  //     amd: 'styled-components',
+  //   },
+  // },
+};
