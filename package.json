@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest --coverage",
     "start": "npx live-server",
-    "build": "webpack --watch --mode development"
+    "build": "webpack --watch --mode development",
+    "doc": "jsdoc -c jsdoc.json"
   },
   "repository": {
     "type": "git",
@@ -35,6 +36,7 @@
     "jest": "^27.3.1",
     "jest-puppeteer": "^6.0.0",
     "jest-styled-components": "^7.0.5",
+    "jsdoc": "^3.6.7",
     "puppeteer": "^10.4.0",
     "webpack": "^5.60.0",
     "webpack-cli": "^4.9.1"
