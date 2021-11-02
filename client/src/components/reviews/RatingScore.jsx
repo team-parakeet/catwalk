@@ -5,7 +5,7 @@ import Stars from './Stars.jsx';
 function RatingScore(props) {
   return (
     <div className="rating-score-container">
-      <Score />
+      <Score avgRating={props.avgRating}/>
       <Stars />
     </div>
   )
