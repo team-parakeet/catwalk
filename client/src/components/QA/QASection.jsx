@@ -1,16 +1,28 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Search from './Search.jsx';
 import QuestionsList from './QuestionsList.jsx';
+import { getAllQuestions } from '../../request.js';
 
 const QASection = () => {
+  const [questions, setQuestions] = useState([]);
+
+  useEffect(() => {
+    getAllQuestions(39333)
+      .then(results => {
+        console.log("🚀 ~ file: QASection.jsx ~ line 12 ~ useEffect ~ results.data", results.data.results)
+        setQuestions(results.data.results); // Already sorted by Question Helpfulness
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
   return (
     <div>
-      {/* we wnat it to have font color #525252 */ }
-      QUESTIONS {"&"} ANSWERS
+      {/* we want it to have font color #525252 */}
+      QUESTIONS {'&'} ANSWERS
       <Search />
-      <QuestionsList />
+      <QuestionsList questions={questions}/>
     </div>
-  )
-}
+  );
+};
 
 export default QASection;

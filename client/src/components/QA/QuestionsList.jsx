@@ -1,11 +1,12 @@
 import React from 'react';
 import QAItem from './QAItem.jsx';
 
-const QuestionsList = () => {
+const QuestionsList = ({questions}) => {
   return (
     <div>
-      Questions List
-      <QAItem />
+      { questions.map(q => {
+        return <QAItem question={q}/>;
+      })}
     </div>
   )
 };
