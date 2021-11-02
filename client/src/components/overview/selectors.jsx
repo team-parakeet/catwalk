@@ -39,9 +39,7 @@ class Selectors extends React.Component {
         break;
       }
     }
-    console.log('available sizes: ', sizes);
     this.setState({
-      ...this.state,
       availableSizes: sizes,
     });
   }
@@ -87,23 +85,22 @@ class Selectors extends React.Component {
   // On click, set state to reflect chosen style
   // Make sure that e.target.value is an ID number
   handleStyleSelect(styleId) {
-    console.log('selected style\'s id: ', styleId);
     this.retrieveSizesByStyle( styleId );
 
     this.setState({
-      ...this.state,
       currentStyle: styleId,
     });
   }
 
   handleSizeSelect(e) {
+    console.log('SELECTED A SIZE');
     let size = e.target.value;
+    console.log('selected size: ', size);
 
-    this.retrieveQuantitiesBySize( size )
+    this.retrieveQuantitiesBySize( size );
 
     this.setState({
-      ...this.state,
-      currentSize: e.target.value,
+      currentSize: size,
     });
   }
 
@@ -134,7 +131,7 @@ class Selectors extends React.Component {
     return (
       <div className='selectors'>
         <div className='style-selector'>
-          Style selector
+          STYLES
           <br></br>
           { this.props.styles.map( (style, i) => {
             let url = style.photos[0].thumbnail_url;
@@ -146,8 +143,8 @@ class Selectors extends React.Component {
         <div className='size-selector'>
           <div>Size selector</div>
           <select onSelect={this.handleSizeSelect}>
-            { this.state.availableSizes.length ? this.state.availableSizes.map( (size) => (
-              <option>{size}</option>
+            { this.state.availableSizes.length ? this.state.availableSizes.map( (size, i) => (
+              <option key={i}>{size}</option>
             )) : <option>Select a size</option> }
           </select>
         </div>
