@@ -138,7 +138,7 @@ class App extends React.Component {
         <br></br>
         <div className='ratings-and-reviews'>
           <h2>Ratings and reviews!</h2>
-          <Reviews />
+          <Reviews reviews={this.state.reviews}/>
         </div>
         <br></br>
         <div className='q-and-a'>
