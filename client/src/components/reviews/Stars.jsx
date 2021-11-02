@@ -1,9 +1,14 @@
 import React from 'react';
+import StarRatings from 'react-star-ratings';
 
-function Stars(props) {
+function Stars({ avgRating }) {
   return (
     <div className="stars">
-      Stars
+      <StarRatings
+        rating={avgRating}
+        starDimension="15px"
+        starSpacing="0px"
+      />
     </div>
   )
 }
