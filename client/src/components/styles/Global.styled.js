@@ -1,5 +1,5 @@
 import styled from 'styled-components';
 
 const GlobalContainer = styled.div`
-  border: red;
+  border: 1px solid red;
 `
