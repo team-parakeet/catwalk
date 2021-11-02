@@ -28,7 +28,8 @@ function Review( {review} ) {
         user: {review.reviewer_name}
       </div>
       {review.photos.map(photo => {
-        return <div key={photo}>PHOTO URL{photo.url}</div>
+        console.log(photo)
+        return <div key={photo.id}>PHOTO URL{photo.url}</div>
       })}
     </div>
   )
