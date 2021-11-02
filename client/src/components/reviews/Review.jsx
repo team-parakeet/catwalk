@@ -1,10 +1,15 @@
 import React from 'react';
+import dateFormatter from 'iso-date-formatter';
 
 function Review( {review} ) {
+
+  const isoDate = review.date;
+  const date = dateFormatter(isoDate, { format: 'MMM d, yyyy', namedMonths: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] });
+
   return (
     <div className="review">
       <div className="review-date">
-        {review.date}
+        {date}
       </div>
       <div className="review-stars">
         {review.rating} stars
