@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import StyleThumbnail from './styleThumbnail.jsx';
+import styled from 'styled-components';
 
 class Selectors extends React.Component {
   constructor(props) {
@@ -26,18 +27,6 @@ class Selectors extends React.Component {
     this.handleSizeSelect = this.handleSizeSelect.bind(this);
     this.handleQuantitySelect = this.handleQuantitySelect.bind(this);
     this.handleAddToCart = this.handleAddToCart.bind(this);
-  }
-
-  // On click, set state to reflect chosen style
-  // TODO: Make sure that e.target.value is an ID number
-  handleStyleSelect(e) {
-    console.log('selected style: ', e.target.value);
-    this.retrieveSizesByStyle( e.target.value );
-
-    this.setState({
-      ...this.state,
-      currentStyle: e.target.value,
-    });
   }
 
   // On style select, gets all the sizes based off of the style's id
@@ -94,6 +83,18 @@ class Selectors extends React.Component {
     }
   }
 
+  // On click, set state to reflect chosen style
+  // Make sure that e.target.value is an ID number
+  handleStyleSelect(styleId) {
+    console.log('selected style\'s id: ', styleId);
+    this.retrieveSizesByStyle( styleId );
+
+    this.setState({
+      ...this.state,
+      currentStyle: styleId,
+    });
+  }
+
   handleSizeSelect(e) {
     let size = e.target.value;
 
@@ -134,10 +135,11 @@ class Selectors extends React.Component {
         <div className='style-selector'>
           Style selector
           <br></br>
-          { /* TODO: Map out `styles` props as thumbnails */ }
-          <StyleThumbnail />
-          <StyleThumbnail />
-          <StyleThumbnail />
+          { this.props.styles.map( (style, i) => {
+            let url = style.photos[0].thumbnail_url;
+
+            return <StyleThumbnail url={url} info={style} key={style.style_id} onClick={this.handleStyleSelect}/>
+          })}
         </div>
         <br></br>
         <div className='size-selector'>
@@ -145,7 +147,7 @@ class Selectors extends React.Component {
         </div>
         <div className='quantity-selector'>
           <div>Quantity selector</div>
-          <select onSelect={this.handleQuantitySelect}>Select a quantity
+          <select onSelect={this.handleQuantitySelect}>
             { this.state.outOfStock ? <option>Out of Stock</option> : this.state.availableQuantities.map( (quantity, i) => (
               <option className='quantity-option' key={i}>{quantity}</option>
             )) }
