@@ -1,5 +1,6 @@
 import React from 'react';
 import dateFormatter from 'iso-date-formatter';
+import Stars from './Stars.jsx';
 
 function Review( {review} ) {
 
@@ -12,7 +13,7 @@ function Review( {review} ) {
         {date}
       </div>
       <div className="review-stars">
-        {review.rating} stars
+        <Stars avgRating={review.rating}/>
       </div>
       <div className="review-title">
         <h3>{review.summary}</h3>
@@ -27,7 +28,7 @@ function Review( {review} ) {
         user: {review.reviewer_name}
       </div>
       {review.photos.map(photo => {
-        return <div>PHOTO URL{photo.url}</div>
+        return <div key={photo}>PHOTO URL{photo.url}</div>
       })}
     </div>
   )
