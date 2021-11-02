@@ -22,7 +22,7 @@ function Review( {review} ) {
         {review.body}
       </div>
       <div className="review-recommend">
-        Recommended? {review.recommend.toString()}
+        Recommend? {review.recommend ? 'Yes' : 'No'}
       </div>
       <div className="review-user">
         user: {review.reviewer_name}
