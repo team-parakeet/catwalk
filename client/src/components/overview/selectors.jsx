@@ -13,8 +13,8 @@ class Selectors extends React.Component {
     this.state = {
       currentStyle: '',
       availableSizes: [],
-      currentSize: '',
-      availableQuantities: [],
+      currentSize: null,
+      availableQuantities: [1],
       currentQuantity: 1,
       outOfStock: false,
     };
@@ -57,7 +57,6 @@ class Selectors extends React.Component {
   }
 
   // On size select, retrieves quantities for that size
-  // TODO: Account for NO STOCK
   retrieveQuantitiesBySize( size ) {
     let maxQuantity;
 
@@ -66,13 +65,11 @@ class Selectors extends React.Component {
       if (style.style_id === this.props.currentStyle) {
         for (let k in style.skus) {
           if (style.skus[k].size === size) {
-            if (style.skus[k].quantity > 0) {
-              maxQuantity = style.skus[k].quantity;
-            } else {
+            maxQuantity = style.skus[k].quantity;
+            if (style.skus[k].quantity < 1) {
               this.setState({
                 outOfStock: true
               });
-              return;
             }
             break;
           }
@@ -81,18 +78,19 @@ class Selectors extends React.Component {
       }
     }
 
-    if (!this.state.outOfStock) {
-      if (maxQuantity < 15) {
-        let quantities = [];
-        for (let i = 1; i <= maxQuantity; i++) {
-          quantities.push(i);
-        }
-      } else {
-        this.setState({
-          ...this.state,
-          availableQuantities: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
-        });
+    if (maxQuantity < 15 && maxQuantity > 0) {
+      let quantities = [];
+      for (let i = 1; i <= maxQuantity; i++) {
+        quantities.push(i);
       }
+      console.log(quantities);
+      this.setState({
+        availableQuantities: quantities,
+      });
+    } else if (maxQuantity >= 15) {
+      this.setState({
+        availableQuantities: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+      });
     }
   }
 
@@ -116,7 +114,11 @@ class Selectors extends React.Component {
   }
 
   // On click, add current state of style to cart
+  // TODO: If user has not selected a size, will render an error msg above the size dropdown menu
   handleAddToCart(e) {
+    if (this.state.currentSize === null) {
+      // TODO: Render error msg above size dropdown
+    }
     console.log(`Adding to the cart ${this.state.style}, ${this.state.quantity}`);
     this.props.addToCart({
       ...this.props.product,
@@ -143,9 +145,8 @@ class Selectors extends React.Component {
         </div>
         <div className='quantity-selector'>
           <div>Quantity selector</div>
-          <div>For now, users can select up to a max of 15</div>
-          <select onSelect={this.handleQuantitySelect}>
-            { this.state.availableQuantities.map( (quantity, i) => (
+          <select onSelect={this.handleQuantitySelect}>Select a quantity
+            { this.state.outOfStock ? <option>Out of Stock</option> : this.state.availableQuantities.map( (quantity, i) => (
               <option className='quantity-option' key={i}>{quantity}</option>
             )) }
           </select>
