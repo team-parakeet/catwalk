@@ -14,7 +14,7 @@ class Selectors extends React.Component {
       currentStyle: '',
       availableSizes: [],
       currentSize: '',
-      availableQuantities: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+      availableQuantities: [],
       currentQuantity: 1,
     };
 
@@ -31,7 +31,7 @@ class Selectors extends React.Component {
   // TODO: Make sure that e.target.value is an ID number
   handleStyleSelect(e) {
     console.log('selected style: ', e.target.value);
-    // this.retrieveSizesByStyle( e.target.value );
+    this.retrieveSizesByStyle( e.target.value );
 
     this.setState({
       ...this.state,
