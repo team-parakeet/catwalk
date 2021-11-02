@@ -16,6 +16,7 @@ class Selectors extends React.Component {
       currentSize: '',
       availableQuantities: [],
       currentQuantity: 1,
+      outOfStock: false,
     };
 
     // Bind fns
@@ -56,6 +57,7 @@ class Selectors extends React.Component {
   }
 
   // On size select, retrieves quantities for that size
+  // TODO: Account for NO STOCK
   retrieveQuantitiesBySize( size ) {
     let maxQuantity;
 
@@ -64,7 +66,14 @@ class Selectors extends React.Component {
       if (style.style_id === this.props.currentStyle) {
         for (let k in style.skus) {
           if (style.skus[k].size === size) {
-            maxQuantity = style.skus[k].quantity;
+            if (style.skus[k].quantity > 0) {
+              maxQuantity = style.skus[k].quantity;
+            } else {
+              this.setState({
+                outOfStock: true
+              });
+              return;
+            }
             break;
           }
         }
@@ -72,16 +81,18 @@ class Selectors extends React.Component {
       }
     }
 
-    if (maxQuantity < 15) {
-      let quantities = [];
-      for (let i = 1; i <= maxQuantity; i++) {
-        quantities.push(i);
+    if (!this.state.outOfStock) {
+      if (maxQuantity < 15) {
+        let quantities = [];
+        for (let i = 1; i <= maxQuantity; i++) {
+          quantities.push(i);
+        }
+      } else {
+        this.setState({
+          ...this.state,
+          availableQuantities: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+        });
       }
-    } else {
-      this.setState({
-        ...this.state,
-        availableQuantities: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
-      });
     }
   }
 
@@ -140,7 +151,7 @@ class Selectors extends React.Component {
           </select>
         </div>
         <br></br>
-        <button className='add-to-cart' onClick={this.handleAddToCart}>Add to Cart</button>
+        { this.state.outOfStock ? <button>Out of Stock</button> : <button className='add-to-cart' onClick={this.handleAddToCart}>Add to Cart</button> }
       </div>
     )
   }
