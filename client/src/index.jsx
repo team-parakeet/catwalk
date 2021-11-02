@@ -35,7 +35,11 @@ class App extends React.Component {
     };
 
     axios(config)
-      .then( () => {
+      .then( (results) => {
+        this.setState({
+          ...this.state,
+          product: results.data
+        });
         this.getStyles();
         this.getReviews();
       })
@@ -68,7 +72,7 @@ class App extends React.Component {
       });
   }
 
-  // TODO: GET all reviews for a product
+  // GET all reviews for a product
   getReviews() {
     const config = {
       method: 'get',
@@ -80,8 +84,6 @@ class App extends React.Component {
 
     axios(config)
       .then( (reviews) => {
-        console.log('reviews: ', reviews.data.results);
-
         this.setState({
           ...this.state,
           reviews: reviews.data.results
@@ -93,9 +95,25 @@ class App extends React.Component {
       })
   }
 
-  // TODO: POST the item obj to the API
+  // POST the item obj to the API
   addItemToCart( item ) {
+    let config = {
+      method: POST,
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/cart`,
+      headers: {
+        'Authorization': `${TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+      data: item,
+    }
 
+    axios(config)
+      .then( () => {
+        alert(`Your item ${item.name} in style ${item.style} has been added to the cart`);
+      })
+      .catch( (err) => {
+        console.error(err);
+      })
   }
 
   render() {
@@ -110,8 +128,12 @@ class App extends React.Component {
             Product details here!
           </div>
           <br></br>
-          { /* Selectors should receive current item's styles and quantities */}
-          <Selectors addItemToCart={this.addItemToCart} styles={this.state.styles}/>
+          <Selectors
+            addItemToCart={this.addItemToCart}
+            styles={this.state.styles}
+            product={this.state.product}
+            productId={this.props.productId}
+          />
         </div>
         <br></br>
         <div className='ratings-and-reviews'>
