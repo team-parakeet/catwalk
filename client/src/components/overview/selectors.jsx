@@ -39,6 +39,7 @@ class Selectors extends React.Component {
         break;
       }
     }
+    console.log('available sizes: ', sizes);
     this.setState({
       ...this.state,
       availableSizes: sizes,
@@ -138,12 +139,17 @@ class Selectors extends React.Component {
           { this.props.styles.map( (style, i) => {
             let url = style.photos[0].thumbnail_url;
 
-            return <StyleThumbnail url={url} info={style} key={style.style_id} onClick={this.handleStyleSelect}/>
+            return <StyleThumbnail url={url} info={style} key={i} onClick={this.handleStyleSelect}/>
           })}
         </div>
         <br></br>
         <div className='size-selector'>
           <div>Size selector</div>
+          <select onSelect={this.handleSizeSelect}>
+            { this.state.availableSizes.length ? this.state.availableSizes.map( (size) => (
+              <option>{size}</option>
+            )) : <option>Select a size</option> }
+          </select>
         </div>
         <div className='quantity-selector'>
           <div>Quantity selector</div>
