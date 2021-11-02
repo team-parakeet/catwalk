@@ -4,13 +4,12 @@ function StarsChart({ reviews }) {
   //once we get stars
   // get the keys
 
-  const [isLoading, setIsLoading] = useState(true)
   const [ratings, setRatings] = useState([1, 2, 3, 4, 5])
 
   return (
     <div className="stars-chart">
       {ratings.map(rating => {
-        return <div className="star-bar">{rating} STARS: </div>
+        return <div key={rating} className="star-bar">{rating} STARS: </div>
       })}
     </div>
   )

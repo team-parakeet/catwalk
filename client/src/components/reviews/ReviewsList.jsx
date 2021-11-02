@@ -8,7 +8,7 @@ function ReviewsList({ reviews }) {
     <div className="reviews-list-container">
       REVIEWS:
       {reviews.map(review => {
-        return <Review review={review}/>
+        return <Review key={review.review_id} review={review}/>
       })}
     </div>
   )
