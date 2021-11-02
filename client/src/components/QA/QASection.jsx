@@ -9,7 +9,6 @@ const QASection = () => {
   useEffect(() => {
     getAllQuestions(39333)
       .then(results => {
-        console.log("🚀 ~ file: QASection.jsx ~ line 12 ~ useEffect ~ results.data", results.data.results)
         setQuestions(results.data.results); // Already sorted by Question Helpfulness
       })
       .catch((err) => console.error(err));
