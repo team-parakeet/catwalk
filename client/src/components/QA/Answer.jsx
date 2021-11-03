@@ -5,12 +5,16 @@ import {
   SingleResponseContainer,
   ABlock,
   AnswerBody,
+  SubAnswerBody,
+  LoadMoreAnswersBtn,
+  CollapseAnswersBtn,
+  StyledBy,
+  Spacer
 } from '../styles/QA/Answer.styled';
-import { Spacer } from '../styles/QA/Spacer.styled';
 import Helpful from './Helpful.jsx';
 import Report from './Report.jsx';
 
-const formatString = (dateString) => {
+const formatString = dateString => {
   const options = {
     year: 'numeric',
     month: 'long',
@@ -27,36 +31,51 @@ const Answer = ({ answers }) => {
   return (
     <AnswersContainer className="outer-answers-container">
       {keys.length > 0 && <ABlock className="a-block">A:</ABlock>}
-      {keys.length > 0 &&
+      {keys.length > 0 && (
         <ResponsesContainer className="inner-answers-container">
-          {keys.map((answer, idx) => { // 'answer' is the id of the answer
-            return (idx < loadFactor) ? (
-              <SingleResponseContainer key={answer} id={answer} className="answer">
-                <AnswerBody className="answer-text">{answers[answer].body}</AnswerBody>
-                <By answer={answers[answer]} />
-                <Spacer>|</Spacer>
-                <Helpful count={answers[answer].helpfulness}/>
-                <Spacer>|</Spacer>
-                <Report />
+          {keys.map((answer, idx) => {
+            // 'answer' is the id of the answer
+            return idx < loadFactor ? (
+              <SingleResponseContainer
+                key={answer}
+                id={answer}
+                className="answer"
+              >
+                <AnswerBody className="answer-text">
+                  {answers[answer].body}
+                </AnswerBody>
+                <SubAnswerBody>
+                  <By answer={answers[answer]} />
+                  <Spacer>|</Spacer>
+                  <Helpful count={answers[answer].helpfulness} />
+                  <Spacer>|</Spacer>
+                  <Report />
+                </SubAnswerBody>
               </SingleResponseContainer>
             ) : null;
           })}
-          {moreAnswers > 0 &&  <button onClick={() => setLoadFactor(loadFactor + 2)}>
-            Load more answers ({moreAnswers})
-          </button>}
-          {loadFactor > 2 && <button onClick={() => setLoadFactor(2)}>Collapse all answers</button>}
-        </ResponsesContainer>}
+          {moreAnswers > 0 && (
+            <LoadMoreAnswersBtn onClick={() => setLoadFactor(loadFactor + 2)}>
+              Load more answers ({moreAnswers})
+            </LoadMoreAnswersBtn>
+          )}
+          {loadFactor > 2 && (
+            <CollapseAnswersBtn onClick={() => setLoadFactor(2)}>
+              Collapse all answers
+            </CollapseAnswersBtn>
+          )}
+        </ResponsesContainer>
+      )}
     </AnswersContainer>
   );
 };
 
 const By = ({ answer }) => {
   return (
-    <span>
+    <StyledBy>
       by {answer.answerer_name}, {formatString(answer.date)}{' '}
-    </span>
+    </StyledBy>
   );
 };
-
 
 export default Answer;

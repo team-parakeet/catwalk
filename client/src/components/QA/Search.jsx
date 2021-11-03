@@ -1,5 +1,5 @@
 import { StyledInput, SearchContainer } from '../styles/QA/Search.styled';
-import { StyledLabel } from '../styles/QA/Label.styled';
+import { InvisibleLabel } from '../styles/QA/Label.styled';
 import React, { useContext } from 'react';
 import { QAContext } from './QAContext.jsx';
 
@@ -9,7 +9,7 @@ const Search = () => {
   return (
     <div>
       <form>
-        <StyledLabel htmlFor="search">Search</StyledLabel>
+        <InvisibleLabel htmlFor="search">Search</InvisibleLabel>
         <SearchContainer>
           <StyledInput id="search" value={search} onChange={(e) => setSearch(e)} placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..." autoComplete="off"></StyledInput>
           {/* TODO: THIS IS THE SEARCH ICON, WE SHOULD PROBABLY IMPORT instead of using src directly? */}
