@@ -20,14 +20,13 @@ const QASection = () => {
   }, []);
 
   return (
-    <Provider>
+    <>
       {/* we want it to have font color #525252 */}
       {/* Putting in a span tag so that childrens listed on the context is just the span as opposed to Question, Answers, &*/}
       <span>QUESTIONS {'&'} ANSWERS</span>
       <Search />
       <QuestionsList questions={questions} />
-      {/* <Random /> */}
-    </Provider>
+    </>
   );
 };
 
