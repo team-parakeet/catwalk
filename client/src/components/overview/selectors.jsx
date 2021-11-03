@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import StyleSelector from './styleSelector.jsx';
 import StyleThumbnail from './styleThumbnail.jsx';
 import styled from 'styled-components';
 
@@ -133,19 +134,16 @@ class Selectors extends React.Component {
         <div className='style-selector'>
           STYLES
           <br></br>
-          { this.props.styles.map( (style, i) => {
-            let url = style.photos[0].thumbnail_url;
-
-            return <StyleThumbnail url={url} info={style} key={i} onClick={this.handleStyleSelect}/>
-          })}
+          <StyleSelector styles={this.props.styles} handleStyleSelect={this.handleStyleSelect} />
         </div>
         <br></br>
         <div className='size-selector'>
           <div>Size selector</div>
           <select onSelect={this.handleSizeSelect}>
+            <option className='size-option'>Select a size</option>
             { this.state.availableSizes.length ? this.state.availableSizes.map( (size, i) => (
-              <option key={i}>{size}</option>
-            )) : <option>Select a size</option> }
+              <option className='size-option' key={i}>{size}</option>
+            )) : null }
           </select>
         </div>
         <div className='quantity-selector'>
@@ -164,3 +162,11 @@ class Selectors extends React.Component {
 }
 
 export default Selectors;
+
+/*
+{ this.props.styles.map( (style, i) => {
+  let url = style.photos[0].thumbnail_url;
+
+  return <StyleThumbnail url={url} info={style} key={i} onClick={this.handleStyleSelect}/>
+})}
+*/
