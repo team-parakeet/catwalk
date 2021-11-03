@@ -11,14 +11,12 @@ class App extends React.Component {
     super(props);
     // For our progress demo, we've hard-coded an ID of `39333`
 
-    // TODO: What parts of state changes at this level?
     this.state = {
       product: {},
       styles: [],
       reviews: [],
     };
 
-    // TODO: Bind fns
     this.getStyles = this.getStyles.bind(this);
     this.getReviews = this.getReviews.bind(this);
     this.addItemToCart = this.addItemToCart.bind(this);
@@ -62,7 +60,6 @@ class App extends React.Component {
     axios(config)
       .then( (styles) => {
         this.setState({
-          ...this.state,
           styles: styles.data.results,
         });
       })
