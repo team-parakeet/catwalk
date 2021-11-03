@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Review from './Review.jsx';
 
 function ReviewsList({ reviews }) {
   // what props does this component need?
   // what state does this component need?
   const [numReviewsShown, setNumReviewsShown] = useState(2);
+
+  useEffect(() => {
+    setNumReviewsShown(2)
+  }, [reviews])
 
   const handleOnClick = () => {
     numReviewsShown + 2 <= reviews.length ? setNumReviewsShown(prev => prev + 2) : setNumReviewsShown(reviews.length)
