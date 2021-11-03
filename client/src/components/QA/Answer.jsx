@@ -35,7 +35,7 @@ const Answer = ({ answers }) => {
                 <AnswerBody className="answer-text">{answers[answer].body}</AnswerBody>
                 <By answer={answers[answer]} />
                 <Spacer>|</Spacer>
-                <Helpful />
+                <Helpful count={answers[answer].helpfulness}/>
                 <Spacer>|</Spacer>
                 <Report />
               </SingleResponseContainer>

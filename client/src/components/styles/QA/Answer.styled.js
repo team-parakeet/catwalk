@@ -1,6 +1,8 @@
 import styled from 'styled-components';
+import Helpful from '../../QA/Helpful.jsx';
 
 export const AnswersContainer = styled.div`
+  position: relative;
   display: flex;
 `
 
@@ -22,4 +24,8 @@ export const SingleResponseContainer = styled.div`
 
 export const AnswerBody = styled.div`
   font-size: 1.2rem;
+`
+
+export const AHelpful = styled(Helpful)`
+
 `

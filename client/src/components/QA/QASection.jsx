@@ -59,7 +59,7 @@ const QASection = () => {
   function getHighlightedText(text, highlight) {
     // Split text on highlight term, include term itself into parts, ignore case
     const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
-    return <span>{parts.map(part => part.toLowerCase() === highlight.toLowerCase() ? <span style={{backgroundColor: 'yellow'}}>{part}</span> : part)}</span>;
+    return <span>{parts.map((part, idx) => part.toLowerCase() === highlight.toLowerCase() ? <span key={idx} style={{backgroundColor: 'yellow'}}>{part}</span> : part)}</span>;
   }
 
   return (
