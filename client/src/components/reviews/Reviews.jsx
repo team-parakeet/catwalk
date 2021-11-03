@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReviewsColumn from './ReviewsColumn.jsx';
+import SortBy from './SortBy.jsx';
 import ReviewsList from './ReviewsList.jsx';
 
 function Reviews({ reviews }) {
@@ -13,10 +14,13 @@ function Reviews({ reviews }) {
       </div>
       <div>
         <ReviewsColumn reviews={reviews} />
+      </div>
+      <div>
+        <SortBy />
         <ReviewsList reviews={reviews}/>
       </div>
       <div className="reviews-buttons">
-        <button className="more-reviews-button">MORE REVIEWS</button>
+        {reviews.length > 2 ? <button className="more-reviews-button">MORE REVIEWS</button> : null}
         <button className="add-review-button">ADD A REVIEW</button>
       </div>
     </div>
