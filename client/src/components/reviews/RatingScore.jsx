@@ -3,29 +3,24 @@ import Score from './Score.jsx';
 import Stars from './Stars.jsx';
 
 function RatingScore({ reviews }) {
-  const [isLoading, setIsLoading] = useState(true);
+  const [avgRating, setAvgRating] = useState(null);
 
   useEffect(() => {
-    if (reviews.length !== 0) {
-      setIsLoading(false);
+    const getAvgRating = () => {
+      let sum = 0;
+      for (let i = 0; i < reviews.length; i++) {
+        let currentReview = reviews[i];
+        sum += currentReview.rating;
+      }
+      let result = sum / reviews.length;
+      return result;
     }
-  }, [reviews]);
+    setAvgRating(getAvgRating())
+  }, [reviews])
 
-  if (isLoading) {
-    return <div>IS LOADING..</div>
+  if (!avgRating) {
+    return null
   }
-
-  const getAvgRating = () => {
-    let sum = 0;
-    for (let i = 0; i < reviews.length; i++) {
-      let currentReview = reviews[i];
-      sum += currentReview.rating;
-    }
-    let result = sum / reviews.length;
-    return result;
-  }
-
-  const avgRating = getAvgRating();
 
   return (
     <div className="rating-score-container">
