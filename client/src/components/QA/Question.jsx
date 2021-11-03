@@ -1,11 +1,17 @@
 import React from 'react';
-import {StyledDiv} from '../styles/QA/Question.styled';
+import Helpful from './Helpful.jsx';
+import { StyledDiv, QuestionContainer, HelpfulContainer } from '../styles/QA/Question.styled';
 
 const Question = (props) => {
   return (
-    <StyledDiv>
-      Q: {props.question.question_body}
-    </StyledDiv>
+    <QuestionContainer className="q-container">
+      <StyledDiv className={props.className}>
+        Q: {props.question.question_body}
+      </StyledDiv>
+      <HelpfulContainer>
+        <Helpful count={props.question.question_helpfulness} />
+      </HelpfulContainer>
+    </QuestionContainer>
   )
 }
 
