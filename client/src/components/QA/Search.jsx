@@ -1,7 +1,7 @@
 import { StyledInput, SearchContainer } from '../styles/QA/Search.styled';
 import { StyledLabel } from '../styles/QA/Label.styled';
-import React, { useState, useContext } from 'react';
-import {QAContext} from './QASection.jsx';
+import React, { useContext } from 'react';
+import { QAContext } from './QAContext.jsx';
 
 const Search = () => {
   const {search, setSearch} = useContext(QAContext);
