@@ -2,7 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 
-// TODO: Style thumbnails to be small circles
+// TODO: Style thumbnails
+// - small gray circles
+// - (this.state.isSelected ? pink border : gray border)
 const Image = styled.img`
   width: 40px;
   height: 40px;
@@ -14,20 +16,28 @@ const Image = styled.img`
 class StyleThumbnail extends React.Component {
   constructor(props) {
     super(props);
-    // url={url} info={style} onClick={this.handleStyleSelect}
+    // url={url} info={style} selected={state.selected} onClick={this.handleStyleSelect}
 
     this.state = {
-      selected: false,
+      isSelected: false,
     }
 
     this.handleClick = this.handleClick.bind(this);
+  }
+
+  // If the thumbnail's style_id matches the prop, then set state.isSelected to true
+  componentDidMount() {
+    if (this.props.selected === this.props.info.style_id) {
+      this.setState({
+        isSelected: true,
+      });
+    }
   }
 
   handleClick(e) {
     this.setState({
       selected: true,
     });
-
     this.props.onClick(this.props.info.style_id);
   }
 
@@ -39,4 +49,3 @@ class StyleThumbnail extends React.Component {
 }
 
 export default StyleThumbnail;
-{ /* <div className='style-thumbnail'> I am a style thumbnail </div> */ }
