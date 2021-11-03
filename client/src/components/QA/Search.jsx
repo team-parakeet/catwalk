@@ -11,7 +11,7 @@ const Search = () => {
       <form>
         <StyledLabel htmlFor="search">Search</StyledLabel>
         <SearchContainer>
-          <StyledInput id="search" value={search} onChange={(e) => setSearch(e)} placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..."></StyledInput>
+          <StyledInput id="search" value={search} onChange={(e) => setSearch(e)} placeholder="HAVE A QUESTION? SEARCH FOR ANSWERS..." autoComplete="off"></StyledInput>
           {/* TODO: THIS IS THE SEARCH ICON, WE SHOULD PROBABLY IMPORT instead of using src directly? */}
           <img src={"./images/search.svg"} alt="search bar" height="15" width="15"/>
         </SearchContainer>
