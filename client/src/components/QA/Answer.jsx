@@ -25,14 +25,14 @@ const Answer = ({ answers }) => {
   let moreAnswers = keys.length - loadFactor;
 
   return (
-    <AnswersContainer>
-      {keys.length > 0 && <ABlock>A:</ABlock>}
+    <AnswersContainer className="outer-answers-container">
+      {keys.length > 0 && <ABlock className="a-block">A:</ABlock>}
       {keys.length > 0 &&
-        <ResponsesContainer>
+        <ResponsesContainer className="inner-answers-container">
           {keys.map((answer, idx) => { // 'answer' is the id of the answer
             return (idx < loadFactor) ? (
-              <SingleResponseContainer key={answer} id={answer}>
-                <AnswerBody>{answers[answer].body}</AnswerBody>
+              <SingleResponseContainer key={answer} id={answer} className="answer">
+                <AnswerBody className="answer-text">{answers[answer].body}</AnswerBody>
                 <By answer={answers[answer]} />
                 <Spacer>|</Spacer>
                 <Helpful />

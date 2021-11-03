@@ -3,7 +3,7 @@ import {StyledDiv} from '../styles/QA/Question.styled';
 
 const Question = (props) => {
   return (
-    <StyledDiv>
+    <StyledDiv className={props.className}>
       Q: {props.question.question_body}
     </StyledDiv>
   )

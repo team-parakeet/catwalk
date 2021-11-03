@@ -143,11 +143,13 @@ class App extends React.Component {
           <Reviews />
         </div>
         <br></br>
-        <QAProvider className='q-and-a'>
+        <div className='q-and-a'>
+        <QAProvider>
           <QuestionsAnswers />
           <button className='add-question'>Add a question</button>
           <button className='add-answer'>Add an answer [modal]</button>
         </QAProvider>
+        </div>
         <br></br>
         <div className='related-items-comparison'>
           <h2>Related items and comparison!</h2>

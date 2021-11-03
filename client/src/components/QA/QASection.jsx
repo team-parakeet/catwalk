@@ -28,17 +28,25 @@ const QASection = () => {
   const getSearchResults = () => {
     let results = [];
     for (let q of questions) {
-      if (q.question_body.indexOf(search) > -1) {
-        results.push(q);
-        continue;
+      let text = q.question_body.substring();
+      let copy = JSON.parse(JSON.stringify(q));
+      let wasModified = false;
+      if (text.indexOf(search) > -1) {
+        text = getHighlightedText(text, search);
+        copy.question_body = text;
+        wasModified = true;
       }
 
       for (let ansKey in q.answers) {
-        if (q.answers[ansKey].body.indexOf(search) > -1) {
-          results.push(q);
-          break;
+        text = q.answers[ansKey].body;
+        if (text.indexOf(search) > -1) {
+          text = getHighlightedText(text, search);
+          copy.answers[ansKey].body = text;
+          wasModified = true;
         }
       }
+
+      if (wasModified) results.push(copy);
     }
 
     setSearchResults(results);
@@ -46,6 +54,12 @@ const QASection = () => {
 
   const clearSearchResults = () => {
     setSearchResults([]);
+  }
+
+  function getHighlightedText(text, highlight) {
+    // Split text on highlight term, include term itself into parts, ignore case
+    const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
+    return <span>{parts.map(part => part.toLowerCase() === highlight.toLowerCase() ? <span style={{backgroundColor: 'yellow'}}>{part}</span> : part)}</span>;
   }
 
   return (

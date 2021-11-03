@@ -5,9 +5,9 @@ import Answer from './Answer.jsx';
 // TODO: figure out what to display when there are no answers
 const QAItem = (props) => {
   return (
-    <div>
-      <Question question={props.question}/>
-      <Answer answers={props.question.answers}/>
+    <div className={props.className}>
+      <Question question={props.question} className="question"/>
+      <Answer answers={props.question.answers} className="answer"/>
     </div>
   )
 }
