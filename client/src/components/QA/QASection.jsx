@@ -31,7 +31,7 @@ const QASection = () => {
       let text = q.question_body.substring();
       let copy = JSON.parse(JSON.stringify(q));
       let wasModified = false;
-      if (text.indexOf(search) > -1) {
+      if (text.toLowerCase().indexOf(search.toLowerCase()) > -1) {
         text = getHighlightedText(text, search);
         copy.question_body = text;
         wasModified = true;
@@ -39,7 +39,7 @@ const QASection = () => {
 
       for (let ansKey in q.answers) {
         text = q.answers[ansKey].body;
-        if (text.indexOf(search) > -1) {
+        if (text.toLowerCase().indexOf(search.toLowerCase()) > -1) {
           text = getHighlightedText(text, search);
           copy.answers[ansKey].body = text;
           wasModified = true;
