@@ -6,7 +6,7 @@ function RatingScore(props) {
   return (
     <div className="rating-score-container">
       <Score avgRating={props.avgRating}/>
-      <Stars avgRating={props.avgRating}/>
+      <Stars rating={props.avgRating}/>
     </div>
   )
 }
