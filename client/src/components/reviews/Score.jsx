@@ -1,9 +1,9 @@
 import React from 'react';
 
-function Score(props) {
+function Score({ avgRating }) {
   return (
     <div className="score">
-      AVERAGE RATING: {props.avgRating}
+      AVERAGE RATING: {avgRating}
     </div>
   )
 }
