@@ -7,6 +7,17 @@ import ReviewsList from './ReviewsList.jsx';
 function Reviews({ reviews }) {
   // what props does this component need?
   // what state does this component need?
+  const [currentReviews, setCurrentReviews] = useState(null);
+
+  useEffect(() => {
+    if (reviews.length !== 0) {
+      setCurrentReviews(reviews)
+    }
+  }, [reviews])
+
+  if (!currentReviews) {
+    return null
+  }
 
   const handleOnChange = e => {
     //take the value and send a request to fetch data by relevance
@@ -18,7 +29,7 @@ function Reviews({ reviews }) {
         Authorization: TOKEN
       }
     })
-    .then(r => console.log(r.data.results))
+    .then(r => setCurrentReviews(r.data.results))
   }
 
   return (
@@ -38,7 +49,7 @@ function Reviews({ reviews }) {
             <option value="newest">newest</option>
           </select>
         </div>
-        <ReviewsList reviews={reviews}/>
+        <ReviewsList reviews={currentReviews}/>
       </div>
       <div className="reviews-buttons">
         {reviews.length > 2 ? <button className="more-reviews-button">MORE REVIEWS</button> : null}
