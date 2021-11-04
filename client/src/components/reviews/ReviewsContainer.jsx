@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import ReviewsList from './ReviewsList.jsx';
-import { TOKEN } from '../../../../config.js';
+import SortBy from './SortBy.jsx';
+import Button from './Button.jsx';
 
 function ReviewsContainer({reviews}) {
   const [currentReviews, setCurrentReviews] = useState(null);
+  const [numReviewsShown, setNumReviewsShown] = useState(2);
 
   useEffect(() => {
     if (reviews.length !== 0) {
@@ -12,39 +13,43 @@ function ReviewsContainer({reviews}) {
     }
   }, [reviews])
 
-  if (!currentReviews) {
+  useEffect(() => {
+    setNumReviewsShown(2)
+  }, [currentReviews])
+
+  const handleMoreReviewsOnClick = () => {
+    numReviewsShown + 2 <= reviews.length ? setNumReviewsShown(prev => prev + 2) : setNumReviewsShown(reviews.length)
+  }
+
+  const handleShowLessOnClick = () => {
+    setNumReviewsShown(2)
+  }
+
+  const handleAddReviewOnClick = () => {
+    console.log('new review clicked')
+  }
+
+  if (!reviews.length || !currentReviews) {
     return null
   }
 
-  const handleOnChange = e => {
-    const selected = e.target.value;
-    const url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/?sort=${selected}&product_id=39333`
-    axios.get(url, {
-      headers: {
-        Authorization: TOKEN
-      }
-    })
-    .then(r => setCurrentReviews(r.data.results))
-  }
+  const reviewsToShow = currentReviews.slice(0, numReviewsShown);
 
   return (
     <div>
-      <div className="sort=by=bar">
-        Sorted by:
-        <select onChange={handleOnChange}>
-          <option value="relevance">relevance</option>
-          <option value="helpful">helpful</option>
-          <option value="newest">newest</option>
-        </select>
-      </div>
-      <ReviewsList reviews={currentReviews}/>
-      {/* <div className="reviews-buttons">
-        {currentReviews.length > 2 ? <button className="more-reviews-button">MORE REVIEWS</button> : null}
-        <button className="add-review-button">ADD A REVIEW</button>
-      </div> */}
+      <SortBy setCurrentReviews={setCurrentReviews} />
+      {reviews.length !== 0 &&
+      <ReviewsList reviews={reviewsToShow}/>
+      }
+      {reviews.length < 2 || reviewsToShow.length === reviews.length ? null :
+      <Button handleOnClick={handleMoreReviewsOnClick} text={'MORE REVIEWS'} />
+      }
+      {reviewsToShow.length === reviews.length &&
+      <Button handleOnClick={handleShowLessOnClick} text={'SHOW LESS'} />
+      }
+      <Button handleOnClick={handleAddReviewOnClick} text={'ADD REVIEW'} />
     </div>
   )
 }
-
 
 export default ReviewsContainer;
