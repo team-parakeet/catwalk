@@ -10,8 +10,12 @@ function ReviewsList({ reviews }) {
     setNumReviewsShown(2)
   }, [reviews])
 
-  const handleOnClick = () => {
+  const handleMoreReviewsOnClick = () => {
     numReviewsShown + 2 <= reviews.length ? setNumReviewsShown(prev => prev + 2) : setNumReviewsShown(reviews.length)
+  }
+
+  const handleShowLessOnClick = () => {
+    setNumReviewsShown(2)
   }
 
   if (reviews.length === 0) {
@@ -27,7 +31,8 @@ function ReviewsList({ reviews }) {
         return <Review key={review.review_id} review={review}/>
       })}
       <div className="reviews-buttons">
-        {reviews.length < 2 || reviewsToShow.length === reviews.length ? null : <button className="more-reviews-button" onClick={handleOnClick}>MORE REVIEWS</button> }
+        {reviews.length < 2 || reviewsToShow.length === reviews.length ? null : <button className="more-reviews-button" onClick={handleMoreReviewsOnClick}>MORE REVIEWS</button> }
+        {reviewsToShow.length === reviews.length ? <button className="show-less-button" onClick={handleShowLessOnClick}>SHOW LESS</button> : null}
         <button className="add-review-button">ADD A REVIEW</button>
       </div>
     </div>
