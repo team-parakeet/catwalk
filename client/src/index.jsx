@@ -95,19 +95,17 @@ class App extends React.Component {
   // POST the item obj to the API
   addItemToCart( item ) {
     let config = {
-      method: POST,
+      method: 'post',
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/cart`,
       headers: {
         'Authorization': `${TOKEN}`,
         'Content-Type': 'application/json',
       },
-      data: item,
+      data: JSON.stringify(item),
     }
+    console.log(config.data);
 
     axios(config)
-      .then( () => {
-        alert(`Your item ${item.name} in style ${item.style} has been added to the cart`);
-      })
       .catch( (err) => {
         console.error(err);
       })
@@ -126,7 +124,7 @@ class App extends React.Component {
           </div>
           <br></br>
           <Selectors
-            addItemToCart={this.addItemToCart}
+            addToCart={this.addItemToCart}
             styles={this.state.styles}
             product={this.state.product}
             productId={this.props.productId}
