@@ -8,6 +8,7 @@ import styled from 'styled-components';
 class Selectors extends React.Component {
   constructor(props) {
     super(props);
+    // addToCart
     // productId
     // product = obj of product info
     // styles = array of style thumbnail objects
@@ -15,7 +16,7 @@ class Selectors extends React.Component {
     this.state = {
       currentStyle: '',
       availableSizes: [],
-      currentSize: null,
+      currentSize: null ,
       availableQuantities: [1],
       currentQuantity: 1,
       outOfStock: false,
@@ -51,7 +52,7 @@ class Selectors extends React.Component {
 
     for (let i = 0; i < this.props.styles.length; i++) {
       let style = this.props.styles[i];
-      if (style.style_id === this.props.currentStyle) {
+      if (style.style_id === this.state.currentStyle) {
         for (let k in style.skus) {
           if (style.skus[k].size === size) {
             maxQuantity = style.skus[k].quantity;
@@ -72,7 +73,6 @@ class Selectors extends React.Component {
       for (let i = 1; i <= maxQuantity; i++) {
         quantities.push(i);
       }
-      console.log(quantities);
       this.setState({
         availableQuantities: quantities,
       });
@@ -94,14 +94,10 @@ class Selectors extends React.Component {
   }
 
   handleSizeSelect(e) {
-    console.log('SELECTED A SIZE');
-    let size = e.target.value;
-    console.log('selected size: ', size);
-
-    this.retrieveQuantitiesBySize( size );
+    this.retrieveQuantitiesBySize( e.target.value );
 
     this.setState({
-      currentSize: size,
+      currentSize: e.target.value,
     });
   }
 
@@ -119,41 +115,55 @@ class Selectors extends React.Component {
     if (this.state.currentSize === null) {
       // TODO: Render error msg above size dropdown
     }
-    console.log(`Adding to the cart ${this.state.style}, ${this.state.quantity}`);
-    this.props.addToCart({
-      ...this.props.product,
-      style: this.state.style,
-      size: this.state.size,
-      quantity: this.state.quantity,
-    })
+    let item = {};
+
+    for (let i = 0; i < this.props.styles.length; i++) {
+      let style = this.props.styles[i];
+      if (style.style_id === this.state.currentStyle) {
+        for (let k in style.skus) {
+          if (style.skus[k].size === this.state.currentSize) {
+            item.sku_id = k;
+            item.count = this.state.currentQuantity;
+            break;
+          }
+        }
+        break;
+      }
+    }
+
+    this.props.addToCart(item);
   }
 
   render() {
     return (
       <div className='selectors'>
         <div className='style-selector'>
-          STYLES
+          STYLE > {this.state.currentStyle}
           <br></br>
           <StyleSelector styles={this.props.styles} handleStyleSelect={this.handleStyleSelect} />
         </div>
         <br></br>
         <div className='size-selector'>
-          <div>Size selector</div>
-          <select onSelect={this.handleSizeSelect}>
-            <option className='size-option'>Select a size</option>
+          <div>SIZE > {this.state.currentSize ? this.state.currentSize : 'Select a size'}</div>
+          <select className='size-select'
+            value={this.state.currentSize}
+            onChange={this.handleSizeSelect}>
+            <option>Select a size</option>
             { this.state.availableSizes.length ? this.state.availableSizes.map( (size, i) => (
-              <option className='size-option' key={i}>{size}</option>
+              <option className='size-option' key={i} value={size}>{size}</option>
             )) : null }
           </select>
         </div>
+
         <div className='quantity-selector'>
-          <div>Quantity selector</div>
-          <select onSelect={this.handleQuantitySelect}>
+          <div>QUANTITY > {this.state.currentQuantity}</div>
+          <select onChange={this.handleQuantitySelect}>
             { this.state.outOfStock ? <option>Out of Stock</option> : this.state.availableQuantities.map( (quantity, i) => (
-              <option className='quantity-option' key={i}>{quantity}</option>
+              <option className='quantity-option' key={i} value={quantity}>{quantity}</option>
             )) }
           </select>
         </div>
+
         <br></br>
         { this.state.outOfStock ? <button>Out of Stock</button> : <button className='add-to-cart' onClick={this.handleAddToCart}>Add to Cart</button> }
       </div>
