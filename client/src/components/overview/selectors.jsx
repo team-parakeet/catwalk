@@ -16,7 +16,7 @@ class Selectors extends React.Component {
     this.state = {
       currentStyle: '',
       availableSizes: [],
-      currentSize: null ,
+      currentSize: '',
       availableQuantities: [1],
       currentQuantity: 1,
       outOfStock: false,
