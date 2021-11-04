@@ -93,9 +93,13 @@ class Selectors extends React.Component {
     });
   }
 
+  // On click, updates state to reflect chosen size and hides 'Choose a size' error msg
   handleSizeSelect(e) {
-    this.retrieveQuantitiesBySize( e.target.value );
+    const errorMsg = document.querySelector('.size-error-msg');
+    console.log(errorMsg);
+    errorMsg.style.visibility = 'hidden';
 
+    this.retrieveQuantitiesBySize( e.target.value );
     this.setState({
       currentSize: e.target.value,
     });
@@ -112,26 +116,30 @@ class Selectors extends React.Component {
   // On click, add current state of style to cart
   // TODO: If user has not selected a size, will render an error msg above the size dropdown menu
   handleAddToCart(e) {
-    if (this.state.currentSize === null) {
-      // TODO: Render error msg above size dropdown
-    }
-    let item = {};
-
-    for (let i = 0; i < this.props.styles.length; i++) {
-      let style = this.props.styles[i];
-      if (style.style_id === this.state.currentStyle) {
-        for (let k in style.skus) {
-          if (style.skus[k].size === this.state.currentSize) {
-            item.sku_id = k;
-            item.count = this.state.currentQuantity;
-            break;
+    if (!this.state.currentSize.length) {
+      console.error('You must select a size first');
+      // TODO: Prepend error msg to .size-selector div
+      const errorMsg = document.querySelector('.size-error-msg');
+      console.log(errorMsg);
+      errorMsg.style.visibility = 'visible';
+    } else {
+      let item = {};
+      for (let i = 0; i < this.props.styles.length; i++) {
+        let style = this.props.styles[i];
+        if (style.style_id === this.state.currentStyle) {
+          for (let k in style.skus) {
+            if (style.skus[k].size === this.state.currentSize) {
+              item.sku_id = k;
+              item.count = this.state.currentQuantity;
+              break;
+            }
           }
+          break;
         }
-        break;
       }
-    }
 
-    this.props.addToCart(item);
+      this.props.addToCart(item);
+    }
   }
 
   render() {
@@ -143,8 +151,10 @@ class Selectors extends React.Component {
           <StyleSelector styles={this.props.styles} handleStyleSelect={this.handleStyleSelect} />
         </div>
         <br></br>
+        { /* TODO: If the user clicks 'Add to Cart' without selecting a size, show err message to size-selector div */ }
         <div className='size-selector'>
-          <div>SIZE > {this.state.currentSize ? this.state.currentSize : 'Select a size'}</div>
+          <div className='size-error-msg' style={{visibility: 'hidden', color: 'red'}}>Please select a size</div>
+          <div>SIZE > {this.state.currentSize ? this.state.currentSize : null}</div>
           <select className='size-select'
             value={this.state.currentSize}
             onChange={this.handleSizeSelect}>
