@@ -8,7 +8,7 @@ import styled from 'styled-components';
 const Image = styled.img`
   width: 40px;
   height: 40px;
-  border: ${ state => state.isSelected ? 'pink solid 5px' : 'gray solid 5px' };
+  border: ${ props => props.isSelected ? 'pink solid 5px' : 'gray solid 5px' };
   border-radius: 30px;
   padding: 2px;
 `
@@ -16,34 +16,27 @@ const Image = styled.img`
 class StyleThumbnail extends React.Component {
   constructor(props) {
     super(props);
-    // url={url} info={style} selected={state.selected} onClick={this.handleStyleSelect}
+    // url={url} info={style} selected={t/f} onClick={this.handleStyleSelect}
 
     this.state = {
-      isSelected: (this.props.selected === this.props.info.style_id ? true : false),
+      isSelected: this.props.selected, // Initial state
     }
 
     this.handleClick = this.handleClick.bind(this);
   }
 
-  // // If the thumbnail's style_id matches the prop, then set state.isSelected to true
-  // componentDidMount() {
-  //   if (this.props.selected === this.props.info.style_id) {
-  //     this.setState({
-  //       isSelected: true,
-  //     });
-  //   }
-  // }
-
   handleClick(e) {
     this.setState({
-      selected: true,
+      isSelected: true,
     });
+
     this.props.onClick(this.props.info.style_id);
   }
 
   render() {
     return (
       <Image
+        isSelected={this.state.isSelected}
         onClick={this.handleClick}
         src={this.props.url}/>
     )
