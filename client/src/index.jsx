@@ -11,7 +11,6 @@ import QuestionsAnswers from './components/QA/QASection.jsx';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    // For our progress demo, we've hard-coded an ID of `39333`
 
     this.state = {
       product: {},
@@ -37,7 +36,6 @@ class App extends React.Component {
     axios(config)
       .then( (results) => {
         this.setState({
-          ...this.state,
           product: results.data
         });
         this.getStyles();
@@ -84,7 +82,6 @@ class App extends React.Component {
     axios(config)
       .then( (reviews) => {
         this.setState({
-          ...this.state,
           reviews: reviews.data.results
         })
       })
@@ -105,7 +102,6 @@ class App extends React.Component {
       },
       data: JSON.stringify(item),
     }
-    console.log(config.data);
 
     axios(config)
       .catch( (err) => {
