@@ -19,7 +19,7 @@ class StyleSelector extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  // TODO: On click, set this.state.selected to the corresponding style ID
+  // On click, set this.state.selected to the corresponding style ID
   handleClick(styleId) {
     this.setState({
       selected: styleId,
@@ -28,8 +28,8 @@ class StyleSelector extends React.Component {
     this.props.handleStyleSelect(styleId);
   }
 
-  // TODO: Renders a StyleThumbnail component for each style
-  // - Pass it { url }, { style }, { this.state.selected }, and { handleClick }
+  // Renders a StyleThumbnail component for each style
+  // Props: { url }, { style }, { this.state.selected }, and { handleClick }
   render() {
     return (
       <div>
