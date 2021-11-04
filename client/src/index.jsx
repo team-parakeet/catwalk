@@ -4,6 +4,8 @@ import axios from 'axios';
 import { TOKEN } from '../../config.js';
 import Selectors from './components/overview/selectors.jsx';
 import Reviews from './components/reviews/Reviews.jsx';
+import { OverviewProvider } from './components/overview/OverviewContext.jsx';
+import { DefaultView } from './components/overview/DefaultView.jsx';
 import { Provider as QAProvider } from './components/QA/QAContext.jsx';
 import QuestionsAnswers from './components/QA/QASection.jsx';
 
@@ -122,9 +124,10 @@ class App extends React.Component {
     return (
       <div>
         <div className='overview'>
+        <OverviewProvider>
           <h2>Overview!</h2>
           <div className='image-gallery'>
-            Image gallery here!
+            <DefaultView />
           </div>
           <div className='product-detail'>
             Product details here!
@@ -136,6 +139,7 @@ class App extends React.Component {
             product={this.state.product}
             productId={this.props.productId}
           />
+        </OverviewProvider>
         </div>
         <br></br>
         <div className='ratings-and-reviews'>
