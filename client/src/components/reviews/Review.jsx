@@ -13,7 +13,7 @@ function Review( {review} ) {
         {date}
       </div>
       <div className="review-stars">
-        <Stars avgRating={review.rating}/>
+        <Stars rating={review.rating}/>
       </div>
       <div className="review-title">
         <h3>{review.summary}</h3>
@@ -28,7 +28,6 @@ function Review( {review} ) {
         user: {review.reviewer_name}
       </div>
       {review.photos.map(photo => {
-        console.log(photo)
         return <div key={photo.id}>PHOTO URL{photo.url}</div>
       })}
     </div>

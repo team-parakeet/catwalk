@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Review from './Review.jsx';
 
 function ReviewsList({ reviews }) {
-  // what props does this component need?
-  // what state does this component need?
+  if (!reviews) {
+    return null;
+  }
+
   return (
     <div className="reviews-list-container">
       REVIEWS:
@@ -13,6 +15,5 @@ function ReviewsList({ reviews }) {
     </div>
   )
 }
-
 
 export default ReviewsList;

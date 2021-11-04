@@ -3,27 +3,26 @@ import RatingScore from "./RatingScore.jsx";
 import StarsChart from "./StarsChart.jsx"
 import ComparisonScales from "./ComparisonScales.jsx";
 
-function ReviewsColumn({ avgRating, reviews }) {
+function ReviewsColumn({ reviews }) {
   // what props does this component need?
   // what state does this component need?
 
-  const [isLoading, setIsLoading] = useState(true)
+  const [ratings, setRatings] = useState({ 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 })
 
   useEffect(() => {
-    if (reviews.length !== 0) {
-      setIsLoading(false)
-    }
+    reviews.forEach(review => {
+      const currentRating = review.rating;
+      setRatings(prevState => ({
+        ...prevState,
+        [currentRating]: prevState[currentRating] + 1
+      }))
+    })
   }, [reviews])
-
-  if (isLoading) {
-    return <div>IS LOADING..</div>
-  }
-
 
   return (
     <div className="reviews-column-container">
-      <RatingScore avgRating={avgRating}/>
-      <StarsChart reviews={reviews}/>
+      <RatingScore reviews={reviews}/>
+      <StarsChart ratings={ratings}/>
       <ComparisonScales/>
     </div>
   )
