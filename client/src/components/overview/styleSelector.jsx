@@ -4,15 +4,15 @@ import StyleThumbnail from './styleThumbnail.jsx';
 import styled from 'styled-components';
 
 // TODO: Build out the component so that it:
-// - renders style thumbnails in rows of 4
-// - keeps track of which style is currently selected
+// ? renders style thumbnails in rows of 4
+// √ keeps track of which style is currently selected
 class StyleSelector extends React.Component {
   constructor(props) {
     super(props);
     // props { styles, handleStyleSelect }
 
     this.state = {
-      selected: '',
+      selected: '', // id # of the style that user has selected
     }
 
     // Bind fns
@@ -40,7 +40,7 @@ class StyleSelector extends React.Component {
             className='style-thumbnail'
             url={url}
             info={style}
-            selected={this.state.selected}
+            selected={this.state.selected === style.style_id}
             key={i}
             onClick={this.handleClick} />)
         }) }
