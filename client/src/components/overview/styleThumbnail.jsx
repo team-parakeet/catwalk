@@ -19,7 +19,7 @@ class StyleThumbnail extends React.Component {
     // url={url} info={style} selected={t/f} onClick={this.handleStyleSelect}
 
     this.state = {
-      isSelected: this.props.selected, // Initial state
+      isSelected: this.props.selected,
     }
 
     this.handleClick = this.handleClick.bind(this);
@@ -36,7 +36,7 @@ class StyleThumbnail extends React.Component {
   render() {
     return (
       <Image
-        isSelected={this.state.isSelected}
+        isSelected={this.props.selected}
         onClick={this.handleClick}
         src={this.props.url}/>
     )
