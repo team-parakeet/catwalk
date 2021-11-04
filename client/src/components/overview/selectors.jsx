@@ -95,9 +95,7 @@ class Selectors extends React.Component {
 
   // On click, updates state to reflect chosen size and hides 'Choose a size' error msg
   handleSizeSelect(e) {
-    const errorMsg = document.querySelector('.size-error-msg');
-    console.log(errorMsg);
-    errorMsg.style.visibility = 'hidden';
+    document.querySelector('.size-error-msg').style.visibility = 'hidden';
 
     this.retrieveQuantitiesBySize( e.target.value );
     this.setState({
@@ -114,14 +112,10 @@ class Selectors extends React.Component {
   }
 
   // On click, add current state of style to cart
-  // TODO: If user has not selected a size, will render an error msg above the size dropdown menu
+  // If user has not selected a size, will render an error msg above the size dropdown menu
   handleAddToCart(e) {
     if (!this.state.currentSize.length) {
-      console.error('You must select a size first');
-      // TODO: Prepend error msg to .size-selector div
-      const errorMsg = document.querySelector('.size-error-msg');
-      console.log(errorMsg);
-      errorMsg.style.visibility = 'visible';
+      document.querySelector('.size-error-msg').style.visibility = 'visible';
     } else {
       let item = {};
       for (let i = 0; i < this.props.styles.length; i++) {
@@ -151,7 +145,6 @@ class Selectors extends React.Component {
           <StyleSelector styles={this.props.styles} handleStyleSelect={this.handleStyleSelect} />
         </div>
         <br></br>
-        { /* TODO: If the user clicks 'Add to Cart' without selecting a size, show err message to size-selector div */ }
         <div className='size-selector'>
           <div className='size-error-msg' style={{visibility: 'hidden', color: 'red'}}>Please select a size</div>
           <div>SIZE > {this.state.currentSize ? this.state.currentSize : null}</div>
