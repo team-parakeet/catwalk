@@ -38,3 +38,21 @@ export function getProductStyles(productId) {
   })
 }
 
+/**
+ * Returns a promise resolving to a style object if styleId exists, or empty object if it does not exist.
+ *
+ * @param {number} productId
+ * @param {number} styleId
+ * @returns
+ */
+export function getProductPhotosOfAStyle(productId, styleId) {
+  return axios.get(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/${productId}/styles`, {
+    headers: header,
+  })
+    .then((results) => results.data.results.reduce((result, style) => {
+      if (style.style_id === styleId) {
+        result = style;
+      }
+      return result;
+    }, {}));
+}
