@@ -26,7 +26,7 @@ function Review({ review }) {
     setHasClicked(true)
   }
 
-  const response = <div>Response from seller: {review.response}</div>
+  const response = <div>Response from seller: <p>{review.response}</p></div>
   const recommend = <div><FontAwesomeIcon icon={faCheck} /> I recommend this product</div>
   const helpfulNoLink = <div>Was this review helpful? Yes ({count})</div>
   const helpfulLink = <div>Was this review helpful? <a href="#0" onClick={handleHelpfulOnClick}>Yes</a> ({count})</div>
