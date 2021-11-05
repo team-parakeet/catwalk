@@ -12,7 +12,7 @@ function Review({ review }) {
   const date = dateFormatter(isoDate, { format: 'MMM d, yyyy', namedMonths: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] });
 
   const [count, setCount] = useState(review.helpfulness)
-  const [hasClicked, setHasClicked] = useState(false);
+  const [hasClicked, setHasClicked] = useState(false)
 
   const handleHelpfulOnClick = () => {
     const reviewId = review.review_id
