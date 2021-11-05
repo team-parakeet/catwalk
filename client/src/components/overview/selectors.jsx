@@ -5,6 +5,11 @@ import StyleSelector from './styleSelector.jsx';
 import StyleThumbnail from './styleThumbnail.jsx';
 import styled from 'styled-components';
 
+const Wrapper = styled.div`
+  border: hsla(205, 37%, 60%, 50%) solid 5px;
+  padding: 5px;
+`
+
 class Selectors extends React.Component {
   constructor(props) {
     super(props);
@@ -138,6 +143,7 @@ class Selectors extends React.Component {
 
   render() {
     return (
+      <Wrapper>
       <div className='selectors'>
         <div className='style-selector'>
           STYLE > {this.state.currentStyle}
@@ -170,16 +176,9 @@ class Selectors extends React.Component {
         <br></br>
         { this.state.outOfStock ? <button>Out of Stock</button> : <button className='add-to-cart' onClick={this.handleAddToCart}>Add to Cart</button> }
       </div>
+      </Wrapper>
     )
   }
 }
 
 export default Selectors;
-
-/*
-{ this.props.styles.map( (style, i) => {
-  let url = style.photos[0].thumbnail_url;
-
-  return <StyleThumbnail url={url} info={style} key={i} onClick={this.handleStyleSelect}/>
-})}
-*/
