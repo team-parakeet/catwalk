@@ -102,7 +102,6 @@ class Selectors extends React.Component {
   // On click, set state to reflect chosen quantity
   handleQuantitySelect(e) {
     this.setState({
-      ...this.state,
       currentQuantity: e.target.value,
     })
   }
