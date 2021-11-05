@@ -2,13 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 
-// TODO: Style thumbnails
-// - small gray circles
-// - (this.state.isSelected ? pink border : gray border)
 const Image = styled.img`
   width: 40px;
   height: 40px;
-  border: ${ props => props.isSelected ? 'pink solid 5px' : 'gray solid 5px' };
+  border: ${ props => props.isSelected ? 'hsl(360, 27%, 81%) solid 5px' : 'hsla(33, 22%, 45%, 70%) solid 5px' };
   border-radius: 30px;
   padding: 2px;
 `
