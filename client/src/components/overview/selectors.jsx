@@ -5,18 +5,9 @@ import StyleSelector from './styleSelector.jsx';
 import StyleThumbnail from './styleThumbnail.jsx';
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
-  border: hsla(205, 37%, 60%, 50%) solid 5px;
-  padding: 5px;
-`
-
 class Selectors extends React.Component {
   constructor(props) {
     super(props);
-    // addToCart
-    // productId
-    // product = obj of product info
-    // styles = array of style thumbnail objects
 
     this.state = {
       currentStyle: '',
@@ -143,7 +134,6 @@ class Selectors extends React.Component {
 
   render() {
     return (
-      <Wrapper>
       <div className='selectors'>
         <div className='style-selector'>
           STYLE > {this.state.currentStyle}
@@ -176,7 +166,6 @@ class Selectors extends React.Component {
         <br></br>
         { this.state.outOfStock ? <button>Out of Stock</button> : <button className='add-to-cart' onClick={this.handleAddToCart}>Add to Cart</button> }
       </div>
-      </Wrapper>
     )
   }
 }
