@@ -3,7 +3,7 @@ import RatingScore from "./RatingScore.jsx";
 import StarsChart from "./StarsChart.jsx"
 import ComparisonScales from "./ComparisonScales.jsx";
 
-function ReviewsColumn({ reviews }) {
+function ReviewsColumn({ reviews, productId }) {
   const [ratings, setRatings] = useState({ 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 })
   const [recommendPercent, setRecommendPercent] = useState(null);
 
@@ -31,12 +31,12 @@ function ReviewsColumn({ reviews }) {
 
   return (
     <div className="reviews-column-container">
-      <RatingScore reviews={reviews}/>
-      <StarsChart ratings={ratings}/>
+      <RatingScore reviews={reviews} />
+      <StarsChart ratings={ratings} />
       <div className="recommend-percent-bar">
         {recommendPercent}% of reviews recommend this product
       </div>
-      <ComparisonScales/>
+      <ComparisonScales productId={productId} />
     </div>
   )
 }
