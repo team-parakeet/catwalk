@@ -4,7 +4,7 @@ import {TOKEN} from '../../config.js';
 /**
  * Returns a promise that resolves to all questions for a given product.
  *
- * @param {number} productId The product_id you want questions for.
+ * @param {number}  The product_id you want questions for.
  * @returns {Promise<any>} Promise object representing api results
  */
 export function getAllQuestions(productId) {
