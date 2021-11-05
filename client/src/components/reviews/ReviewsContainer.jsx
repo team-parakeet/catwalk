@@ -3,7 +3,7 @@ import ReviewsList from './ReviewsList.jsx';
 import SortBy from './SortBy.jsx';
 import Button from './Button.jsx';
 
-function ReviewsContainer({reviews}) {
+function ReviewsContainer({ reviews, productId }) {
   const [currentReviews, setCurrentReviews] = useState(null);
   const [numReviewsShown, setNumReviewsShown] = useState(2);
 
@@ -37,7 +37,7 @@ function ReviewsContainer({reviews}) {
 
   return (
     <div>
-      <SortBy setCurrentReviews={setCurrentReviews} />
+      <SortBy setCurrentReviews={setCurrentReviews} productId={productId} />
       {reviews.length !== 0 &&
       <ReviewsList reviews={reviewsToShow}/>
       }
