@@ -25,7 +25,7 @@ function RatingScore({ reviews }) {
   return (
     <div className="rating-score-container">
       <Score avgRating={avgRating}/>
-      <Stars rating={avgRating}/>
+      <Stars avgRating={avgRating}/>
     </div>
   )
 }
