@@ -53,9 +53,9 @@ function Review({ review }) {
         Username: {review.reviewer_name}
       </div>
       <div className="review-photos">
-        {review.photos.map(photo => {
-        return <div key={photo.id}>PHOTO URL{photo.url}</div>
-        })}
+        { review.photos.map(photo => {
+          return <div key={photo.id}>PHOTO URL{photo.url}</div>
+        }) }
       </div>
       <div className="review-helpfulness">
         Was this review helpful? {hasClicked ? <div>Yes ({count})</div> : <div><a href="#0" onClick={handleHelpfulOnClick}>Yes</a> ({count})</div>}

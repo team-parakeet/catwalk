@@ -11,16 +11,13 @@ import QuestionsAnswers from './components/QA/QASection.jsx';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    // For our progress demo, we've hard-coded an ID of `39333`
 
-    // TODO: What parts of state changes at this level?
     this.state = {
       product: {},
       styles: [],
       reviews: [],
     };
 
-    // TODO: Bind fns
     this.getStyles = this.getStyles.bind(this);
     this.getReviews = this.getReviews.bind(this);
     this.addItemToCart = this.addItemToCart.bind(this);
@@ -39,7 +36,6 @@ class App extends React.Component {
     axios(config)
       .then( (results) => {
         this.setState({
-          ...this.state,
           product: results.data
         });
         this.getStyles();
@@ -64,7 +60,6 @@ class App extends React.Component {
     axios(config)
       .then( (styles) => {
         this.setState({
-          ...this.state,
           styles: styles.data.results,
         });
       })
@@ -87,7 +82,6 @@ class App extends React.Component {
     axios(config)
       .then( (reviews) => {
         this.setState({
-          ...this.state,
           reviews: reviews.data.results
         })
       })
@@ -100,19 +94,16 @@ class App extends React.Component {
   // POST the item obj to the API
   addItemToCart( item ) {
     let config = {
-      method: POST,
+      method: 'post',
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/cart`,
       headers: {
         'Authorization': `${TOKEN}`,
         'Content-Type': 'application/json',
       },
-      data: item,
+      data: JSON.stringify(item),
     }
 
     axios(config)
-      .then( () => {
-        alert(`Your item ${item.name} in style ${item.style} has been added to the cart`);
-      })
       .catch( (err) => {
         console.error(err);
       })
@@ -131,7 +122,7 @@ class App extends React.Component {
           </div>
           <br></br>
           <Selectors
-            addItemToCart={this.addItemToCart}
+            addToCart={this.addItemToCart}
             styles={this.state.styles}
             product={this.state.product}
             productId={this.props.productId}

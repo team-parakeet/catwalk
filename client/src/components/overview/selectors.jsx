@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import StyleSelector from './styleSelector.jsx';
 import StyleThumbnail from './styleThumbnail.jsx';
+import styled from 'styled-components';
 
 class Selectors extends React.Component {
   constructor(props) {
     super(props);
+    // addToCart
     // productId
     // product = obj of product info
     // styles = array of style thumbnail objects
@@ -14,8 +17,9 @@ class Selectors extends React.Component {
       currentStyle: '',
       availableSizes: [],
       currentSize: '',
-      availableQuantities: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+      availableQuantities: [1],
       currentQuantity: 1,
+      outOfStock: false,
     };
 
     // Bind fns
@@ -25,18 +29,6 @@ class Selectors extends React.Component {
     this.handleSizeSelect = this.handleSizeSelect.bind(this);
     this.handleQuantitySelect = this.handleQuantitySelect.bind(this);
     this.handleAddToCart = this.handleAddToCart.bind(this);
-  }
-
-  // On click, set state to reflect chosen style
-  // TODO: Make sure that e.target.value is an ID number
-  handleStyleSelect(e) {
-    console.log('selected style: ', e.target.value);
-    // this.retrieveSizesByStyle( e.target.value );
-
-    this.setState({
-      ...this.state,
-      currentStyle: e.target.value,
-    });
   }
 
   // On style select, gets all the sizes based off of the style's id
@@ -50,7 +42,6 @@ class Selectors extends React.Component {
       }
     }
     this.setState({
-      ...this.state,
       availableSizes: sizes,
     });
   }
@@ -61,10 +52,15 @@ class Selectors extends React.Component {
 
     for (let i = 0; i < this.props.styles.length; i++) {
       let style = this.props.styles[i];
-      if (style.style_id === this.props.currentStyle) {
+      if (style.style_id === this.state.currentStyle) {
         for (let k in style.skus) {
           if (style.skus[k].size === size) {
             maxQuantity = style.skus[k].quantity;
+            if (style.skus[k].quantity < 1) {
+              this.setState({
+                outOfStock: true
+              });
+            }
             break;
           }
         }
@@ -72,26 +68,37 @@ class Selectors extends React.Component {
       }
     }
 
-    if (maxQuantity < 15) {
+    if (maxQuantity < 15 && maxQuantity > 0) {
       let quantities = [];
       for (let i = 1; i <= maxQuantity; i++) {
         quantities.push(i);
       }
-    } else {
       this.setState({
-        ...this.state,
+        availableQuantities: quantities,
+      });
+    } else if (maxQuantity >= 15) {
+      this.setState({
         availableQuantities: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
       });
     }
   }
 
-  handleSizeSelect(e) {
-    let size = e.target.value;
-
-    this.retrieveQuantitiesBySize( size )
+  // On click, set state to reflect chosen style
+  // Make sure that e.target.value is an ID number
+  handleStyleSelect(styleId) {
+    this.retrieveSizesByStyle( styleId );
 
     this.setState({
-      ...this.state,
+      currentStyle: styleId,
+    });
+  }
+
+  // On click, updates state to reflect chosen size and hides 'Choose a size' error msg
+  handleSizeSelect(e) {
+    document.querySelector('.size-error-msg').style.visibility = 'hidden';
+
+    this.retrieveQuantitiesBySize( e.target.value );
+    this.setState({
       currentSize: e.target.value,
     });
   }
@@ -105,45 +112,74 @@ class Selectors extends React.Component {
   }
 
   // On click, add current state of style to cart
+  // If user has not selected a size, will render an error msg above the size dropdown menu
   handleAddToCart(e) {
-    console.log(`Adding to the cart ${this.state.style}, ${this.state.quantity}`);
-    this.props.addToCart({
-      ...this.props.product,
-      style: this.state.style,
-      size: this.state.size,
-      quantity: this.state.quantity,
-    })
+    if (!this.state.currentSize.length) {
+      document.querySelector('.size-error-msg').style.visibility = 'visible';
+    } else {
+      let item = {};
+      for (let i = 0; i < this.props.styles.length; i++) {
+        let style = this.props.styles[i];
+        if (style.style_id === this.state.currentStyle) {
+          for (let k in style.skus) {
+            if (style.skus[k].size === this.state.currentSize) {
+              item.sku_id = k;
+              item.count = this.state.currentQuantity;
+              break;
+            }
+          }
+          break;
+        }
+      }
+
+      this.props.addToCart(item);
+    }
   }
 
   render() {
     return (
       <div className='selectors'>
         <div className='style-selector'>
-          Style selector
+          STYLE > {this.state.currentStyle}
           <br></br>
-          { /* TODO: Map out `styles` props as thumbnails */ }
-          <StyleThumbnail />
-          <StyleThumbnail />
-          <StyleThumbnail />
+          <StyleSelector styles={this.props.styles} handleStyleSelect={this.handleStyleSelect} />
         </div>
         <br></br>
         <div className='size-selector'>
-          <div>Size selector</div>
+          <div className='size-error-msg' style={{visibility: 'hidden', color: 'red'}}>Please select a size</div>
+          <div>SIZE > {this.state.currentSize ? this.state.currentSize : null}</div>
+          <select className='size-select'
+            value={this.state.currentSize}
+            onChange={this.handleSizeSelect}>
+            <option>Select a size</option>
+            { this.state.availableSizes.length ? this.state.availableSizes.map( (size, i) => (
+              <option className='size-option' key={i} value={size}>{size}</option>
+            )) : null }
+          </select>
         </div>
+
         <div className='quantity-selector'>
-          <div>Quantity selector</div>
-          <div>For now, users can select up to a max of 15</div>
-          <select onSelect={this.handleQuantitySelect}>
-            { this.state.availableQuantities.map( (quantity, i) => (
-              <option className='quantity-option' key={i}>{quantity}</option>
+          <div>QUANTITY > {this.state.currentQuantity}</div>
+          <select onChange={this.handleQuantitySelect}>
+            { this.state.outOfStock ? <option>Out of Stock</option> : this.state.availableQuantities.map( (quantity, i) => (
+              <option className='quantity-option' key={i} value={quantity}>{quantity}</option>
             )) }
           </select>
         </div>
+
         <br></br>
-        <button className='add-to-cart' onClick={this.handleAddToCart}>Add to Cart</button>
+        { this.state.outOfStock ? <button>Out of Stock</button> : <button className='add-to-cart' onClick={this.handleAddToCart}>Add to Cart</button> }
       </div>
     )
   }
 }
 
 export default Selectors;
+
+/*
+{ this.props.styles.map( (style, i) => {
+  let url = style.photos[0].thumbnail_url;
+
+  return <StyleThumbnail url={url} info={style} key={i} onClick={this.handleStyleSelect}/>
+})}
+*/
