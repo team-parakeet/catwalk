@@ -3,7 +3,7 @@ import Score from './Score.jsx';
 import Stars from './Stars.jsx';
 
 function RatingScore({ reviews }) {
-  const [avgRating, setAvgRating] = useState(null);
+  const [avgRating, setAvgRating] = useState('');
   const [numOfReviews, setNumOfReviews] = useState(null);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ function RatingScore({ reviews }) {
   return (
     <div className="rating-score-container">
       <Score avgRating={avgRating}/>
-      <Stars avgRating={avgRating}/>
+      {/* <Stars avgRating={avgRating}/> */}
       <div className="number-of-reviews-bar">
         {numOfReviews} reviews
       </div>
