@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { TOKEN } from '../../../../config.js';
 import Slider from './Slider.jsx';
+import { ComparisonScaleContainer, CharScale } from '../styles/reviews/ComaparisonScaleContainer.styled.js';
+import { Wrapper, SmallFont } from '../styles/reviews/Wrapper.styled.js';
 
 function ComparisonScales({ productId }) {
   const [metaData, setMetaData] = useState({})
@@ -37,16 +39,25 @@ function ComparisonScales({ productId }) {
 
 
   return (
-    <div className="comparison-scales">
+    <ComparisonScaleContainer>
       {Object.keys(characteristics).map(char => (
-      <div key={char} className={`${char}-scale`}>
+      <CharScale key={char}>
         {char}
-        <div><Slider id={char} value={characteristics[char]} /></div>
-        {char === 'Comfort' || char === 'Quality' ? 'Poor' : 'Small'}
-        {char === 'Comfort' || char === 'Quality' ? 'Great' : 'Big'}
-      </div>
+
+        <Slider id={char} value={characteristics[char]} />
+        {char === 'Comfort' || char === 'Quality' ?
+        <Wrapper>
+          <SmallFont>Poor</SmallFont>
+          <SmallFont>Great</SmallFont>
+        </Wrapper>
+        :
+        <Wrapper>
+          <SmallFont>Small</SmallFont>
+          <SmallFont>Big</SmallFont>
+        </Wrapper>}
+      </CharScale>
       ))}
-    </div>
+    </ComparisonScaleContainer>
   )
 }
 

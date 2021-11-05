@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Score from './Score.jsx';
 import Stars from './Stars.jsx';
+import { RatingScoreContainer, NumberOfReviewsBar } from '../styles/reviews/RatingScoreContainer.styled.js';
 
 function RatingScore({ reviews }) {
   const [avgRating, setAvgRating] = useState('');
@@ -26,13 +27,13 @@ function RatingScore({ reviews }) {
   }
 
   return (
-    <div className="rating-score-container">
+    <RatingScoreContainer>
       <Score avgRating={avgRating}/>
       <Stars avgRating={avgRating}/>
-      <div className="number-of-reviews-bar">
+      <NumberOfReviewsBar>
         {numOfReviews} reviews
-      </div>
-    </div>
+      </NumberOfReviewsBar>
+    </RatingScoreContainer>
   )
 }
 

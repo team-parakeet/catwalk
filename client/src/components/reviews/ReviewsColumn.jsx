@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import RatingScore from "./RatingScore.jsx";
 import StarsChart from "./StarsChart.jsx"
 import ComparisonScales from "./ComparisonScales.jsx";
+import { ReviewsColumnContainer } from "../styles/reviews/ReviewsColumnContainer.styled.js";
+import { PercentBar } from "../styles/reviews/PercentBar.styled.js";
 
 function ReviewsColumn({ reviews, productId }) {
   const [ratings, setRatings] = useState({ 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 })
@@ -30,14 +32,14 @@ function ReviewsColumn({ reviews, productId }) {
   }, [reviews])
 
   return (
-    <div className="reviews-column-container">
+    <ReviewsColumnContainer>
       <RatingScore reviews={reviews} />
       <StarsChart ratings={ratings} />
-      <div className="recommend-percent-bar">
+      <PercentBar>
         {recommendPercent}% of reviews recommend this product
-      </div>
+      </PercentBar>
       <ComparisonScales productId={productId} />
-    </div>
+    </ReviewsColumnContainer>
   )
 }
 

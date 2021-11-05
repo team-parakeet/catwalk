@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import ReviewsList from './ReviewsList.jsx';
 import SortBy from './SortBy.jsx';
 import Button from './Button.jsx';
+import { Container } from '../styles/reviews/Container.styled.js';
+import { Wrapper } from '../styles/reviews/Wrapper.styled.js';
 
 function ReviewsContainer({ reviews, productId }) {
   const [currentReviews, setCurrentReviews] = useState(null);
@@ -36,19 +38,21 @@ function ReviewsContainer({ reviews, productId }) {
   const reviewsToShow = currentReviews.slice(0, numReviewsShown);
 
   return (
-    <div>
+    <Container>
       <SortBy setCurrentReviews={setCurrentReviews} productId={productId} />
       {reviews.length !== 0 &&
       <ReviewsList reviews={reviewsToShow}/>
       }
-      {reviews.length < 2 || reviewsToShow.length === reviews.length ? null :
-      <Button handleOnClick={handleMoreReviewsOnClick} text={'MORE REVIEWS'} />
-      }
-      {reviewsToShow.length === reviews.length &&
-      <Button handleOnClick={handleShowLessOnClick} text={'SHOW LESS'} />
-      }
-      <Button handleOnClick={handleAddReviewOnClick} text={'ADD REVIEW'} />
-    </div>
+      <Wrapper>
+        {reviews.length < 2 || reviewsToShow.length === reviews.length ? null :
+        <Button handleOnClick={handleMoreReviewsOnClick} text={'Show more reviews'} />
+        }
+        {reviewsToShow.length === reviews.length &&
+        <Button handleOnClick={handleShowLessOnClick} text={'Show less reviews'} />
+        }
+        <Button handleOnClick={handleAddReviewOnClick} text={'Add a review'} />
+      </Wrapper>
+    </Container>
   )
 }
 
