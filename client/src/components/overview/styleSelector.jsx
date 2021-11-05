@@ -11,7 +11,6 @@ class StyleSelector extends React.Component {
       selected: ''
     }
 
-    // Bind fns
     this.handleClick = this.handleClick.bind(this);
   }
 
