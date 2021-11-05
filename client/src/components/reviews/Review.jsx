@@ -28,6 +28,8 @@ function Review({ review }) {
 
   const response = <div>Response from seller: {review.response}</div>
   const recommend = <div><FontAwesomeIcon icon={faCheck} /> I recommend this product</div>
+  const helpfulNoLink = <div>Was this review helpful? Yes ({count})</div>
+  const helpfulLink = <div>Was this review helpful? <a href="#0" onClick={handleHelpfulOnClick}>Yes</a> ({count})</div>
 
   return (
     <div className="review">
@@ -58,10 +60,11 @@ function Review({ review }) {
         }) }
       </div>
       <div className="review-helpfulness">
-        Was this review helpful? {hasClicked ? <div>Yes ({count})</div> : <div><a href="#0" onClick={handleHelpfulOnClick}>Yes</a> ({count})</div>}
+        {hasClicked ? helpfulNoLink : helpfulLink}
       </div>
     </div>
   )
+
 }
 
 export default Review;
