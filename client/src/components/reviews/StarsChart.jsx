@@ -1,16 +1,20 @@
 import React, {useState, useEffect} from 'react';
+import Slider from './Slider.jsx';
 
 function StarsChart({ ratings }) {
-  //once we get stars
-  // get the keys
 
-  const stars = [1, 2, 3, 4, 5];
+  const stars = [5, 4, 3, 2, 1];
 
   return (
     <div className="stars-chart">
       {stars.map(star => {
-        return <div key={star} className="star-bar">{star} STARS: {ratings[star]}</div>
-      })}
+        return (
+        <div key={star} className="star-bar">
+          {star} stars:
+          <Slider id={star} value={ratings[star]}/>
+          {ratings[star]}
+        </div>
+      )})}
     </div>
   )
 }
