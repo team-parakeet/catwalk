@@ -6,4 +6,5 @@ export const ReviewsHeader = styled.div`
   background-color: #fff;
   width: 76vw;
   margin-bottom: 20px;
+  color: #d3d3d3;
 `
