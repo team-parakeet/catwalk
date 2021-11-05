@@ -28,7 +28,7 @@ function RatingScore({ reviews }) {
   return (
     <div className="rating-score-container">
       <Score avgRating={avgRating}/>
-      {/* <Stars avgRating={avgRating}/> */}
+      <Stars avgRating={avgRating}/>
       <div className="number-of-reviews-bar">
         {numOfReviews} reviews
       </div>
