@@ -31,14 +31,14 @@ function Review({ review }) {
 
   return (
     <div className="review">
+      <div className="review-title">
+        <h3>{review.summary}</h3>
+      </div>
       <div className="review-date">
         {date}
       </div>
       <div className="review-stars">
         <Stars avgRating={review.rating}/>
-      </div>
-      <div className="review-title">
-        <h3>{review.summary}</h3>
       </div>
       <div className="review-body">
         {review.body}
