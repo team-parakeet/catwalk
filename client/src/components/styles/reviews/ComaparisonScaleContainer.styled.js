@@ -7,5 +7,4 @@ export const ComparisonScaleContainer = styled.div`
 export const CharScale = styled.div`
   margin-top: 10px;
   font-size: 9px;
-  font-weight: bold;
 `

@@ -7,6 +7,6 @@ export const Wrapper = styled.div`
 `
 
 export const SmallFont = styled.div`
-  font-size: 8px;
+  font-size: 7px;
   color: #939393;
 `
