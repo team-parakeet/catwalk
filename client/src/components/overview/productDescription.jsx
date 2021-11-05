@@ -7,8 +7,6 @@ const Slogan = styled.div`
 `
 
 const ProductDescription = ( {product} ) => {
-  console.log(product);
-
   return (
     <div className='product-description'>
       <Slogan className='slogan' ><h3>{product.slogan}</h3></Slogan>
