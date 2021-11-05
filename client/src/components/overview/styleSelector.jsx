@@ -3,19 +3,14 @@ import ReactDOM from 'react-dom';
 import StyleThumbnail from './styleThumbnail.jsx';
 import styled from 'styled-components';
 
-// TODO: Build out the component so that it:
-// ? renders style thumbnails in rows of 4
-// √ keeps track of which style is currently selected
 class StyleSelector extends React.Component {
   constructor(props) {
     super(props);
-    // props { styles, handleStyleSelect }
 
     this.state = {
-      selected: '', // id # of the style that user has selected
+      selected: ''
     }
 
-    // Bind fns
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -28,8 +23,6 @@ class StyleSelector extends React.Component {
     this.props.handleStyleSelect(styleId);
   }
 
-  // Renders a StyleThumbnail component for each style
-  // Props: { url }, { style }, { this.state.selected }, and { handleClick }
   render() {
     return (
       <div>
