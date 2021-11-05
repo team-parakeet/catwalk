@@ -29,16 +29,15 @@ export const DefaultView = () => {
 
 export const ThumbnailSlider = () => {
   const { images, currentImage, displayNextImage, displayPrevImage } = useContext(OverviewContext);
-
+  let isAboveLowerBounds = currentImage > 0;
+  let isBelowUpperBounds = currentImage < images.length - 1;
   return (
     <SliderContainer>
-      <Arrow className={currentImage > 0 ? 'showContent' : 'hideContent'} src={'./images/chevron-up.svg'} onClick={() => (currentImage > 0) ? displayPrevImage() : {}} />
-      {/* {currentImage === 0 && <FadedArrow src={'./images/chevron-up.svg'} />} */}
+      <Arrow className={isAboveLowerBounds ? 'showContent' : 'hideContent'} src={'./images/chevron-up.svg'} onClick={() => (isAboveLowerBounds) ? displayPrevImage() : {}} />
       {images.map((image, idx) => {
         return <ThumbnailItem key={image.id} id={image.id} image={image}/>;
       })}
-      {currentImage < images.length - 1 && <Arrow src={'./images/chevron-down.svg'} onClick={() => displayNextImage()} />}
-      {currentImage === images.length - 1 && <FadedArrow src={'./images/chevron-down.svg'} />}
+      <Arrow className={isBelowUpperBounds ? 'showContent' : 'hideContent'} src={'./images/chevron-down.svg'} onClick={() => (isBelowUpperBounds) ? displayNextImage() : {}} />
     </SliderContainer>
   );
 };
