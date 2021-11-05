@@ -6,14 +6,6 @@ function RatingScore({ reviews }) {
   const [avgRating, setAvgRating] = useState(null);
   const [numOfReviews, setNumOfReviews] = useState(null);
 
-  // var number = (4.1428571428571429 + 4.0000000000000000 + 4.3333333333333333 + 4.0000000000000000) / 4
-  // var rounded = Math.round(number * 10) / 10
-
-  // var number = 4
-  // var rounded = number.toFixed(1)
-
-  // console.log(rounded)
-
   useEffect(() => {
     if (reviews.length !== 0) {
       const getAvgRating = () => {
