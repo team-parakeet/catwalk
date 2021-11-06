@@ -8,10 +8,6 @@ import styled from 'styled-components';
 class Selectors extends React.Component {
   constructor(props) {
     super(props);
-    // addToCart
-    // productId
-    // product = obj of product info
-    // styles = array of style thumbnail objects
 
     this.state = {
       currentStyle: '',
@@ -106,7 +102,6 @@ class Selectors extends React.Component {
   // On click, set state to reflect chosen quantity
   handleQuantitySelect(e) {
     this.setState({
-      ...this.state,
       currentQuantity: e.target.value,
     })
   }
@@ -175,11 +170,3 @@ class Selectors extends React.Component {
 }
 
 export default Selectors;
-
-/*
-{ this.props.styles.map( (style, i) => {
-  let url = style.photos[0].thumbnail_url;
-
-  return <StyleThumbnail url={url} info={style} key={i} onClick={this.handleStyleSelect}/>
-})}
-*/
