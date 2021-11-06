@@ -34,7 +34,7 @@ export const CollapseAnswersBtn = styled(LoadMoreAnswersBtn)`
 `
 
 export const ResponsesContainer = styled.div`
-  width: 100%;
+  max-width: 100%;
   display: inline-block;
   outline: 2px solid green;
   flex-shrink: 0;
