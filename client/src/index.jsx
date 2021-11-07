@@ -9,6 +9,8 @@ import Selectors from './components/overview/selectors.jsx';
 import Reviews from './components/reviews/Reviews.jsx';
 import { Provider as QAProvider } from './components/QA/QAContext.jsx';
 import QuestionsAnswers from './components/QA/QASection.jsx';
+import Loader from 'react-loader-spinner';
+import { LoaderWrapper } from './components/styles/reviews/ReviewsWrapper.styled.js';
 
 const Wrapper = styled.div`
   border: hsla(205, 37%, 60%, 50%) solid 5px;
@@ -138,7 +140,18 @@ class App extends React.Component {
           </div>
           <br></br>
           <div className='ratings-and-reviews'>
-            <Reviews reviews={this.state.reviews} productId={this.props.productId}/>
+            {this.state.reviews.length === 0 ? (
+              <LoaderWrapper>
+                <Loader
+                  type="TailSpin"
+                  color="#d3d3d3"
+                  height={100}
+                  width={100}
+                />
+              </LoaderWrapper>)
+              :
+              (<Reviews reviews={this.state.reviews} productId={this.props.productId}/>
+            )}
           </div>
           <br></br>
           <div className='q-and-a'>

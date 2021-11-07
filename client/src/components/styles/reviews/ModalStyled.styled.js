@@ -12,6 +12,7 @@ export const ModalStyled = styled.div`
   height: 50%;
   background: #fff;
   border: 1px solid hotpink;
+  font-size: 10pt;
 `
 
 export const Overlay = styled.div`

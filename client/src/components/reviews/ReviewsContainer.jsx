@@ -3,8 +3,8 @@ import ReviewsList from './ReviewsList.jsx';
 import SortBy from './SortBy.jsx';
 import Button from './Button.jsx';
 import Modal from './Modal.jsx';
-import { Container } from '../styles/reviews/Container.styled.js';
-import { Wrapper } from '../styles/reviews/Wrapper.styled.js';
+import { ReviewsContainerStyled } from '../styles/reviews/ReviewsContainerStyled.styled.js';
+import { ButtonWrapper } from '../styles/reviews/ReviewsWrapper.styled.js';
 
 function ReviewsContainer({ reviews, productId }) {
   const [currentReviews, setCurrentReviews] = useState(null);
@@ -33,6 +33,8 @@ function ReviewsContainer({ reviews, productId }) {
     setShowModal(prev => !prev);
   }
 
+  console.log('hello')
+
   if (!reviews.length || !currentReviews) {
     return null
   }
@@ -40,12 +42,12 @@ function ReviewsContainer({ reviews, productId }) {
   const reviewsToShow = currentReviews.slice(0, numReviewsShown);
 
   return (
-    <Container>
+    <ReviewsContainerStyled>
       <SortBy setCurrentReviews={setCurrentReviews} productId={productId} />
       {reviews.length !== 0 &&
       <ReviewsList reviews={reviewsToShow}/>
       }
-      <Wrapper>
+      <ButtonWrapper>
         {reviews.length < 2 || reviewsToShow.length === reviews.length ? null :
         <Button handleOnClick={handleMoreReviewsOnClick} text={'Show more reviews'} />
         }
@@ -53,12 +55,12 @@ function ReviewsContainer({ reviews, productId }) {
         <Button handleOnClick={handleShowLessOnClick} text={'Show less reviews'} />
         }
         <Button handleOnClick={toggleModal} text={'Add a review'} />
-      </Wrapper>
+      </ButtonWrapper>
       {showModal ?
       <Modal showModal={showModal} toggleModal={toggleModal}/>
       :
       null}
-    </Container>
+    </ReviewsContainerStyled>
   )
 }
 

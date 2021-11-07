@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { TOKEN } from '../../../../config.js';
-import { SortBySelect } from '../styles/reviews/SortBySelect.styled.js';
+import { SortByContainer, SortBySelect } from '../styles/reviews/SortBySelect.styled.js';
 
 function SortBy({ setCurrentReviews, productId }) {
 
@@ -17,14 +17,14 @@ function SortBy({ setCurrentReviews, productId }) {
   }
 
   return (
-    <div className="sort=by=bar">
+    <SortByContainer>
       Sorted by:
       <SortBySelect onChange={handleOnChange}>
         <option value="relevance">relevance</option>
         <option value="helpful">helpful</option>
         <option value="newest">newest</option>
       </SortBySelect>
-    </div>
+    </SortByContainer>
   )
 }
 

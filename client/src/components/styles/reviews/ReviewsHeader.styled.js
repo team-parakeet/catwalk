@@ -1,10 +1,8 @@
 import styled from "styled-components";
 
 export const ReviewsHeader = styled.div`
-  font-family: sans-serif;
-  font-size: 20px;
+  font-size: 18pt;
   background-color: #fff;
-  width: 76vw;
-  margin-bottom: 20px;
-  color: #d3d3d3;
+  margin: 0px 0px 20px 250px;
+  color: #939393;
 `

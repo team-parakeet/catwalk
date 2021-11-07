@@ -1,9 +1,10 @@
 import React from 'react';
+import { SliderStyled } from '../styles/reviews/SliderStyled.styled';
 
 function Slider({ id, value }) {
 
   return (
-      <input
+    <SliderStyled
       className="slider"
       id={id}
       type="range"

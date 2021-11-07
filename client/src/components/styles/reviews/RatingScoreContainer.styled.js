@@ -5,5 +5,5 @@ export const RatingScoreContainer = styled.div`
 `
 
 export const NumberOfReviewsBar = styled.div`
-  font-size: 10px;
+  font-size: 9pt;
 `

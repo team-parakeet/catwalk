@@ -55,7 +55,7 @@ function Review({ review }) {
       {review.recommend ? recommend : null}
       <ReviewPhotos>
         { review.photos.map(photo => {
-          return <div key={photo.id}>PHOTO URL{photo.url}</div>
+          return <div key={photo.id}>Photo url: {photo.url}</div>
         }) }
       </ReviewPhotos>
       {hasClicked ? helpfulNoLink : helpfulLink}
