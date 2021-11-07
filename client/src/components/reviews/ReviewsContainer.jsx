@@ -33,8 +33,6 @@ function ReviewsContainer({ reviews, productId }) {
     setShowModal(prev => !prev);
   }
 
-  console.log('hello')
-
   if (!reviews.length || !currentReviews) {
     return null
   }
