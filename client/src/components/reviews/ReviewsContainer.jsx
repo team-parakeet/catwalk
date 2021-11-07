@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import ReviewsList from './ReviewsList.jsx';
 import SortBy from './SortBy.jsx';
 import Button from './Button.jsx';
+import Modal from './Modal.jsx';
 import { Container } from '../styles/reviews/Container.styled.js';
 import { Wrapper } from '../styles/reviews/Wrapper.styled.js';
 
 function ReviewsContainer({ reviews, productId }) {
   const [currentReviews, setCurrentReviews] = useState(null);
   const [numReviewsShown, setNumReviewsShown] = useState(2);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     if (reviews.length !== 0) {
@@ -27,8 +29,8 @@ function ReviewsContainer({ reviews, productId }) {
     setNumReviewsShown(2)
   }
 
-  const handleAddReviewOnClick = () => {
-    console.log('new review clicked')
+  const toggleModal = () => {
+    setShowModal(prev => !prev);
   }
 
   if (!reviews.length || !currentReviews) {
@@ -50,8 +52,12 @@ function ReviewsContainer({ reviews, productId }) {
         {reviewsToShow.length === reviews.length &&
         <Button handleOnClick={handleShowLessOnClick} text={'Show less reviews'} />
         }
-        <Button handleOnClick={handleAddReviewOnClick} text={'Add a review'} />
+        <Button handleOnClick={toggleModal} text={'Add a review'} />
       </Wrapper>
+      {showModal ?
+      <Modal showModal={showModal} toggleModal={toggleModal}/>
+      :
+      null}
     </Container>
   )
 }
