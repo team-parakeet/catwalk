@@ -1,12 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import styled from 'styled-components';
 import { TOKEN } from '../../config.js';
+import ProductDetails from './components/overview/productDetails.jsx';
+import ProductDescription from './components/overview/productDescription.jsx';
 import Selectors from './components/overview/selectors.jsx';
 import Reviews from './components/reviews/Reviews.jsx';
 import { Provider as QAProvider } from './components/QA/QAContext.jsx';
 import QuestionsAnswers from './components/QA/QASection.jsx';
 
+const Wrapper = styled.div`
+  border: hsla(205, 37%, 60%, 50%) solid 5px;
+  padding: 10px;
+`
 
 class App extends React.Component {
   constructor(props) {
@@ -112,13 +119,27 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <div className='overview'>
-          <h2>Overview!</h2>
-          <div className='image-gallery'>
-            Image gallery here!
+        <Wrapper>
+          <div className='overview'>
+            <h2>Overview!</h2>
+            <div className='image-gallery'>
+              Image gallery here!
+            </div>
+            <ProductDetails product={this.state.product} />
+            <br></br>
+            <Selectors
+              addToCart={this.addItemToCart}
+              styles={this.state.styles}
+              product={this.state.product}
+              productId={this.props.productId}
+            />
+            <br></br>
+            <ProductDescription product={this.state.product}/>
           </div>
-          <div className='product-detail'>
-            Product details here!
+          <br></br>
+          <div className='ratings-and-reviews'>
+            <h2>Ratings and reviews!</h2>
+            <Reviews reviews={this.state.reviews}/>
           </div>
           <br></br>
           <Selectors
@@ -137,11 +158,11 @@ class App extends React.Component {
         </div>
         <br></br>
         <div className='q-and-a'>
-        <QAProvider>
-          <QuestionsAnswers />
-          <button className='add-question'>Add a question</button>
-          <button className='add-answer'>Add an answer [modal]</button>
-        </QAProvider>
+          <QAProvider>
+            <QuestionsAnswers />
+            <button className='add-question'>Add a question</button>
+            <button className='add-answer'>Add an answer [modal]</button>
+          </QAProvider>
         </div>
         <br></br>
         <div className='related-items-comparison'>
@@ -149,7 +170,7 @@ class App extends React.Component {
           <div className='related-products'>
             Not sure what goes in here yet
           </div>
-        </div>
+        </Wrapper>
       </div>
     )
   }
