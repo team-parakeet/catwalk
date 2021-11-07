@@ -138,18 +138,6 @@ class App extends React.Component {
           </div>
           <br></br>
           <div className='ratings-and-reviews'>
-            <h2>Ratings and reviews!</h2>
-            <Reviews reviews={this.state.reviews}/>
-          </div>
-          <br></br>
-          <Selectors
-            addToCart={this.addItemToCart}
-            styles={this.state.styles}
-            product={this.state.product}
-            productId={this.props.productId}
-          />
-          <br></br>
-          <div className='ratings-and-reviews'>
             <Reviews reviews={this.state.reviews} productId={this.props.productId}/>
           </div>
           <br></br>
