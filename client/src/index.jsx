@@ -148,27 +148,24 @@ class App extends React.Component {
             product={this.state.product}
             productId={this.props.productId}
           />
-        </div>
-        <br></br>
-        <div className='ratings-and-reviews'>
-          <Reviews
-            reviews={this.state.reviews}
-            productId={this.props.productId}
-          />
-        </div>
-        <br></br>
-        <div className='q-and-a'>
-          <QAProvider>
-            <QuestionsAnswers />
-            <button className='add-question'>Add a question</button>
-            <button className='add-answer'>Add an answer [modal]</button>
-          </QAProvider>
-        </div>
-        <br></br>
-        <div className='related-items-comparison'>
-          <h2>Related items and comparison!</h2>
-          <div className='related-products'>
-            Not sure what goes in here yet
+          <br></br>
+          <div className='ratings-and-reviews'>
+            <Reviews reviews={this.state.reviews} productId={this.props.productId}/>
+          </div>
+          <br></br>
+          <div className='q-and-a'>
+            <QAProvider>
+              <QuestionsAnswers />
+              <button className='add-question'>Add a question</button>
+              <button className='add-answer'>Add an answer [modal]</button>
+            </QAProvider>
+          </div>
+          <br></br>
+          <div className='related-items-comparison'>
+            <h2>Related items and comparison!</h2>
+            <div className='related-products'>
+              Not sure what goes in here yet
+            </div>
           </div>
         </Wrapper>
       </div>
