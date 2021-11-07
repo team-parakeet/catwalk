@@ -37,14 +37,14 @@ function ComparisonScales({ productId }) {
     return null
   }
 
-
+  console.log(metaData)
   return (
     <ComparisonScaleContainer>
       {Object.keys(characteristics).map(char => (
       <CharScale key={char}>
         {char}
         <div>
-          <Slider id={char} value={characteristics[char]} />
+          <Slider id={char} value={characteristics[char]} max={5}/>
         </div>
         {char === 'Comfort' || char === 'Quality' ?
         <FlexSpaceBetween>
