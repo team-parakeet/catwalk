@@ -3,9 +3,8 @@ import Score from './Score.jsx';
 import Stars from './Stars.jsx';
 import { RatingScoreContainer, NumberOfReviewsBar } from '../styles/reviews/RatingScoreContainer.styled.js';
 
-function RatingScore({ reviews }) {
+function RatingScore({ reviews, numOfReviews }) {
   const [avgRating, setAvgRating] = useState('');
-  const [numOfReviews, setNumOfReviews] = useState(null);
 
   useEffect(() => {
     if (reviews.length !== 0) {
@@ -18,7 +17,6 @@ function RatingScore({ reviews }) {
         return sum / reviews.length;
       }
       setAvgRating(getAvgRating())
-      setNumOfReviews(reviews.length)
     }
   }, [reviews])
 
