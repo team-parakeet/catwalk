@@ -82,7 +82,7 @@ class App extends React.Component {
   getReviews() {
     const config = {
       method: 'get',
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/?sort="relevant"&product_id=${this.props.productId}`,
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/?sort="relevant"&product_id=${this.props.productId}&count=50`,
       headers: {
         'Authorization': `${TOKEN}`,
       }
