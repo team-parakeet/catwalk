@@ -26,7 +26,7 @@ function Modal({ toggleModal, productId }) {
   const handleSubmitOnClick = () => {
     const url =  `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews`
     const data = {
-      productId: productId,
+      product_id: productId,
       rating: overallRating,
       summary: reviewSummary,
       body: reviewBody,
@@ -35,10 +35,10 @@ function Modal({ toggleModal, productId }) {
       email: email,
       photos: [],
       characteristics: {
-        'Quality': 4,
-        'Comfort': 4,
-        'Fit': 4,
-        'Length': 4
+        "131841": 5,
+        "131840": 5,
+        "131838": 5,
+        "131839": 5
       }
     }
     axios.post(url, data, {
@@ -83,14 +83,14 @@ function Modal({ toggleModal, productId }) {
         <div>
           <label>What is your nickname:</label>
           <div>
-            <input type="text" id="username" maxLength="60" placeholder="Example: jackson11!" required onChange={e => setUsername(e.target.value)}/>
+            <input type="text" id="username" maxLength="60" size="30" placeholder="Example: jackson11!" required onChange={e => setUsername(e.target.value)}/>
           </div>
         </div>
 
         <div>
           <label>Your email:</label>
           <div>
-            <input type="email" id="email" maxLength="60" placeholder="Example: jackson11@email.com" required onChange={e => setEmail(e.target.value)}/>
+            <input type="email" id="email" maxLength="60" size="30" placeholder="Example: jackson11@email.com" required onChange={e => setEmail(e.target.value)}/>
           </div>
         </div>
         <div>
