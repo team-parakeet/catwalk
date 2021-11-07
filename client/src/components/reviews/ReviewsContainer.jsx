@@ -55,7 +55,7 @@ function ReviewsContainer({ reviews, productId }) {
         <Button handleOnClick={toggleModal} text={'Add a review'} />
       </ButtonWrapper>
       {showModal ?
-      <Modal showModal={showModal} toggleModal={toggleModal}/>
+      <Modal toggleModal={toggleModal} productId={productId}/>
       :
       null}
     </ReviewsContainerStyled>
