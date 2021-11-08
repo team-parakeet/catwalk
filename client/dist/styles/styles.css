@@ -5,6 +5,7 @@
   border-color: hsl(33, 22%, 45%);
   color: hsla(99, 49%, 11%, 1);
   font-family: 'Zen Antique Soft', serif;
+  width: auto;
 }
 
 .description-text {
