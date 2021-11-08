@@ -2,14 +2,14 @@ import styled from 'styled-components';
 
 export const DefaultViewContainer = styled.div`
   position: relative;
-  outline: 2px solid green;
+  /* outline: 2px solid green; */
   /* max-width: 100vh; */
   background-color: #EBEBEB;
 `
 
 export const BackgroundImageContainer = styled.div`
   display: flex;
-  outline: 2px solid blue;
+  /* outline: 2px solid blue; */
   padding-left: 15%;
 `
 
