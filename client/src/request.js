@@ -36,3 +36,11 @@ export function getSelectedSortByReviews(selected, productId) {
   })
 }
 
+export function postNewReview(data) {
+  const url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews`
+  return axios.post(url, data, {
+    headers: {
+      Authorization: TOKEN
+    }
+  })
+}
