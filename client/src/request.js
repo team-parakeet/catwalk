@@ -44,3 +44,12 @@ export function postNewReview(data) {
     }
   })
 }
+
+export function putReviewAsHelpful(reviewId) {
+  const url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/${reviewId}/helpful`
+  return axios.put(url, {}, {
+    headers: {
+      Authorization: TOKEN
+    }
+  })
+}
