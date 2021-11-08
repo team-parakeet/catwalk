@@ -17,7 +17,6 @@ export function getAllQuestions(productId) {
     }
   })
 }
-<<<<<<< HEAD
 
 export function getProductReviewMeta(productId) {
   const url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/meta/?product_id=${productId}`
@@ -28,5 +27,3 @@ export function getProductReviewMeta(productId) {
   })
 }
 
-=======
->>>>>>> e885080609df30c2ae710741da54cc4c2adb271f
