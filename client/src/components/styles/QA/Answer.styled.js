@@ -5,15 +5,15 @@ export const AnswersContainer = styled.div`
   position: relative;
   display: flex;
   margin-top: 0.5rem;
-  /* border: 2px solid blue; */
+  /* outline: 2px solid blue; */
 `
 
 export const ABlock = styled.div`
-  display: inline-block;
+  display: inline;
   font-weight: bold;
   font-size: 1.2rem;
   padding-right: 0.5rem;
-  /* border: 2px solid orange; */
+  /* outline: 2px solid orange; */
 `
 
 export const LoadMoreAnswersBtn = styled.button`
@@ -33,16 +33,15 @@ export const CollapseAnswersBtn = styled(LoadMoreAnswersBtn)`
 `
 
 export const ResponsesContainer = styled.div`
-  width: 100%;
-  display: block;
-  /* outline: 2px solid blue; */
-
+  max-width: 100%;
+  display: inline-block;
+  flex-shrink: 0;
+  /* outline: 2px solid green; */
 `
 
 export const SingleResponseContainer = styled.div`
   display: block;
   padding-bottom: 0.5rem;
-  /* outline: 2px solid yellow; */
 `
 
 export const AnswerBody = styled.div`
@@ -54,7 +53,6 @@ export const SubAnswerBody = styled.div`
   margin-bottom: 0.3rem;
   color: #676767;
   font-size: 0.95em;
-  /* outline: 2px solid green; */
 `
 
 export const StyledBy = styled.span`
