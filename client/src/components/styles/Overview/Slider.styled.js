@@ -6,18 +6,19 @@ export const SliderContainer = styled.div`
   justify-content: center;
   align-items: center;
   width: 90px;
-  outline: 2px solid blue;
+  /* outline: 2px solid blue; */
 
 `
 
 export const ThumbnailContainer = styled.div`
-  outline: 1px solid orange;
+  /* outline: 1px solid orange; */
   padding: 0.5rem;
 `
 
 export const Thumbnail = styled.img`
   height: 100px;
   width: 70px;
+  border: 1px solid black;
 `
 
 export const FadedThumbnail = styled(Thumbnail)`

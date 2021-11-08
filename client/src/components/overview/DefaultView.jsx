@@ -19,11 +19,11 @@ export const DefaultView = () => {
 
 
   return (
-    <DefaultViewContainer tabIndex="0" onKeyUp={(e) => { e.preventDefault(); handleKeyPress(e);}}>
-      <ThumbnailSliderContainer>
+    <DefaultViewContainer className='default-view-container' tabIndex="0" onKeyUp={(e) => { e.preventDefault(); handleKeyPress(e);}}>
+      <ThumbnailSliderContainer className='thumbnail-slider-container'>
         <ThumbnailSlider />
       </ThumbnailSliderContainer>
-      <BackgroundImageContainer>
+      <BackgroundImageContainer className='background-img-container'>
         {images.length && <BackgroundImage src={images[currentImage]['url']} />}
       </BackgroundImageContainer>
     </DefaultViewContainer>
@@ -37,9 +37,10 @@ export const ThumbnailSlider = () => {
   return (
     <SliderContainer>
       <Arrow className={isAboveLowerBounds ? 'showContent' : 'hideContent'} src={'./images/chevron-up.svg'} onClick={() => (isAboveLowerBounds) ? displayPrevImage() : {}} />
-      {images.map((image, idx) => {
-        return <ThumbnailItem key={image.id} id={image.id} image={image}/>;
-      })}
+      {images.map((image, idx) => (idx < 7) ?
+        <ThumbnailItem key={image.id} id={image.id} image={image}/>
+        : null
+      )}
       <Arrow className={isBelowUpperBounds ? 'showContent' : 'hideContent'} src={'./images/chevron-down.svg'} onClick={() => (isBelowUpperBounds) ? displayNextImage() : {}} />
     </SliderContainer>
   );

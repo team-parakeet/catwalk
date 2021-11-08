@@ -3,14 +3,14 @@ import styled from 'styled-components';
 export const DefaultViewContainer = styled.div`
   position: relative;
   outline: 2px solid green;
-  max-width: 100vh;
+  /* max-width: 100vh; */
+  background-color: #EBEBEB;
 `
 
 export const BackgroundImageContainer = styled.div`
   display: flex;
-  justify-content: center;
-  outline: 1px red solid;
-  max-width: 60vw;
+  outline: 2px solid blue;
+  padding-left: 15%;
 `
 
 export const ThumbnailSliderContainer = styled.div`
@@ -20,6 +20,6 @@ export const ThumbnailSliderContainer = styled.div`
 `
 
 export const BackgroundImage = styled.img`
-  padding-left: 300px;
   max-height: 1000px;
+  cursor: url('./images/search.svg'), zoom-in;
 `
