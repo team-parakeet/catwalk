@@ -130,7 +130,6 @@ class App extends React.Component {
         sum += currentReview.rating;
       }
       let avg = sum / this.state.reviews.length;
-      console.log('AVG: ', avg);
       this.setState({
         rating: avg
       })
