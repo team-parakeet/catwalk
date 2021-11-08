@@ -1,18 +1,11 @@
 import React from 'react';
-import axios from 'axios';
-import { TOKEN } from '../../../../config.js';
+import { getSelectedSortByReviews } from '../../request.js';
 import { SortByContainer, SortBySelect } from '../styles/reviews/SortBySelect.styled.js';
 
 function SortBy({ setCurrentReviews, productId }) {
-
   const handleOnChange = e => {
     const selected = e.target.value;
-    const url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/?sort=${selected}&product_id=${productId}&count=50`
-    axios.get(url, {
-      headers: {
-        Authorization: TOKEN
-      }
-    })
+    getSelectedSortByReviews(selected, productId)
     .then(r => setCurrentReviews(r.data.results))
   }
 
