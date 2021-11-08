@@ -14,7 +14,7 @@ import QuestionsAnswers from './components/QA/QASection.jsx';
 import Loader from 'react-loader-spinner';
 import { LoaderWrapper } from './components/styles/reviews/ReviewsWrapper.styled.js';
 
-const Wrapper = styled.div`
+const SiteWrapper = styled.div`
   border: hsla(205, 37%, 60%, 50%) solid 5px;
   padding: 10px;
 `;
@@ -27,6 +27,7 @@ class App extends React.Component {
       product: {},
       styles: [],
       reviews: [],
+      rating: 0,
     };
 
     this.getStyles = this.getStyles.bind(this);
@@ -51,6 +52,7 @@ class App extends React.Component {
         });
         this.getStyles();
         this.getReviews();
+        this.getAvgRating();
       })
       .catch(err => {
         console.error(err);
@@ -91,10 +93,11 @@ class App extends React.Component {
     };
 
     axios(config)
-      .then(reviews => {
+      .then( (reviews) => {
         this.setState({
-          reviews: reviews.data.results,
+          reviews: reviews.data.results
         });
+        this.getAvgRating();
       })
       .catch(err => {
         console.error(err);
@@ -119,18 +122,31 @@ class App extends React.Component {
     });
   }
 
+  getAvgRating() {
+    if (this.state.reviews.length !== 0) {
+      let sum = 0;
+      for (let i = 0; i < this.state.reviews.length; i++) {
+        let currentReview = this.state.reviews[i];
+        sum += currentReview.rating;
+      }
+      let avg = sum / this.state.reviews.length;
+      console.log('AVG: ', avg);
+      this.setState({
+        rating: avg
+      })
+    }
+  }
+
   render() {
     return (
       <div>
-        <Wrapper>
-          <div className="overview">
+        <SiteWrapper>
             {/* TODO: Wrap the image gallery and product-details in a grid container for reponsive layout on mobile */}
             <OverviewProvider>
-              <h2>Overview!</h2>
               <div className="image-gallery">
                 <DefaultView />
               </div>
-              <ProductDetails product={this.state.product} />
+              <ProductDetails product={this.state.product} rating={this.state.rating}/>
               <br></br>
               <Selectors
                 addToCart={this.addItemToCart}
@@ -144,20 +160,17 @@ class App extends React.Component {
           </div>
           <br></br>
           <div className="ratings-and-reviews">
-            {this.state.reviews.length === 0 ? (
-              <LoaderWrapper>
+            {this.state.reviews.length === 0 ? 
+             (<LoaderWrapper>
                 <Loader
                   type="TailSpin"
                   color="#d3d3d3"
                   height={100}
                   width={100}
                 />
-              </LoaderWrapper>
-            ) : (
-              <Reviews
-                reviews={this.state.reviews}
-                productId={this.props.productId}
-              />
+              </LoaderWrapper>)
+              :
+              (<Reviews reviews={this.state.reviews} productId={this.props.productId} avgRating={this.state.rating}/>
             )}
           </div>
           <br></br>
@@ -168,14 +181,7 @@ class App extends React.Component {
               <button className="add-answer">Add an answer [modal]</button>
             </QAProvider>
           </div>
-          <br></br>
-          <div className="related-items-comparison">
-            <h2>Related items and comparison!</h2>
-            <div className="related-products">
-              Not sure what goes in here yet
-            </div>
-          </div>
-        </Wrapper>
+        </SiteWrapper>
       </div>
     );
   }

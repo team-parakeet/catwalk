@@ -5,7 +5,7 @@ import ComparisonScales from "./ComparisonScales.jsx";
 import { ReviewsColumnContainer } from "../styles/reviews/ReviewsColumnContainer.styled.js";
 import { PercentBar } from "../styles/reviews/PercentBar.styled.js";
 
-function ReviewsColumn({ reviews, productId }) {
+function ReviewsColumn({ reviews, productId, avgRating }) {
   const [ratings, setRatings] = useState({ 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 })
   const [numOfReviews, setNumOfReviews] = useState(null);
   const [recommendPercent, setRecommendPercent] = useState(null);
@@ -36,7 +36,7 @@ function ReviewsColumn({ reviews, productId }) {
 
   return (
     <ReviewsColumnContainer>
-      <RatingScore reviews={reviews} numOfReviews={numOfReviews} />
+      <RatingScore reviews={reviews} numOfReviews={numOfReviews} avgRating={avgRating}/>
       <StarsChart ratings={ratings} numOfReviews={numOfReviews} />
       <PercentBar>
         {recommendPercent}% of reviews recommend this product
