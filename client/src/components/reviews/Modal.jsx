@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { TOKEN } from '../../../../config.js';
 import SelectStars from './SelectStars.jsx';
 import { Overlay, ModalStyled } from '../styles/reviews/ModalStyled.styled';
 import { postNewReview } from '../../request.js';
