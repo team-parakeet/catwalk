@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { TOKEN } from '../../../../config.js';
 import { getProductReviewMeta } from '../../request.js';
 import Slider from './Slider.jsx';
 import { ComparisonScaleContainer, CharScale, FlexSpaceBetween } from '../styles/reviews/ComaparisonScaleContainer.styled.js';
