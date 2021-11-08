@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { putReviewAsHelpful } from '../../request.js';
 import dateFormatter from 'iso-date-formatter';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
-import { TOKEN } from '../../../../config.js';
 import Stars from './Stars.jsx';
 import {
   ReviewContainer, ReviewTitle, ReviewDate, ReviewStars, ReviewBody, ReviewResponse, ReviewResponseBody, ReviewRecommend, ReviewUser, ReviewHelpfulness, ReviewPhotos, HelpfulLink
@@ -19,12 +18,7 @@ function Review({ review }) {
 
   const handleHelpfulOnClick = () => {
     const reviewId = review.review_id
-    const url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/${reviewId}/helpful`
-    axios.put(url, {}, {
-      headers: {
-        Authorization: TOKEN
-      }
-    })
+    putReviewAsHelpful(reviewId);
     setCount(prev => prev + 1);
     setHasClicked(true)
   }
