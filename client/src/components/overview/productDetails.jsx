@@ -1,14 +1,32 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import Stars from '../shared/Stars.jsx';
 import styled from 'styled-components';
 
-const ProductDetails = ( {product} ) => {
+const ProductName = styled.span`
+  font-size: 30px;
+  font-style: bold;
+  color: hsla(196, 17%, 29%, 1);
+`
+
+const ProductCategory = styled.span`
+  font-size: 15px;
+  font-style: italic;
+  color: hsla(196, 17%, 45%, 85%);
+  margin-left: 20px;
+`
+
+const ProductPrice = styled.div`
+  color: hsla(33, 22%, 45%, 1);
+`
+
+const ProductDetails = ( {product, rating} ) => {
   return (
       <div className='product-details'>
-        <span>Star rating here</span>
-        <h4>{product.category}</h4>
-        <h2>{product.name}</h2>
-        {product.default_price}
+        {/* <Stars avgRating={rating} style={ {margin: 'auto'}}/> */}
+        <br></br>
+        <ProductName>{product.name}</ProductName>
+        <ProductCategory>{product.category}</ProductCategory>
+        <ProductPrice>{product.default_price}</ProductPrice>
       </div>
   )
 }
