@@ -17,3 +17,13 @@ export function getAllQuestions(productId) {
     }
   })
 }
+
+export function getProductReviewMeta(productId) {
+  const url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/meta/?product_id=${productId}`
+  return axios.get(url, {
+    headers: {
+      Authorization: TOKEN
+    }
+  })
+}
+
