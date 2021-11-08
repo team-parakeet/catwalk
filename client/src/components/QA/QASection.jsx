@@ -66,7 +66,7 @@ const QASection = () => {
     <>
       {/* we want it to have font color #525252 */}
       {/* Putting in a span tag so that childrens listed on the context is just the span as opposed to Question, Answers, &*/}
-      <span style={{'font-size': '1.5rem'}}>QUESTIONS {'&'} ANSWERS</span>
+      <span style={{'fontSize': '1.5rem'}}>QUESTIONS {'&'} ANSWERS</span>
       <Search />
       <QuestionsList questions={questions} searchResults={searchResults}/>
     </>
