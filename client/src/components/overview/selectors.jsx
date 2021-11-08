@@ -142,7 +142,7 @@ class Selectors extends React.Component {
         <div className='size-selector'>
           <div>
             <b>SIZE</b> > <em>{this.state.currentSize ? this.state.currentSize : null }</em>
-            <span className='size-error-msg' style={{visibility: 'hidden', color: 'red'}}>Please select a size</span>
+            <span className='size-error-msg' style={{visibility: 'hidden', color: 'red', fontStyle: 'italic'}}>Please select a size</span>
           </div>
           <select className='size-select'
             value={this.state.currentSize}
