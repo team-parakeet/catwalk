@@ -1,18 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Score from './Score.jsx';
 import Stars from './Stars.jsx';
+import { RatingScoreContainer, NumberOfReviewsBar } from '../styles/reviews/RatingScoreContainer.styled.js';
 
-function RatingScore({ reviews }) {
-  const [avgRating, setAvgRating] = useState(null);
-  const [numOfReviews, setNumOfReviews] = useState(null);
-
-  // var number = (4.1428571428571429 + 4.0000000000000000 + 4.3333333333333333 + 4.0000000000000000) / 4
-  // var rounded = Math.round(number * 10) / 10
-
-  // var number = 4
-  // var rounded = number.toFixed(1)
-
-  // console.log(rounded)
+function RatingScore({ reviews, numOfReviews }) {
+  const [avgRating, setAvgRating] = useState('');
 
   useEffect(() => {
     if (reviews.length !== 0) {
@@ -25,7 +17,6 @@ function RatingScore({ reviews }) {
         return sum / reviews.length;
       }
       setAvgRating(getAvgRating())
-      setNumOfReviews(reviews.length)
     }
   }, [reviews])
 
@@ -34,13 +25,13 @@ function RatingScore({ reviews }) {
   }
 
   return (
-    <div className="rating-score-container">
+    <RatingScoreContainer>
       <Score avgRating={avgRating}/>
       <Stars avgRating={avgRating}/>
-      <div className="number-of-reviews-bar">
+      <NumberOfReviewsBar>
         {numOfReviews} reviews
-      </div>
-    </div>
+      </NumberOfReviewsBar>
+    </RatingScoreContainer>
   )
 }
 

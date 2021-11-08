@@ -2,10 +2,14 @@ import React, { useState, useEffect } from 'react';
 import RatingScore from "./RatingScore.jsx";
 import StarsChart from "./StarsChart.jsx"
 import ComparisonScales from "./ComparisonScales.jsx";
+import { ReviewsColumnContainer } from "../styles/reviews/ReviewsColumnContainer.styled.js";
+import { PercentBar } from "../styles/reviews/PercentBar.styled.js";
 
-function ReviewsColumn({ reviews }) {
+function ReviewsColumn({ reviews, productId }) {
   const [ratings, setRatings] = useState({ 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 })
+  const [numOfReviews, setNumOfReviews] = useState(null);
   const [recommendPercent, setRecommendPercent] = useState(null);
+
 
   useEffect(() => {
     reviews.forEach(review => {
@@ -26,18 +30,19 @@ function ReviewsColumn({ reviews }) {
       }
       return Math.round((sum / reviews.length) * 100);
     }
+    setNumOfReviews(reviews.length)
     setRecommendPercent(getRecommendPercentage())
   }, [reviews])
 
   return (
-    <div className="reviews-column-container">
-      <RatingScore reviews={reviews}/>
-      <StarsChart ratings={ratings}/>
-      <div className="recommend-percent-bar">
+    <ReviewsColumnContainer>
+      <RatingScore reviews={reviews} numOfReviews={numOfReviews} />
+      <StarsChart ratings={ratings} numOfReviews={numOfReviews} />
+      <PercentBar>
         {recommendPercent}% of reviews recommend this product
-      </div>
-      <ComparisonScales/>
-    </div>
+      </PercentBar>
+      <ComparisonScales productId={productId} />
+    </ReviewsColumnContainer>
   )
 }
 

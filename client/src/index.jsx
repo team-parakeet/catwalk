@@ -9,6 +9,8 @@ import Selectors from './components/overview/selectors.jsx';
 import Reviews from './components/reviews/Reviews.jsx';
 import { Provider as QAProvider } from './components/QA/QAContext.jsx';
 import QuestionsAnswers from './components/QA/QASection.jsx';
+import Loader from 'react-loader-spinner';
+import { LoaderWrapper } from './components/styles/reviews/ReviewsWrapper.styled.js';
 
 const Wrapper = styled.div`
   border: hsla(205, 37%, 60%, 50%) solid 5px;
@@ -80,7 +82,7 @@ class App extends React.Component {
   getReviews() {
     const config = {
       method: 'get',
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/?sort="relevant"&product_id=${this.props.productId}`,
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/?sort="relevant"&product_id=${this.props.productId}&count=50`,
       headers: {
         'Authorization': `${TOKEN}`,
       }
@@ -138,16 +140,33 @@ class App extends React.Component {
           </div>
           <br></br>
           <div className='ratings-and-reviews'>
-            <h2>Ratings and reviews!</h2>
-            <Reviews reviews={this.state.reviews}/>
+            {this.state.reviews.length === 0 ? (
+              <LoaderWrapper>
+                <Loader
+                  type="TailSpin"
+                  color="#d3d3d3"
+                  height={100}
+                  width={100}
+                />
+              </LoaderWrapper>)
+              :
+              (<Reviews reviews={this.state.reviews} productId={this.props.productId}/>
+            )}
           </div>
           <br></br>
           <div className='q-and-a'>
-          <QAProvider>
-            <QuestionsAnswers />
-            <button className='add-question'>Add a question</button>
-            <button className='add-answer'>Add an answer [modal]</button>
-          </QAProvider>
+            <QAProvider>
+              <QuestionsAnswers />
+              <button className='add-question'>Add a question</button>
+              <button className='add-answer'>Add an answer [modal]</button>
+            </QAProvider>
+          </div>
+          <br></br>
+          <div className='related-items-comparison'>
+            <h2>Related items and comparison!</h2>
+            <div className='related-products'>
+              Not sure what goes in here yet
+            </div>
           </div>
         </Wrapper>
       </div>
