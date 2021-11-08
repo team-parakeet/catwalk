@@ -5,7 +5,7 @@ export const SliderContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 90px;
+  max-width: 90px;
   /* outline: 2px solid blue; */
 
 `
@@ -16,8 +16,8 @@ export const ThumbnailContainer = styled.div`
 `
 
 export const Thumbnail = styled.img`
-  height: 100px;
-  width: 70px;
+  max-height: 100%;
+  max-width: 100%;
   border: 1px solid black;
 `
 
@@ -31,8 +31,8 @@ export const ActiveThumbnail = styled(Thumbnail)`
 `
 
 export const Arrow = styled.img`
-  width: 50px;
-  height: 50px;
+  max-width: 50px;
+  max-height: 50px;
   opacity: 1;
   transition: all 0.25s;
 
