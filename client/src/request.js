@@ -35,3 +35,4 @@ export function getSelectedSortByReviews(selected, productId) {
     }
   })
 }
+
