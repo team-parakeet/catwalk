@@ -5,7 +5,7 @@ export const AnswersContainer = styled.div`
   position: relative;
   display: flex;
   margin-top: 0.5rem;
-  outline: 2px solid blue;
+  /* outline: 2px solid blue; */
 `
 
 export const ABlock = styled.div`
@@ -13,8 +13,7 @@ export const ABlock = styled.div`
   font-weight: bold;
   font-size: 1.2rem;
   padding-right: 0.5rem;
-  outline: 2px solid orange;
-
+  /* outline: 2px solid orange; */
 `
 
 export const LoadMoreAnswersBtn = styled.button`
@@ -36,9 +35,8 @@ export const CollapseAnswersBtn = styled(LoadMoreAnswersBtn)`
 export const ResponsesContainer = styled.div`
   max-width: 100%;
   display: inline-block;
-  outline: 2px solid green;
   flex-shrink: 0;
-
+  /* outline: 2px solid green; */
 `
 
 export const SingleResponseContainer = styled.div`
