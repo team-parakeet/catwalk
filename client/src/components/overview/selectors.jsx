@@ -141,6 +141,7 @@ class Selectors extends React.Component {
 
         <div className='size-selector'>
           <div>
+            <br></br>
             <b>SIZE</b> > <em>{this.state.currentSize ? this.state.currentSize : null }</em>
             <span className='size-error-msg' style={{visibility: 'hidden', color: 'red', fontStyle: 'italic'}}>Please select a size</span>
           </div>
@@ -155,6 +156,7 @@ class Selectors extends React.Component {
         </div>
 
         <div className='quantity-selector'>
+          <br></br>
           <div> <b>QUANTITY</b> > <em>{this.state.currentQuantity}</em> </div>
           <select onChange={this.handleQuantitySelect}>
             { this.state.outOfStock ? <option>Out of Stock</option> : this.state.availableQuantities.map( (quantity, i) => (
