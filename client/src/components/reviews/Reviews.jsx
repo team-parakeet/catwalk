@@ -4,14 +4,14 @@ import ReviewsContainer from './ReviewsContainer.jsx';
 import { SectionWrapper } from './../styles/reviews/SectionWrapper.styled.js';
 import { ReviewsHeader } from './../styles/reviews/ReviewsHeader.styled.js';
 
-function Reviews({ reviews, productId }) {
+function Reviews({ reviews, productId, avgRating }) {
   return (
     <>
       <ReviewsHeader>
         RATINGS & REVIEWS
       </ReviewsHeader>
       <SectionWrapper>
-        <ReviewsColumn reviews={reviews} productId={productId} />
+        <ReviewsColumn reviews={reviews} productId={productId} avgRating={avgRating}/>
         <ReviewsContainer reviews={reviews} productId={productId} />
       </SectionWrapper>
     </>

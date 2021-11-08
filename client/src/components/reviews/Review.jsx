@@ -3,7 +3,8 @@ import { putReviewAsHelpful } from '../../request.js';
 import dateFormatter from 'iso-date-formatter';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
-import Stars from './Stars.jsx';
+import { TOKEN } from '../../../../config.js';
+import Stars from '../shared/Stars.jsx';
 import {
   ReviewContainer, ReviewTitle, ReviewDate, ReviewStars, ReviewBody, ReviewResponse, ReviewResponseBody, ReviewRecommend, ReviewUser, ReviewHelpfulness, ReviewPhotos, HelpfulLink
 } from '../styles/reviews/ReviewStyled.styled.js';

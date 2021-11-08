@@ -25,8 +25,17 @@ const QASection = () => {
     }
   }, [search])
 
+  const getHighlightedText = (text, highlight) => {
+    // Split text on highlight term, include term itself into parts, ignore case
+    const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
+    return <span>{parts.map((part, idx) => part.toLowerCase() === highlight.toLowerCase() ? <span key={idx} style={{backgroundColor: '#E3CFC6'}}>{part}</span> : part)}</span>;
+  }
+
+  // This handles finding and highlighting questions with matching text from search box;
   const getSearchResults = () => {
     let results = [];
+
+    // Search question body for the search string and highlight
     for (let q of questions) {
       let text = q.question_body.substring();
       let copy = JSON.parse(JSON.stringify(q));
@@ -37,6 +46,7 @@ const QASection = () => {
         wasModified = true;
       }
 
+      // Search answer body for the search string and highlight
       for (let ansKey in q.answers) {
         text = q.answers[ansKey].body;
         if (text.toLowerCase().indexOf(search.toLowerCase()) > -1) {
@@ -56,17 +66,11 @@ const QASection = () => {
     setSearchResults([]);
   }
 
-  function getHighlightedText(text, highlight) {
-    // Split text on highlight term, include term itself into parts, ignore case
-    const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
-    return <span>{parts.map((part, idx) => part.toLowerCase() === highlight.toLowerCase() ? <span key={idx} style={{backgroundColor: '#E3CFC6'}}>{part}</span> : part)}</span>;
-  }
-
   return (
     <>
       {/* we want it to have font color #525252 */}
       {/* Putting in a span tag so that childrens listed on the context is just the span as opposed to Question, Answers, &*/}
-      <span style={{'font-size': '1.5rem'}}>QUESTIONS {'&'} ANSWERS</span>
+      <span style={{'fontSize': '1.5rem'}}>QUESTIONS {'&'} ANSWERS</span>
       <Search />
       <QuestionsList questions={questions} searchResults={searchResults}/>
     </>
