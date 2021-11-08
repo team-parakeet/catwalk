@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import SizeSelector from './sizeSelector.jsx';
 import StyleSelector from './styleSelector.jsx';
 import StyleThumbnail from './styleThumbnail.jsx';
 import styled from 'styled-components';
@@ -145,14 +146,10 @@ class Selectors extends React.Component {
             <b>SIZE</b> > <em>{this.state.currentSize ? this.state.currentSize : null }</em>
             <span className='size-error-msg' style={{visibility: 'hidden', color: 'red', fontStyle: 'italic'}}>Please select a size</span>
           </div>
-          <select className='size-select'
-            value={this.state.currentSize}
-            onChange={this.handleSizeSelect}>
-            <option>Select a size</option>
-            { this.state.availableSizes.length ? this.state.availableSizes.map( (size, i) => {
-              return ( <option className='size-option' key={i} value={size}>{size}</option> );
-            }) : null }
-          </select>
+          <SizeSelector currentSize={this.state.currentSize}
+            availableSizes={this.state.availableSizes}
+            handleSizeSelect={this.handleSizeSelect}
+          />
         </div>
 
         <div className='quantity-selector'>
