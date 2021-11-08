@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Review from './Review.jsx';
+import { ReviewsListContainer } from '../styles/reviews/ReviewsListContainer.styled.js';
 
 function ReviewsList({ reviews }) {
   if (!reviews) {
@@ -7,12 +8,11 @@ function ReviewsList({ reviews }) {
   }
 
   return (
-    <div className="reviews-list-container">
-      REVIEWS:
+    <ReviewsListContainer>
       {reviews.map(review => {
         return <Review key={review.review_id} review={review}/>
       })}
-    </div>
+    </ReviewsListContainer>
   )
 }
 

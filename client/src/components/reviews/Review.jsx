@@ -5,6 +5,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import { TOKEN } from '../../../../config.js';
 import Stars from './Stars.jsx';
+import {
+  ReviewContainer, ReviewTitle, ReviewDate, ReviewStars, ReviewBody, ReviewResponse, ReviewResponseBody, ReviewRecommend, ReviewUser, ReviewHelpfulness, ReviewPhotos, HelpfulLink
+} from '../styles/reviews/ReviewStyled.styled.js';
 
 function Review({ review }) {
 
@@ -26,42 +29,39 @@ function Review({ review }) {
     setHasClicked(true)
   }
 
-  const response = <div>Response from seller: {review.response}</div>
-  const recommend = <div><FontAwesomeIcon icon={faCheck} /> I recommend this product</div>
+  const response = <ReviewResponse>Response from seller: <ReviewResponseBody>{review.response}</ReviewResponseBody></ReviewResponse>
+  const recommend = <ReviewRecommend><FontAwesomeIcon icon={faCheck} /> I recommend this product</ReviewRecommend>
+  const helpfulNoLink = <ReviewHelpfulness>Was this review helpful? Yes ({count})</ReviewHelpfulness>
+  const helpfulLink = <ReviewHelpfulness>Was this review helpful? <HelpfulLink href="#0" onClick={handleHelpfulOnClick}>Yes</HelpfulLink> ({count})</ReviewHelpfulness>
 
   return (
-    <div className="review">
-      <div className="review-title">
-        <h3>{review.summary}</h3>
-      </div>
-      <div className="review-date">
+    <ReviewContainer>
+      <ReviewDate>
         {date}
-      </div>
-      <div className="review-stars">
+      </ReviewDate>
+      <ReviewUser>
+        {review.reviewer_name}
+      </ReviewUser>
+      <ReviewStars>
         <Stars avgRating={review.rating}/>
-      </div>
-      <div className="review-body">
+      </ReviewStars>
+      <ReviewTitle>
+        {review.summary}
+      </ReviewTitle>
+      <ReviewBody>
         {review.body}
-      </div>
-      <div className="review-response">
-        {review.response ? response : null}
-      </div>
-      <div className="review-recommend">
-        {review.recommend ? recommend : null}
-      </div>
-      <div className="review-user">
-        Username: {review.reviewer_name}
-      </div>
-      <div className="review-photos">
+      </ReviewBody>
+      {review.response ? response : null}
+      {review.recommend ? recommend : null}
+      <ReviewPhotos>
         { review.photos.map(photo => {
-          return <div key={photo.id}>PHOTO URL{photo.url}</div>
+          return <div key={photo.id}>Photo url: {photo.url}</div>
         }) }
-      </div>
-      <div className="review-helpfulness">
-        Was this review helpful? {hasClicked ? <div>Yes ({count})</div> : <div><a href="#0" onClick={handleHelpfulOnClick}>Yes</a> ({count})</div>}
-      </div>
-    </div>
+      </ReviewPhotos>
+      {hasClicked ? helpfulNoLink : helpfulLink}
+    </ReviewContainer>
   )
+
 }
 
 export default Review;

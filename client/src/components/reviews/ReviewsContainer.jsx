@@ -2,10 +2,14 @@ import React, { useState, useEffect } from 'react';
 import ReviewsList from './ReviewsList.jsx';
 import SortBy from './SortBy.jsx';
 import Button from './Button.jsx';
+import Modal from './Modal.jsx';
+import { ReviewsContainerStyled } from '../styles/reviews/ReviewsContainerStyled.styled.js';
+import { ButtonWrapper } from '../styles/reviews/ReviewsWrapper.styled.js';
 
-function ReviewsContainer({reviews}) {
+function ReviewsContainer({ reviews, productId }) {
   const [currentReviews, setCurrentReviews] = useState(null);
   const [numReviewsShown, setNumReviewsShown] = useState(2);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     if (reviews.length !== 0) {
@@ -25,8 +29,8 @@ function ReviewsContainer({reviews}) {
     setNumReviewsShown(2)
   }
 
-  const handleAddReviewOnClick = () => {
-    console.log('new review clicked')
+  const toggleModal = () => {
+    setShowModal(prev => !prev);
   }
 
   if (!reviews.length || !currentReviews) {
@@ -36,19 +40,25 @@ function ReviewsContainer({reviews}) {
   const reviewsToShow = currentReviews.slice(0, numReviewsShown);
 
   return (
-    <div>
-      <SortBy setCurrentReviews={setCurrentReviews} />
+    <ReviewsContainerStyled>
+      <SortBy setCurrentReviews={setCurrentReviews} productId={productId} />
       {reviews.length !== 0 &&
       <ReviewsList reviews={reviewsToShow}/>
       }
-      {reviews.length < 2 || reviewsToShow.length === reviews.length ? null :
-      <Button handleOnClick={handleMoreReviewsOnClick} text={'MORE REVIEWS'} />
-      }
-      {reviewsToShow.length === reviews.length &&
-      <Button handleOnClick={handleShowLessOnClick} text={'SHOW LESS'} />
-      }
-      <Button handleOnClick={handleAddReviewOnClick} text={'ADD REVIEW'} />
-    </div>
+      <ButtonWrapper>
+        {reviews.length < 2 || reviewsToShow.length === reviews.length ? null :
+        <Button handleOnClick={handleMoreReviewsOnClick} text={'Show more reviews'} />
+        }
+        {reviewsToShow.length === reviews.length &&
+        <Button handleOnClick={handleShowLessOnClick} text={'Show less reviews'} />
+        }
+        <Button handleOnClick={toggleModal} text={'Add a review'} />
+      </ButtonWrapper>
+      {showModal ?
+      <Modal toggleModal={toggleModal} productId={productId}/>
+      :
+      null}
+    </ReviewsContainerStyled>
   )
 }
 
