@@ -4,7 +4,6 @@ import Stars from '../shared/Stars.jsx';
 import { RatingScoreContainer, NumberOfReviewsBar } from '../styles/reviews/RatingScoreContainer.styled.js';
 
 function RatingScore({ reviews, numOfReviews, avgRating }) {
-
   if (!avgRating || reviews.length === 0) {
     return null
   }
