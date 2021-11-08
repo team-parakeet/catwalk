@@ -125,6 +125,7 @@ class App extends React.Component {
       <div>
         <div className='overview'>
         <OverviewProvider>
+          {/* TODO: Wrap the image gallery and product-details in a grid container for reponsive layout on mobile */}
           <h2>Overview!</h2>
           <div className='image-gallery'>
             <DefaultView />

@@ -1,13 +1,15 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useCallback } from 'react';
 import { OverviewContext } from './OverviewContext.jsx';
 import { getProductPhotosOfAStyle } from '../../request.js';
 import { DefaultViewContainer, BackgroundImageContainer, BackgroundImage, ThumbnailSliderContainer } from '../styles/Overview/DefaultView.styled';
 import { Arrow, FadedArrow, ActiveThumbnail, FadedThumbnail, ThumbnailContainer, SliderContainer } from '../styles/Overview/Slider.styled';
 
 export const DefaultView = () => {
-  const { images, setImages, currentImage } = useContext(OverviewContext);
+  const { images, setImages, currentImage, handleKeyPress } = useContext(OverviewContext);
+  const context = useContext(OverviewContext);
 
   useEffect(() => {
+    console.log('context: ', context);
     getProductPhotosOfAStyle(39333, 234004)
       .then(results =>
       setImages(results.photos.map((photo, id) => {return {id, ...photo}}))
@@ -15,8 +17,9 @@ export const DefaultView = () => {
     console.log('useEffect hook called');
   }, []);
 
+
   return (
-    <DefaultViewContainer>
+    <DefaultViewContainer tabIndex="0" onKeyUp={(e) => { e.preventDefault(); handleKeyPress(e);}}>
       <ThumbnailSliderContainer>
         <ThumbnailSlider />
       </ThumbnailSliderContainer>
