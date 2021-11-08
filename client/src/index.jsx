@@ -1,28 +1,34 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import styled from 'styled-components';
 import { TOKEN } from '../../config.js';
+import ProductDetails from './components/overview/productDetails.jsx';
+import ProductDescription from './components/overview/productDescription.jsx';
 import Selectors from './components/overview/selectors.jsx';
 import Reviews from './components/reviews/Reviews.jsx';
 import { OverviewProvider } from './components/overview/OverviewContext.jsx';
 import { DefaultView } from './components/overview/DefaultView.jsx';
 import { Provider as QAProvider } from './components/QA/QAContext.jsx';
 import QuestionsAnswers from './components/QA/QASection.jsx';
+import Loader from 'react-loader-spinner';
+import { LoaderWrapper } from './components/styles/reviews/ReviewsWrapper.styled.js';
 
+const Wrapper = styled.div`
+  border: hsla(205, 37%, 60%, 50%) solid 5px;
+  padding: 10px;
+`;
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    // For our progress demo, we've hard-coded an ID of `39333`
 
-    // TODO: What parts of state changes at this level?
     this.state = {
       product: {},
       styles: [],
       reviews: [],
     };
 
-    // TODO: Bind fns
     this.getStyles = this.getStyles.bind(this);
     this.getReviews = this.getReviews.bind(this);
     this.addItemToCart = this.addItemToCart.bind(this);
@@ -34,20 +40,19 @@ class App extends React.Component {
       method: 'get',
       url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/39333',
       headers: {
-        'Authorization': `${TOKEN}`,
-      }
+        Authorization: `${TOKEN}`,
+      },
     };
 
     axios(config)
-      .then( (results) => {
+      .then(results => {
         this.setState({
-          ...this.state,
-          product: results.data
+          product: results.data,
         });
         this.getStyles();
         this.getReviews();
       })
-      .catch( (err) => {
+      .catch(err => {
         console.error(err);
         console.error('index.jsx | mount failed');
       });
@@ -59,18 +64,17 @@ class App extends React.Component {
       method: 'get',
       url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/39333/styles',
       headers: {
-        'Authorization': `${TOKEN}`,
-      }
+        Authorization: `${TOKEN}`,
+      },
     };
 
     axios(config)
-      .then( (styles) => {
+      .then(styles => {
         this.setState({
-          ...this.state,
           styles: styles.data.results,
         });
       })
-      .catch( (err) => {
+      .catch(err => {
         console.error(err);
         console.error('index.jsx | failed to get styles');
       });
@@ -80,91 +84,101 @@ class App extends React.Component {
   getReviews() {
     const config = {
       method: 'get',
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/?sort="relevant"&product_id=${this.props.productId}`,
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/?sort="relevant"&product_id=${this.props.productId}&count=50`,
       headers: {
-        'Authorization': `${TOKEN}`,
-      }
+        Authorization: `${TOKEN}`,
+      },
     };
 
     axios(config)
-      .then( (reviews) => {
+      .then(reviews => {
         this.setState({
-          ...this.state,
-          reviews: reviews.data.results
-        })
+          reviews: reviews.data.results,
+        });
       })
-      .catch( (err) => {
+      .catch(err => {
         console.error(err);
         console.error('index.jsx | failed to fetch reviews');
-      })
+      });
   }
 
   // POST the item obj to the API
-  addItemToCart( item ) {
+  addItemToCart(item) {
     let config = {
-      method: POST,
+      method: 'post',
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/cart`,
       headers: {
-        'Authorization': `${TOKEN}`,
+        Authorization: `${TOKEN}`,
         'Content-Type': 'application/json',
       },
-      data: item,
-    }
+      data: JSON.stringify(item),
+    };
 
-    axios(config)
-      .then( () => {
-        alert(`Your item ${item.name} in style ${item.style} has been added to the cart`);
-      })
-      .catch( (err) => {
-        console.error(err);
-      })
+    axios(config).catch(err => {
+      console.error(err);
+    });
   }
 
   render() {
     return (
       <div>
-        <div className='overview'>
-        <OverviewProvider>
-          {/* TODO: Wrap the image gallery and product-details in a grid container for reponsive layout on mobile */}
-          <h2>Overview!</h2>
-          <div className='image-gallery'>
-            <DefaultView />
-          </div>
-          <div className='product-detail'>
-            Product details here!
+        <Wrapper>
+          <div className="overview">
+            {/* TODO: Wrap the image gallery and product-details in a grid container for reponsive layout on mobile */}
+            <OverviewProvider>
+              <h2>Overview!</h2>
+              <div className="image-gallery">
+                <DefaultView />
+              </div>
+              <ProductDetails product={this.state.product} />
+              <br></br>
+              <Selectors
+                addToCart={this.addItemToCart}
+                styles={this.state.styles}
+                product={this.state.product}
+                productId={this.props.productId}
+              />
+              <br></br>
+              <ProductDescription product={this.state.product} />
+            </OverviewProvider>
           </div>
           <br></br>
-          <Selectors
-            addItemToCart={this.addItemToCart}
-            styles={this.state.styles}
-            product={this.state.product}
-            productId={this.props.productId}
-          />
-        </OverviewProvider>
-        </div>
-        <br></br>
-        <div className='ratings-and-reviews'>
-          <h2>Ratings and reviews!</h2>
-          <Reviews reviews={this.state.reviews}/>
-        </div>
-        <br></br>
-        <div className='q-and-a'>
-        <QAProvider>
-          <QuestionsAnswers />
-          <button className='add-question'>Add a question</button>
-          <button className='add-answer'>Add an answer [modal]</button>
-        </QAProvider>
-        </div>
-        <br></br>
-        <div className='related-items-comparison'>
-          <h2>Related items and comparison!</h2>
-          <div className='related-products'>
-            Not sure what goes in here yet
+          <div className="ratings-and-reviews">
+            {this.state.reviews.length === 0 ? (
+              <LoaderWrapper>
+                <Loader
+                  type="TailSpin"
+                  color="#d3d3d3"
+                  height={100}
+                  width={100}
+                />
+              </LoaderWrapper>
+            ) : (
+              <Reviews
+                reviews={this.state.reviews}
+                productId={this.props.productId}
+              />
+            )}
           </div>
-        </div>
+          <br></br>
+          <div className="q-and-a">
+            <QAProvider>
+              <QuestionsAnswers />
+              <button className="add-question">Add a question</button>
+              <button className="add-answer">Add an answer [modal]</button>
+            </QAProvider>
+          </div>
+          <br></br>
+          <div className="related-items-comparison">
+            <h2>Related items and comparison!</h2>
+            <div className="related-products">
+              Not sure what goes in here yet
+            </div>
+          </div>
+        </Wrapper>
       </div>
-    )
+    );
   }
 }
 
-ReactDOM.render(<App productId={39333}/>, document.getElementById('app'));
+ReactDOM.render(<App productId={39333} />, document.getElementById('app'));

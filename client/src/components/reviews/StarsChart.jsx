@@ -1,17 +1,23 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
+import Slider from './Slider.jsx';
+import { StarsChartStyled, StarBar } from '../styles/reviews/StarsChartStyled.styled.js';
 
-function StarsChart({ reviews }) {
-  //once we get stars
-  // get the keys
+function StarsChart({ ratings, numOfReviews }) {
 
-  const [ratings, setRatings] = useState([1, 2, 3, 4, 5])
+  const stars = [5, 4, 3, 2, 1];
 
   return (
-    <div className="stars-chart">
-      {ratings.map(rating => {
-        return <div key={rating} className="star-bar">{rating} STARS: </div>
-      })}
-    </div>
+    <StarsChartStyled>
+      {stars.map(star => {
+        return (
+        <StarBar key={star}>
+          {star} stars: <span>
+          <Slider id={star} value={ratings[star]} max={numOfReviews} />
+          </span>
+          {ratings[star]}
+        </StarBar>
+      )})}
+    </StarsChartStyled>
   )
 }
 

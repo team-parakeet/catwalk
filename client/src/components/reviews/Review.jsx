@@ -1,38 +1,67 @@
-import React from 'react';
+import React, { useState } from 'react';
+import axios from 'axios';
 import dateFormatter from 'iso-date-formatter';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons'
+import { TOKEN } from '../../../../config.js';
 import Stars from './Stars.jsx';
+import {
+  ReviewContainer, ReviewTitle, ReviewDate, ReviewStars, ReviewBody, ReviewResponse, ReviewResponseBody, ReviewRecommend, ReviewUser, ReviewHelpfulness, ReviewPhotos, HelpfulLink
+} from '../styles/reviews/ReviewStyled.styled.js';
 
-function Review( {review} ) {
+function Review({ review }) {
 
   const isoDate = review.date;
   const date = dateFormatter(isoDate, { format: 'MMM d, yyyy', namedMonths: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] });
 
+  const [count, setCount] = useState(review.helpfulness)
+  const [hasClicked, setHasClicked] = useState(false)
+
+  const handleHelpfulOnClick = () => {
+    const reviewId = review.review_id
+    const url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/${reviewId}/helpful`
+    axios.put(url, {}, {
+      headers: {
+        Authorization: TOKEN
+      }
+    })
+    setCount(prev => prev + 1);
+    setHasClicked(true)
+  }
+
+  const response = <ReviewResponse>Response from seller: <ReviewResponseBody>{review.response}</ReviewResponseBody></ReviewResponse>
+  const recommend = <ReviewRecommend><FontAwesomeIcon icon={faCheck} /> I recommend this product</ReviewRecommend>
+  const helpfulNoLink = <ReviewHelpfulness>Was this review helpful? Yes ({count})</ReviewHelpfulness>
+  const helpfulLink = <ReviewHelpfulness>Was this review helpful? <HelpfulLink href="#0" onClick={handleHelpfulOnClick}>Yes</HelpfulLink> ({count})</ReviewHelpfulness>
+
   return (
-    <div className="review">
-      <div className="review-date">
+    <ReviewContainer>
+      <ReviewDate>
         {date}
-      </div>
-      <div className="review-stars">
+      </ReviewDate>
+      <ReviewUser>
+        {review.reviewer_name}
+      </ReviewUser>
+      <ReviewStars>
         <Stars avgRating={review.rating}/>
-      </div>
-      <div className="review-title">
-        <h3>{review.summary}</h3>
-      </div>
-      <div className="review-body">
+      </ReviewStars>
+      <ReviewTitle>
+        {review.summary}
+      </ReviewTitle>
+      <ReviewBody>
         {review.body}
-      </div>
-      <div className="review-recommend">
-        Recommend? {review.recommend ? 'Yes' : 'No'}
-      </div>
-      <div className="review-user">
-        user: {review.reviewer_name}
-      </div>
-      {review.photos.map(photo => {
-        console.log(photo)
-        return <div key={photo.id}>PHOTO URL{photo.url}</div>
-      })}
-    </div>
+      </ReviewBody>
+      {review.response ? response : null}
+      {review.recommend ? recommend : null}
+      <ReviewPhotos>
+        { review.photos.map(photo => {
+          return <div key={photo.id}>Photo url: {photo.url}</div>
+        }) }
+      </ReviewPhotos>
+      {hasClicked ? helpfulNoLink : helpfulLink}
+    </ReviewContainer>
   )
+
 }
 
 export default Review;

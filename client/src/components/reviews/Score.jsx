@@ -1,10 +1,12 @@
 import React from 'react';
+import { ScoreStyled } from '../styles/reviews/ScoreStyled.styled.js'
 
-function Score(props) {
+function Score({ avgRating }) {
+  const formattedScore = avgRating.toFixed(1)
   return (
-    <div className="score">
-      AVERAGE RATING: {props.avgRating}
-    </div>
+    <ScoreStyled>
+      {formattedScore}
+    </ScoreStyled>
   )
 }
 
