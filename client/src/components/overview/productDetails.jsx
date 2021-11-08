@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 
 const ProductDetails = ( {product} ) => {
-  // console.log(product);
   return (
       <div className='product-details'>
         <span>Star rating here</span>

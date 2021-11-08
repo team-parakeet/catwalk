@@ -18,7 +18,6 @@ class Selectors extends React.Component {
       outOfStock: false,
     };
 
-    // Bind fns
     this.handleStyleSelect = this.handleStyleSelect.bind(this);
     this.retrieveSizesByStyle = this.retrieveSizesByStyle.bind(this);
     this.retrieveQuantitiesBySize = this.retrieveQuantitiesBySize.bind(this);
@@ -48,7 +47,7 @@ class Selectors extends React.Component {
 
     for (let i = 0; i < this.props.styles.length; i++) {
       let style = this.props.styles[i];
-      if (style.style_id === this.state.currentStyle) {
+      if (style.style_id === this.state.currentStyle.style_id) {
         for (let k in style.skus) {
           if (style.skus[k].size === size) {
             maxQuantity = style.skus[k].quantity;
@@ -81,11 +80,11 @@ class Selectors extends React.Component {
 
   // On click, set state to reflect chosen style
   // Make sure that e.target.value is an ID number
-  handleStyleSelect(styleId) {
-    this.retrieveSizesByStyle( styleId );
+  handleStyleSelect(product) {
+    this.retrieveSizesByStyle( product.style_id );
 
     this.setState({
-      currentStyle: styleId,
+      currentStyle: product,
     });
   }
 
@@ -115,7 +114,7 @@ class Selectors extends React.Component {
       let item = {};
       for (let i = 0; i < this.props.styles.length; i++) {
         let style = this.props.styles[i];
-        if (style.style_id === this.state.currentStyle) {
+        if (style.style_id === this.state.currentStyle.style_id) {
           for (let k in style.skus) {
             if (style.skus[k].size === this.state.currentSize) {
               item.sku_id = k;
@@ -135,26 +134,28 @@ class Selectors extends React.Component {
     return (
       <div className='selectors'>
         <div className='style-selector'>
-          STYLE > {this.state.currentStyle}
+          <b>STYLE</b> > <em>{this.state.currentStyle ? this.state.currentStyle.name : 'Select a style'}</em>
           <br></br>
           <StyleSelector styles={this.props.styles} handleStyleSelect={this.handleStyleSelect} />
         </div>
-        <br></br>
+
         <div className='size-selector'>
-          <div className='size-error-msg' style={{visibility: 'hidden', color: 'red'}}>Please select a size</div>
-          <div>SIZE > {this.state.currentSize ? this.state.currentSize : null}</div>
+          <div>
+            <b>SIZE</b> > <em>{this.state.currentSize ? this.state.currentSize : null }</em>
+            <span className='size-error-msg' style={{visibility: 'hidden', color: 'red'}}>Please select a size</span>
+          </div>
           <select className='size-select'
             value={this.state.currentSize}
             onChange={this.handleSizeSelect}>
             <option>Select a size</option>
-            { this.state.availableSizes.length ? this.state.availableSizes.map( (size, i) => (
-              <option className='size-option' key={i} value={size}>{size}</option>
-            )) : null }
+            { this.state.availableSizes.length ? this.state.availableSizes.map( (size, i) => {
+              return ( <option className='size-option' key={i} value={size}>{size}</option> );
+            }) : null }
           </select>
         </div>
 
         <div className='quantity-selector'>
-          <div>QUANTITY > {this.state.currentQuantity}</div>
+          <div> <b>QUANTITY</b> > <em>{this.state.currentQuantity}</em> </div>
           <select onChange={this.handleQuantitySelect}>
             { this.state.outOfStock ? <option>Out of Stock</option> : this.state.availableQuantities.map( (quantity, i) => (
               <option className='quantity-option' key={i} value={quantity}>{quantity}</option>
