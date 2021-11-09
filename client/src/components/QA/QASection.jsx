@@ -7,29 +7,42 @@ import { QAContext } from './QAContext.jsx';
 const QASection = () => {
   const [questions, setQuestions] = useState([]); // keep track of the questions
   const [searchResults, setSearchResults] = useState([]); // keep track of searchResults
-  const {search} = useContext(QAContext);
+  const { search } = useContext(QAContext);
 
   useEffect(() => {
     getAllQuestions(39334)
       .then(results => {
         setQuestions(results.data.results); // Already sorted by Question Helpfulness
       })
-      .catch(err => console.error('There was an error retrieving questions for product >>>', err));
+      .catch(err =>
+        console.error(
+          'There was an error retrieving questions for product >>>',
+          err
+        )
+      );
   }, []);
 
   useEffect(() => {
-    if (search.length >= 3) {
-      getSearchResults();
-    } else {
-      clearSearchResults(); // Clear the searchResults if we don't want to search
-    }
-  }, [search])
+    search.length >= 3 ? getSearchResults() : clearSearchResults(); // Clear the searchResults if we don't want to search
+  }, [search]);
 
   const getHighlightedText = (text, highlight) => {
     // Split text on highlight term, include term itself into parts, ignore case
     const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
-    return <span>{parts.map((part, idx) => part.toLowerCase() === highlight.toLowerCase() ? <span key={idx} style={{backgroundColor: '#E3CFC6'}}>{part}</span> : part)}</span>;
-  }
+    return (
+      <span>
+        {parts.map((part, idx) =>
+          part.toLowerCase() === highlight.toLowerCase() ? (
+            <span key={idx} style={{ backgroundColor: '#E3CFC6' }}>
+              {part}
+            </span>
+          ) : (
+            part
+          )
+        )}
+      </span>
+    );
+  };
 
   // This handles finding and highlighting questions with matching text from search box;
   const getSearchResults = () => {
@@ -60,19 +73,19 @@ const QASection = () => {
     }
 
     setSearchResults(results);
-  }
+  };
 
   const clearSearchResults = () => {
     setSearchResults([]);
-  }
+  };
 
   return (
     <>
       {/* we want it to have font color #525252 */}
       {/* Putting in a span tag so that childrens listed on the context is just the span as opposed to Question, Answers, &*/}
-      <span style={{'fontSize': '1.5rem'}}>QUESTIONS {'&'} ANSWERS</span>
+      <span style={{ fontSize: '1.5rem' }}>QUESTIONS {'&'} ANSWERS</span>
       <Search />
-      <QuestionsList questions={questions} searchResults={searchResults}/>
+      <QuestionsList questions={questions} searchResults={searchResults} />
     </>
   );
 };

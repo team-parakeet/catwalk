@@ -4,7 +4,7 @@ import React from 'react';
  * State object
  * @type {{search: string}}
  */
- const initialState = {
+const initialState = {
   search: '',
 };
 
