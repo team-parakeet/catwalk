@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -19,24 +19,14 @@ const SiteWrapper = styled.div`
   padding: 10px;
 `;
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      product: {},
-      styles: [],
-      reviews: [],
-      rating: 0,
-    };
-
-    this.getStyles = this.getStyles.bind(this);
-    this.getReviews = this.getReviews.bind(this);
-    this.addItemToCart = this.addItemToCart.bind(this);
-  }
+const App = ( {productId} ) => {
+  const [product, setProduct] = useState({});
+  const [styles, setStyles] = useState([]);
+  const [reviews, setReviews] = useState([]);
+  const [rating, setRating] = useState(0);
 
   // On mount, retrieve product and styles
-  componentDidMount() {
+  useEffect( () => {
     const config = {
       method: 'get',
       url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/39333',
@@ -47,21 +37,19 @@ class App extends React.Component {
 
     axios(config)
       .then(results => {
-        this.setState({
-          product: results.data,
-        });
-        this.getStyles();
-        this.getReviews();
-        this.getAvgRating();
+        setProduct(results.data);
+
+        getStyles();
+        getReviews();
+        getAvgRating();
       })
       .catch(err => {
         console.error(err);
-        console.error('index.jsx | mount failed');
       });
-  }
+  }, []);
 
   // Retrieve product's styles from API, set state to reflect those styles
-  getStyles() {
+  const getStyles = () => {
     const config = {
       method: 'get',
       url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/39333/styles',
@@ -72,21 +60,18 @@ class App extends React.Component {
 
     axios(config)
       .then(styles => {
-        this.setState({
-          styles: styles.data.results,
-        });
+        setStyles(styles.data.results);
       })
       .catch(err => {
         console.error(err);
-        console.error('index.jsx | failed to get styles');
       });
   }
 
   // GET all reviews for a product
-  getReviews() {
+  const getReviews = () => {
     const config = {
       method: 'get',
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/?sort="relevant"&product_id=${this.props.productId}&count=50`,
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/?sort="relevant"&product_id=${productId}&count=50`,
       headers: {
         Authorization: `${TOKEN}`,
       },
@@ -94,19 +79,17 @@ class App extends React.Component {
 
     axios(config)
       .then( (reviews) => {
-        this.setState({
-          reviews: reviews.data.results
-        });
-        this.getAvgRating();
+        setReviews(reviews.data.results);
+
+        getAvgRating();
       })
       .catch(err => {
         console.error(err);
-        console.error('index.jsx | failed to fetch reviews');
       });
   }
 
   // POST the item obj to the API
-  addItemToCart(item) {
+  const addItemToCart = (item) => {
     let config = {
       method: 'post',
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/cart`,
@@ -119,73 +102,70 @@ class App extends React.Component {
 
     axios(config)
       .then( () => {
-        alert(`Added ${item.count} ${this.state.product.name} to your cart`)
+        alert(`Added ${item.count} ${product.name} to your cart`)
       })
       .catch(err => {
         console.error(err);
       });
   }
-  getAvgRating() {
-    if (this.state.reviews.length !== 0) {
+
+  const getAvgRating = () => {
+    if (reviews.length !== 0) {
       let sum = 0;
-      for (let i = 0; i < this.state.reviews.length; i++) {
-        let currentReview = this.state.reviews[i];
+      for (let i = 0; i < reviews.length; i++) {
+        let currentReview = reviews[i];
         sum += currentReview.rating;
       }
-      let avg = sum / this.state.reviews.length;
-      this.setState({
-        rating: avg
-      })
+      let avg = sum / state.reviews.length;
+      setRating(avg);
     }
   }
 
-  render() {
-    return (
-      <div>
-        <SiteWrapper>
-          {/* TODO: Wrap the image gallery and product-details in a grid container for reponsive layout on mobile */}
-          <OverviewProvider>
-            <div className="image-gallery">
-              <DefaultView />
-            </div>
-            <ProductDetails product={this.state.product} rating={this.state.rating}/>
-            <br></br>
-            <Selectors
-              addToCart={this.addItemToCart}
-              styles={this.state.styles}
-              product={this.state.product}
-              productId={this.props.productId}
-            />
-            <br></br>
-            <ProductDescription product={this.state.product} />
-          </OverviewProvider>
-          <br></br>
-          <div className="ratings-and-reviews">
-            {this.state.reviews.length === 0 ?
-             (<LoaderWrapper>
-                <Loader
-                  type="TailSpin"
-                  color="#d3d3d3"
-                  height={100}
-                  width={100}
-                />
-              </LoaderWrapper>)
-              :
-              (<Reviews reviews={this.state.reviews} productId={this.props.productId} avgRating={this.state.rating}/>
-            )}
+  return (
+    <div>
+      <SiteWrapper>
+        { /* TODO: Wrap the image gallery and product-details in a grid container for reponsive layout on mobile */ }
+        <OverviewProvider>
+          <div className="image-gallery">
+            <DefaultView />
           </div>
+          <ProductDetails product={product} rating={rating}/>
           <br></br>
-          <div className="q-and-a">
-            <QAProvider>
-              <QuestionsAnswers />
-              <button className="add-question">Add a question</button>
-              <button className="add-answer">Add an answer [modal]</button>
-            </QAProvider>
-          </div>
-        </ SiteWrapper>
-      </div>
-    );
-  }
+          <Selectors
+            addToCart={addItemToCart}
+            styles={styles}
+            product={product}
+            productId={productId}
+          />
+          <br></br>
+          <ProductDescription product={product} />
+        </OverviewProvider>
+        <br></br>
+        <div className="ratings-and-reviews">
+          {reviews.length === 0 ?
+            (<LoaderWrapper>
+              <Loader
+                type="TailSpin"
+                color="#d3d3d3"
+                height={100}
+                width={100}
+              />
+            </LoaderWrapper>)
+            :
+            (<Reviews reviews={reviews} productId={productId} avgRating={rating}/>
+          )}
+        </div>
+        <br></br>
+        <div className="q-and-a">
+          <QAProvider>
+            <QuestionsAnswers />
+            <button className="add-question">Add a question</button>
+            <button className="add-answer">Add an answer [modal]</button>
+          </QAProvider>
+        </div>
+      </ SiteWrapper>
+    </div>
+  );
 }
 
 ReactDOM.render(<App productId={39333} />, document.getElementById('app'));
