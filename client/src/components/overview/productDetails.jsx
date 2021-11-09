@@ -22,8 +22,7 @@ const ProductPrice = styled.div`
 const ProductDetails = ( {product, rating} ) => {
   return (
       <div className='product-details'>
-        { /* TODO: Make Stars color match theme */ }
-        <Stars avgRating={rating} style={ {margin: 'auto', color: 'hsl(196, 17%, 29%)'}}/>
+        <Stars avgRating={rating} />
         <br></br>
         <ProductName>{product.name}</ProductName>
         <ProductCategory>{product.category}</ProductCategory>
