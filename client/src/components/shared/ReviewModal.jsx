@@ -12,12 +12,6 @@ function ReviewModal({ toggleModal, productId }) {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
 
-  useEffect(() => {
-    const originalOverflow = window.getComputedStyle(document.body).overflow;
-    document.body.style.overflow = 'hidden';
-    return () => (document.body.style.overflow = originalOverflow);
-  }, []);
-
   const handleStarChangeOnClick = e => {
     setOverallRating(e);
   };
@@ -49,7 +43,7 @@ function ReviewModal({ toggleModal, productId }) {
   };
 
   return (
-    <Modal toggleModal={toggleModal} productId={productId}>
+    <Modal toggleModal={toggleModal} productId={productId} handleSubmit={handleSubmitOnClick}>
       <ReviewModalStyled>
         Write Your Review
         <label>Overall rating:</label>
