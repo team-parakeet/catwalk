@@ -5,8 +5,9 @@
   border-color: hsl(33, 22%, 45%);
   color: hsla(99, 49%, 11%, 1);
   font-family: 'Zen Antique Soft', serif;
+  width: auto;
 }
 
 .description-text {
-  font-family: 'Red Hat Mono', monospace;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }

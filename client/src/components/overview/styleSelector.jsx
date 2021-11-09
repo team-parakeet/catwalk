@@ -15,12 +15,12 @@ class StyleSelector extends React.Component {
   }
 
   // On click, set this.state.selected to the corresponding style ID
-  handleClick(styleId) {
+  handleClick(style) {
     this.setState({
-      selected: styleId,
+      selected: style.style_id,
     });
 
-    this.props.handleStyleSelect(styleId);
+    this.props.handleStyleSelect(style);
   }
 
   render() {

@@ -8,6 +8,9 @@ const Image = styled.img`
   border: ${ props => props.isSelected ? 'hsl(360, 27%, 81%) solid 5px' : 'hsla(33, 22%, 45%, 70%) solid 5px' };
   border-radius: 30px;
   padding: 2px;
+  margin-top: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
 `
 
 class StyleThumbnail extends React.Component {
@@ -16,7 +19,7 @@ class StyleThumbnail extends React.Component {
     // url={url} info={style} selected={t/f} onClick={this.handleStyleSelect}
 
     this.state = {
-      isSelected: this.props.selected,
+      isSelected: this.props.selected
     }
 
     this.handleClick = this.handleClick.bind(this);
@@ -27,7 +30,7 @@ class StyleThumbnail extends React.Component {
       isSelected: true,
     });
 
-    this.props.onClick(this.props.info.style_id);
+    this.props.onClick(this.props.info);
   }
 
   render() {
@@ -35,7 +38,9 @@ class StyleThumbnail extends React.Component {
       <Image
         isSelected={this.props.selected}
         onClick={this.handleClick}
-        src={this.props.url}/>
+        src={this.props.url}
+        alt={this.state.isSelected ? this.props.info.name : null}
+      />
     )
   }
 }
