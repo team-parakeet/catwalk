@@ -1,14 +1,19 @@
-import React, { useContext, useEffect, useCallback } from 'react';
+import React, { useContext, useState, useEffect, useCallback } from 'react';
+import ExpandedView from './ExpandedView.jsx';
 import { OverviewContext } from './OverviewContext.jsx';
 import { getProductPhotosOfAStyle } from '../../request.js';
 import { DefaultViewContainer, BackgroundImageContainer, BackgroundImage, ThumbnailSliderContainer } from '../styles/Overview/DefaultView.styled';
 import { Arrow, FadedArrow, ActiveThumbnail, FadedThumbnail, ThumbnailContainer, SliderContainer } from '../styles/Overview/Slider.styled';
 
 export const DefaultView = () => {
+  // TODO: have DefaultView manage state
+  const [ expandedView, setExpandedView ] = useState(false);
   const { images, setImages, currentImage, handleKeyPress } = useContext(OverviewContext);
   const context = useContext(OverviewContext);
 
   useEffect(() => {
+    // TODO: Refactor this to take a prop, selectedStyle
+    // ISSUE: How do we get selectedStyle info from styleSelector to this component?
     getProductPhotosOfAStyle(39333, 234004)
       .then( (results) => {
         setImages(results.photos.map((photo, id) => { return {id, ...photo}} ));
@@ -16,8 +21,15 @@ export const DefaultView = () => {
       .catch( (err) => {
         console.error(err);
       });
+
+    // TODO: If expandedView is active, render the expandedView component. Else, hide it
+
   }, []);
 
+  // TODO: Method that sets expandedview
+  const handleBackgroundImageClick = () => {
+    setExpandedView(!expandedView);
+  }
 
   return (
     <DefaultViewContainer className='default-view-container' tabIndex="0" onKeyUp={(e) => { e.preventDefault(); handleKeyPress(e); }}>
@@ -25,7 +37,7 @@ export const DefaultView = () => {
         <ThumbnailSlider />
       </ThumbnailSliderContainer>
       <BackgroundImageContainer className='background-img-container'>
-        {images.length && <BackgroundImage src={images[currentImage]['url']} />}
+        {images.length && <BackgroundImage src={images[currentImage]['url']} onClick={handleBackgroundImageClick} />}
       </BackgroundImageContainer>
     </DefaultViewContainer>
   );
