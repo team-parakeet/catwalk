@@ -117,11 +117,14 @@ class App extends React.Component {
       data: JSON.stringify(item),
     };
 
-    axios(config).catch(err => {
-      console.error(err);
-    });
+    axios(config)
+      .then( () => {
+        alert(`Added ${item.count} ${this.state.product.name} to your cart`)
+      })
+      .catch(err => {
+        console.error(err);
+      });
   }
-
   getAvgRating() {
     if (this.state.reviews.length !== 0) {
       let sum = 0;
@@ -140,21 +143,21 @@ class App extends React.Component {
     return (
       <div>
         <SiteWrapper>
-        {/* TODO: Wrap the image gallery and product-details in a grid container for reponsive layout on mobile */}
-        <OverviewProvider>
-          <div className="image-gallery">
-            <DefaultView />
-          </div>
-          <ProductDetails product={this.state.product} rating={this.state.rating}/>
-          <br></br>
-          <Selectors
-            addToCart={this.addItemToCart}
-            styles={this.state.styles}
-            product={this.state.product}
-            productId={this.props.productId}
-          />
-          <br></br>
-          <ProductDescription product={this.state.product} />
+          {/* TODO: Wrap the image gallery and product-details in a grid container for reponsive layout on mobile */}
+          <OverviewProvider>
+            <div className="image-gallery">
+              <DefaultView />
+            </div>
+            <ProductDetails product={this.state.product} rating={this.state.rating}/>
+            <br></br>
+            <Selectors
+              addToCart={this.addItemToCart}
+              styles={this.state.styles}
+              product={this.state.product}
+              productId={this.props.productId}
+            />
+            <br></br>
+            <ProductDescription product={this.state.product} />
           </OverviewProvider>
           <br></br>
           <div className="ratings-and-reviews">
@@ -179,7 +182,7 @@ class App extends React.Component {
               <button className="add-answer">Add an answer [modal]</button>
             </QAProvider>
           </div>
-        </SiteWrapper>
+        </ SiteWrapper>
       </div>
     );
   }
