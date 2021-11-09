@@ -4,6 +4,7 @@ const AddAnswerBtn = styled.button`
   display: inline;
   border: none;
   background: none;
+  outline: none;
   text-decoration: underline;
   cursor: pointer;
   font-size: 1rem;

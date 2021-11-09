@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { QAContext } from './QAContext.jsx';
 import Helpful from './Helpful.jsx';
 import { Spacer } from '../styles/QA/Spacer.styled';
 import AddAnswerBtn from '../styles/QA/AddAnswerBtn.styled';
+import Modal from '../shared/Modal.jsx';
 import {
   StyledDiv,
   QuestionContainer,
@@ -9,6 +11,8 @@ import {
 } from '../styles/QA/Question.styled';
 
 const Question = props => {
+  const { showModal, toggleModal } = useContext(QAContext);
+
   return (
     <QuestionContainer className="q-container">
       <StyledDiv className={props.className}>
@@ -16,7 +20,7 @@ const Question = props => {
       </StyledDiv>
       <HelpfulContainer>
         <Helpful count={props.question.question_helpfulness} /> |
-        <AddAnswerBtn>Add answer</AddAnswerBtn>
+        <AddAnswerBtn onClick={() => toggleModal()}>Add answer</AddAnswerBtn>
       </HelpfulContainer>
     </QuestionContainer>
   );
