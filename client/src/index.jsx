@@ -124,7 +124,7 @@ const App = ( {productId} ) => {
   return (
     <div>
       <SiteWrapper>
-        {/* TODO: Wrap the image gallery and product-details in a grid container for reponsive layout on mobile */}
+        { /* TODO: Wrap the image gallery and product-details in a grid container for reponsive layout on mobile */ }
         <OverviewProvider>
           <div className="image-gallery">
             <DefaultView />
