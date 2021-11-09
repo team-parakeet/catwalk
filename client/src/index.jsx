@@ -118,6 +118,7 @@ const App = ( {productId} ) => {
       }
       let avg = sum / state.reviews.length;
       setRating(avg);
+      return avg;
     }
   }
 
@@ -129,7 +130,7 @@ const App = ( {productId} ) => {
           <div className="image-gallery">
             <DefaultView />
           </div>
-          <ProductDetails product={product} rating={rating}/>
+          <ProductDetails product={product} productId={productId} rating={rating}/>
           <br></br>
           <Selectors
             addToCart={addItemToCart}
