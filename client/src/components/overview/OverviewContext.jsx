@@ -37,7 +37,6 @@ export const OverviewContext = React.createContext();
 
 export function OverviewProvider({children}) {
 
-  // You can name the destructured variables anyway you want
   const [state, dispatch] = React.useReducer(reducer, initialState)
 
   const handleKeyPress = (e) => {
