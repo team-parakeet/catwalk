@@ -161,10 +161,9 @@ class App extends React.Component {
               <br></br>
               <ProductDescription product={this.state.product} />
             </OverviewProvider>
-          </div>
           <br></br>
           <div className="ratings-and-reviews">
-            {this.state.reviews.length === 0 ? 
+            {this.state.reviews.length === 0 ?
              (<LoaderWrapper>
                 <Loader
                   type="TailSpin"

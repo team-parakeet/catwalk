@@ -15,6 +15,21 @@ export const ModalStyled = styled.div`
   font-size: 10pt;
 `
 
+export const ReviewModalStyled = styled(ModalStyled)`
+  top: 25%;
+  left: 25%;
+  position: absolute;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  display: flex;
+  width: 50%;
+  height: 50%;
+  background: #fff;
+  border: 1px solid hotpink;
+  font-size: 10pt;
+`
+
 export const Overlay = styled.div`
   position: fixed;
   top: 0;
