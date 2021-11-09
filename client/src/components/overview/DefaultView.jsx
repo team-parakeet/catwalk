@@ -10,14 +10,17 @@ export const DefaultView = () => {
 
   useEffect(() => {
     getProductPhotosOfAStyle(39333, 234004)
-      .then(results =>
-      setImages(results.photos.map((photo, id) => {return {id, ...photo}}))
-    );
+      .then( (results) => {
+        setImages(results.photos.map((photo, id) => { return {id, ...photo}} ));
+      })
+      .catch( (err) => {
+        console.error(err);
+      });
   }, []);
 
 
   return (
-    <DefaultViewContainer className='default-view-container' tabIndex="0" onKeyUp={(e) => { e.preventDefault(); handleKeyPress(e);}}>
+    <DefaultViewContainer className='default-view-container' tabIndex="0" onKeyUp={(e) => { e.preventDefault(); handleKeyPress(e); }}>
       <ThumbnailSliderContainer className='thumbnail-slider-container'>
         <ThumbnailSlider />
       </ThumbnailSliderContainer>
@@ -32,6 +35,7 @@ export const ThumbnailSlider = () => {
   const { images, currentImage, displayNextImage, displayPrevImage } = useContext(OverviewContext);
   let isAboveLowerBounds = currentImage > 0;
   let isBelowUpperBounds = currentImage < images.length - 1;
+
   return (
     <SliderContainer>
       <Arrow className={isAboveLowerBounds ? 'showContent' : 'hideContent'} src={'./images/chevron-up.svg'} onClick={() => (isAboveLowerBounds) ? displayPrevImage() : {}} />
