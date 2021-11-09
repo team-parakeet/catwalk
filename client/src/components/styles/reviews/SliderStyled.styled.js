@@ -17,6 +17,6 @@ export const SliderStyled = styled.input`
     height: 7px;
     pointer-events: none;
     background: #d3d3d3;
-    box-shadow: -100px 0 0 100px #24E500;
+    box-shadow: -100px 0 0 100px #a7bb9b;
   }
 `
