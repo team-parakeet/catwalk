@@ -6,7 +6,7 @@ const SizeSelector = ( {currentSize, availableSizes, handleSizeSelect} ) => {
     <select className='size-select'
       value={currentSize}
       onChange={handleSizeSelect}>
-      <option>Select a size</option>
+      <option className='size-option' defaultValue={'Select a size'}>Select a size</option>
       { availableSizes.length ? availableSizes.map( (size, i) => {
         return ( <option className='size-option' key={i} value={size}>{size}</option> );
       }) : null }

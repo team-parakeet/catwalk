@@ -68,7 +68,7 @@ const Selectors = (props) => {
   // Make sure that e.target.value is an ID number
   const handleStyleSelect = (style) => {
     retrieveSizesByStyle(style.style_id );
-    setCurrentStyle(style)
+    setCurrentStyle(style);
   }
 
   // On change, updates state to reflect chosen size and hides 'Choose a size' error msg
@@ -76,12 +76,12 @@ const Selectors = (props) => {
     document.querySelector('.size-error-msg').style.visibility = 'hidden';
 
     retrieveQuantitiesBySize( e.target.value );
-    setCurrentSize(e.target.value)
+    setCurrentSize(e.target.value);
   }
 
   // On click, set state to reflect chosen quantity
   const handleQuantitySelect = (e) => {
-    setCurrentQuantity(e.target.value)
+    setCurrentQuantity(e.target.value);
   }
 
   // On click, add current state of style to cart

@@ -125,7 +125,6 @@ class App extends React.Component {
         console.error(err);
       });
   }
-
   getAvgRating() {
     if (this.state.reviews.length !== 0) {
       let sum = 0;

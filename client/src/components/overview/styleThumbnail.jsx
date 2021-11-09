@@ -26,7 +26,7 @@ const StyleThumbnail = (props) => {
         props.onClick(props.info);
       }}
       src={props.url}
-      alt={isSelected ? props.info.name : null}
+      alt={ isSelected ? props.info.name : null}
     />
   )
 }
