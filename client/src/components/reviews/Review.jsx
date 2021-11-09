@@ -3,13 +3,12 @@ import { putReviewAsHelpful } from '../../request.js';
 import dateFormatter from 'iso-date-formatter';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
-import { TOKEN } from '../../../../config.js';
 import Stars from '../shared/Stars.jsx';
 import {
   ReviewContainer, ReviewTitle, ReviewDate, ReviewStars, ReviewBody, ReviewResponse, ReviewResponseBody, ReviewRecommend, ReviewUser, ReviewHelpfulness, ReviewPhotos, HelpfulLink
 } from '../styles/reviews/ReviewStyled.styled.js';
 
-function Review({ review }) {
+function Review({ review, id }) {
 
   const isoDate = review.date;
   const date = dateFormatter(isoDate, { format: 'MMM d, yyyy', namedMonths: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] });
@@ -22,6 +21,10 @@ function Review({ review }) {
     putReviewAsHelpful(reviewId);
     setCount(prev => prev + 1);
     setHasClicked(true)
+  }
+
+  if (!review) {
+    return null;
   }
 
   const response = <ReviewResponse>Response from seller: <ReviewResponseBody>{review.response}</ReviewResponseBody></ReviewResponse>
@@ -38,7 +41,7 @@ function Review({ review }) {
         {review.reviewer_name}
       </ReviewUser>
       <ReviewStars>
-        <Stars avgRating={review.rating}/>
+        <Stars rating={review.rating} id={id}/>
       </ReviewStars>
       <ReviewTitle>
         {review.summary}

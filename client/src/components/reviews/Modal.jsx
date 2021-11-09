@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import SelectStars from './SelectStars.jsx';
 import { Overlay, ModalStyled } from '../styles/reviews/ModalStyled.styled';
 import { postNewReview } from '../../request.js';
 
@@ -48,8 +47,6 @@ function Modal({ toggleModal, productId }) {
       <ModalStyled>
         Write Your Review
         <label>Overall rating:</label>
-        <SelectStars handleStarChangeOnClick={handleStarChangeOnClick} overallRating={overallRating}/>
-
         <div>
           <label>Would you recommend this product?</label>
           <div>
