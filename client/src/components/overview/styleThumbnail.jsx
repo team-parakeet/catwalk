@@ -5,7 +5,7 @@ import styled from 'styled-components';
 const Image = styled.img`
   width: 40px;
   height: 40px;
-  border: ${ props => props.isSelected ? 'hsl(360, 27%, 81%) solid 5px' : 'hsla(33, 22%, 45%, 70%) solid 5px' };
+  border: ${ props => props.isSelected ? 'hsl(97, 19%, 67%) solid 5px' : 'hsla(33, 22%, 45%, 70%) solid 5px' };
   border-radius: 30px;
   padding: 2px;
   margin-top: 10px;
