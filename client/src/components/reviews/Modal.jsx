@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { TOKEN } from '../../../../config.js';
-import SelectStars from './SelectStars.jsx';
 import { Overlay, ModalStyled } from '../styles/reviews/ModalStyled.styled';
+import { postNewReview } from '../../request.js';
 
 
 function Modal({ toggleModal, productId }) {
@@ -24,7 +22,6 @@ function Modal({ toggleModal, productId }) {
   }
 
   const handleSubmitOnClick = () => {
-    const url =  `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews`
     const data = {
       product_id: productId,
       rating: overallRating,
@@ -41,11 +38,7 @@ function Modal({ toggleModal, productId }) {
         "131839": 5
       }
     }
-    axios.post(url, data, {
-      headers: {
-        Authorization: TOKEN
-      }
-    })
+    postNewReview(data)
     toggleModal()
   }
 
@@ -54,8 +47,6 @@ function Modal({ toggleModal, productId }) {
       <ModalStyled>
         Write Your Review
         <label>Overall rating:</label>
-        <SelectStars handleStarChangeOnClick={handleStarChangeOnClick} overallRating={overallRating}/>
-
         <div>
           <label>Would you recommend this product?</label>
           <div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReviewsList from './ReviewsList.jsx';
 import SortBy from './SortBy.jsx';
 import Button from './Button.jsx';
-import Modal from './Modal.jsx';
+import ReviewModal from '../shared/ReviewModal.jsx';
 import { ReviewsContainerStyled } from '../styles/reviews/ReviewsContainerStyled.styled.js';
 import { ButtonWrapper } from '../styles/reviews/ReviewsWrapper.styled.js';
 
@@ -55,7 +55,7 @@ function ReviewsContainer({ reviews, productId }) {
         <Button handleOnClick={toggleModal} text={'Add a review'} />
       </ButtonWrapper>
       {showModal ?
-      <Modal toggleModal={toggleModal} productId={productId}/>
+      <ReviewModal toggleModal={toggleModal} productId={productId}/>
       :
       null}
     </ReviewsContainerStyled>
