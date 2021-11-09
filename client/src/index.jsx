@@ -133,7 +133,7 @@ const App = ( {productId} ) => {
           <div className="image-gallery">
             <DefaultView />
           </div>
-          <ProductDetails product={product} rating={rating}/>
+          <ProductDetails product={product} rating={rating} productId={productId}/>
           <br></br>
           <Selectors
             addToCart={addItemToCart}
