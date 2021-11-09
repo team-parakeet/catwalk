@@ -41,12 +41,18 @@ const App = ( {productId} ) => {
 
         getStyles();
         getReviews();
-        getAvgRating();
+
       })
       .catch(err => {
         console.error(err);
       });
   }, []);
+
+  useEffect(() => {
+    if (reviews.length !== 0) {
+      setRating(getAvgRating());
+    }
+  }, [reviews])
 
   // Retrieve product's styles from API, set state to reflect those styles
   const getStyles = () => {
@@ -80,8 +86,6 @@ const App = ( {productId} ) => {
     axios(config)
       .then( (reviews) => {
         setReviews(reviews.data.results);
-
-        getAvgRating();
       })
       .catch(err => {
         console.error(err);
@@ -116,8 +120,8 @@ const App = ( {productId} ) => {
         let currentReview = reviews[i];
         sum += currentReview.rating;
       }
-      let avg = sum / state.reviews.length;
-      setRating(avg);
+      let avg = sum / reviews.length;
+      return avg;
     }
   }
 
