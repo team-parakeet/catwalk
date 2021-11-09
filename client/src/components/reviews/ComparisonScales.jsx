@@ -37,7 +37,6 @@ function ComparisonScales({ productId }) {
     return null
   }
 
-  console.log(metaData)
   return (
     <ComparisonScaleContainer>
       {Object.keys(characteristics).map(char => (

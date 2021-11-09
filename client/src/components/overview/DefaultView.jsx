@@ -9,12 +9,10 @@ export const DefaultView = () => {
   const context = useContext(OverviewContext);
 
   useEffect(() => {
-    console.log('context: ', context);
     getProductPhotosOfAStyle(39333, 234004)
       .then(results =>
       setImages(results.photos.map((photo, id) => {return {id, ...photo}}))
     );
-    console.log('useEffect hook called');
   }, []);
 
 
