@@ -2,19 +2,18 @@ import styled from "styled-components";
 
 export const ReviewContainer = styled.div`
   margin: 0px 20px 20px 0px;
+  width: 50vw;
 `
 
 export const ReviewDate = styled.div`
   font-size: 9pt;
   color: #6d6c6c;
   text-align: right;
-  width: 38vw;
 `
 export const ReviewUser = styled.div`
   color: #6d6c6c;
   font-size: 9pt;
   text-align: right;
-  width: 38vw;
   font-style: italic;
 `
 
