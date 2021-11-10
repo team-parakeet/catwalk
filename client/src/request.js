@@ -20,6 +20,33 @@ export function getAllQuestions(productId) {
   })
 }
 
+export function getProductReviewMeta(productId) {
+  const url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/meta/?product_id=${productId}`
+  return axios.get(url, {
+    headers: header
+  })
+}
+
+export function getSelectedSortByReviews(selected, productId) {
+  const url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/?sort=${selected}&product_id=${productId}&count=50`
+  return axios.get(url, {
+    headers: header
+  })
+}
+
+export function postNewReview(data) {
+  const url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews`
+  return axios.post(url, data, {
+    headers: header
+  })
+}
+
+export function putReviewAsHelpful(reviewId) {
+  const url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/${reviewId}/helpful`
+  return axios.put(url, {}, {
+    headers: header
+  })
+}
 export function getAllProducts() {
   return axios.get('https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products', {
     headers: header,

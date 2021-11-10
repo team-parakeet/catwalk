@@ -1,5 +1,25 @@
 import styled from "styled-components";
 
 export const StarsStyled = styled.div`
-  margin-top: -15px;
+  font-size: 15px;
+  display: inline-block;
+  position: sticky;
 `
+
+export const Rating1 = styled.div`
+  position: absolute;
+  color: #6d8a94;
+  z-index: 10;
+  overflow: hidden;
+  &::before {
+    content: "★★★★★"
+  }
+`
+
+export const Rating2= styled.div`
+  color: #d3d3d3;
+  &::before {
+    content: "★★★★★"
+  }
+`
+

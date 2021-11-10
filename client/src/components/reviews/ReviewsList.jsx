@@ -10,7 +10,7 @@ function ReviewsList({ reviews }) {
   return (
     <ReviewsListContainer>
       {reviews.map(review => {
-        return <Review key={review.review_id} review={review}/>
+        return <Review key={review.review_id} review={review} id={review.review_id}/>
       })}
     </ReviewsListContainer>
   )

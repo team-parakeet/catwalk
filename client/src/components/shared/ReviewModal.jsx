@@ -1,8 +1,7 @@
 import axios from 'axios';
 import { TOKEN } from '../../../../config.js';
-import SelectStars from './SelectStars.jsx';
 import Modal from '../shared/Modal.jsx';
-import { ReviewModalStyled } from '../styles/reviews/ModalStyled.styled';
+import { ModalStyled } from '../styles/reviews/ModalStyled.styled';
 
 function ReviewModal({ toggleModal, productId }) {
   const [overallRating, setOverallRating] = useState(0);
@@ -47,10 +46,6 @@ function ReviewModal({ toggleModal, productId }) {
       <ReviewModalStyled>
         Write Your Review
         <label>Overall rating:</label>
-        <SelectStars
-          handleStarChangeOnClick={handleStarChangeOnClick}
-          overallRating={overallRating}
-        />
         <div>
           <label>Would you recommend this product?</label>
           <div>

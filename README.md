@@ -11,4 +11,4 @@ To access the GitHub API without rate limits, you'll need a personal access toke
 - user:email
 - user:follow
 
-Make a copy of config.example.js and rename it to config.js, then add your personal access token.
+Make a copy of `config.example.js`, rename it to `config.js`, and add your personal access token.
