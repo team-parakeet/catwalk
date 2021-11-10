@@ -1,14 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import { Overlay, ModalWindow, ModalHeader, ModalExit, Line, ModalSubmit, ModalFooter } from '../styles/reviews/ModalStyled.styled';
 
-<<<<<<< HEAD
-function Modal({ toggleModal, handleSubmit, children}) {
-=======
 function ModalForm({ toggleModal = () => {}, headerText, handleSubmit = () => {}, children}) {
 
   const modalRef = useRef();
 
->>>>>>> e8a0f0ec674a3d301a4a773a14b74242fcbb7b6e
   useEffect(() => {
     const handleKeyDown = e => {
       e.preventDefault();
