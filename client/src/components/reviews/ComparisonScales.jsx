@@ -5,30 +5,32 @@ import { ComparisonScaleContainer, CharScale, FlexSpaceBetween } from '../styles
 import { SmallFont } from '../styles/reviews/ReviewsWrapper.styled.js';
 
 function ComparisonScales({ productId }) {
-  const [metaData, setMetaData] = useState({})
+  const [reviewMeta, setReviewMeta] = useState({})
   const [characteristics, setCharacteristics] = useState({});
 
   useEffect(() => {
     getProductReviewMeta(productId)
     .then(r => {
       const chars = r.data.characteristics;
-      setMetaData(chars)
+      setReviewMeta(chars)
     })
   }, [])
 
   useEffect(() => {
-    if (Object.keys(metaData).length !== 0) {
+    if (Object.keys(reviewMeta).length !== 0) {
       const newCharacteristics = {}
-      for (let key in metaData) {
-        newCharacteristics[key] = metaData[key].value;
+      for (let key in reviewMeta) {
+        newCharacteristics[key] = reviewMeta[key].value;
       }
       setCharacteristics(newCharacteristics)
     }
-  }, [metaData])
+  }, [reviewMeta])
 
   if (!Object.keys(characteristics).length) {
     return null
   }
+
+  console.log
 
   return (
     <ComparisonScaleContainer>
