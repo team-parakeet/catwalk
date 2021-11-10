@@ -24,8 +24,7 @@ function ModalForm({ toggleModal = () => {}, headerText, handleSubmit = () => {}
     }
   }, [toggleModal]);
 
-  const handleSubmitOnClick = (e) => {
-    e.preventDefault();
+  const handleSubmitOnClick = () => {
     handleSubmit();
     toggleModal();
   }
@@ -38,14 +37,12 @@ function ModalForm({ toggleModal = () => {}, headerText, handleSubmit = () => {}
           <ModalExit onClick={() => toggleModal()}>&times;</ModalExit>
         </ModalHeader>
         <Line />
-        <form onSubmit={handleSubmitOnClick}>
-          {children}
-          <ModalFooter>
-            <ModalSubmit type="submit" onClick={() => handleSubmitOnClick()}>
-              Submit
-            </ModalSubmit>
-          </ModalFooter>
-        </form>
+        {children}
+        <ModalFooter>
+          <ModalSubmit type="submit" onClick={() => handleSubmitOnClick()}>
+           Submit
+          </ModalSubmit>
+        </ModalFooter>
       </ModalWindow>
     </Overlay>
   )
