@@ -2,24 +2,37 @@ import styled from 'styled-components';
 
 export const DefaultViewContainer = styled.div`
   position: relative;
-  /* outline: 2px solid green; */
+  display: flex;
   /* max-width: 100vh; */
   background-color: #EBEBEB;
-`
-
-export const BackgroundImageContainer = styled.div`
-  display: flex;
-  /* outline: 2px solid blue; */
-  padding-left: 15%;
-`
+  align-items: flex-start;
+  /* max-height: 80vh; */
+  /* outline: 2px solid green; */
+  `
 
 export const ThumbnailSliderContainer = styled.div`
-  position: absolute;
+  /* position: absolute;
   left: 2%;
-  top: 9%;
+  top: 9%; */
+  align-self: center;
+  height: auto;
+  /* outline: 2px solid orange; */
+
+`
+
+/*
+flexbox
+put backgroudn image in the
+*/
+export const BackgroundImageContainer = styled.div`
+  display: flex; // gets rid of some whitespace below the image
+  /* outline: 2px solid blue; */
 `
 
 export const BackgroundImage = styled.img`
+  /* min-height: 100%; */
+  max-width: 100%;
   max-height: 1000px;
+  height: auto;
   cursor: url('./images/search.svg'), zoom-in;
 `
