@@ -32,6 +32,7 @@ export const ModalExit = styled.button`
   font-size: 1.5rem;
   font-weight: 600;
   cursor: pointer;
+  margin-left: 30px;
 
   &:hover {
     transform: scale(1.1);
@@ -59,7 +60,7 @@ export const ModalSubmit = styled.button`
   background: white;
   font-size: 1rem;
   cursor: pointer;
-  padding: 20px;
+  padding: 0px 20px 20px 0px;
 
   &:hover {
     transform: scale(1.1);

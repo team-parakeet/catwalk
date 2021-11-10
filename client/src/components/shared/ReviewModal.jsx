@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { postNewReview } from '../../request.js';
-import { ReviewModalStyled } from '../styles/reviews/ReviewModalStyled.styled';
+import { ReviewModalWindowStyled } from '../styles/reviews/ModalStyled.styled';
 
 function ReviewModal({ toggleModal, productId, reviewMeta }) {
   const [overallRating, setOverallRating] = useState(0);
@@ -65,7 +65,7 @@ function ReviewModal({ toggleModal, productId, reviewMeta }) {
   console.log(charRating)
 
   return (
-    <ReviewModalStyled>
+    <ReviewModalWindowStyled>
       Write Your Review
       <label>Overall rating:</label>
       <div>
@@ -208,7 +208,7 @@ function ReviewModal({ toggleModal, productId, reviewMeta }) {
       <div>
         <button onClick={handleSubmitOnClick}>Submit</button>
       </div>
-    </ReviewModalStyled>
+    </ReviewModalWindowStyled>
   );
 }
 
