@@ -15,6 +15,6 @@ export const FlexRow = styled.div`
 `
 
 export const StarScore = styled.div`
-  margin-top: 34px;
-  margin-right: 62px;
+  margin-top: 25px;
+  margin-right: 40px;
 `
