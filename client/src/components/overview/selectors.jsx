@@ -67,6 +67,7 @@ const Selectors = (props) => {
   // On click, set state to reflect chosen style
   // Make sure that e.target.value is an ID number
   const handleStyleSelect = (style) => {
+    props.updateStyle( style.style_id );
     retrieveSizesByStyle( style.style_id );
     setCurrentStyle(style);
   }
@@ -105,7 +106,7 @@ const Selectors = (props) => {
         }
       }
 
-      props.addToCart(item);
+      props.addItemToCart(item);
     }
   }
 
