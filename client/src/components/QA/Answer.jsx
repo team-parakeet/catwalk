@@ -9,7 +9,7 @@ import {
   LoadMoreAnswersBtn,
   CollapseAnswersBtn,
   StyledBy,
-  Spacer
+  Spacer,
 } from '../styles/QA/Answer.styled';
 import Helpful from './Helpful.jsx';
 import Report from './Report.jsx';
@@ -39,12 +39,12 @@ const Answer = ({ answers }) => {
               <SingleResponseContainer
                 key={answer}
                 id={answer}
-                className="answer"
+                className="answer-container"
               >
                 <AnswerBody className="answer-text">
                   {answers[answer].body}
                 </AnswerBody>
-                <SubAnswerBody>
+                <SubAnswerBody className='answer-sub-text'>
                   <By answer={answers[answer]} />
                   <Spacer>|</Spacer>
                   <Helpful count={answers[answer].helpfulness} />

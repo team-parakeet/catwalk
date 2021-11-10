@@ -4,8 +4,9 @@ import React from 'react';
  * State object
  * @type {{search: string}}
  */
- const initialState = {
+const initialState = {
   search: '',
+  showModal: false
 };
 
 /**
@@ -14,12 +15,15 @@ import React from 'react';
  */
 const actions = {
   SET_SEARCH: 'SET_SEARCH',
+  TOGGLE_MODAL: 'TOGGLE_MODAL'
 };
 
 function reducer(state = initialState, action) {
   switch (action.type) {
     case actions.SET_SEARCH:
       return { ...state, search: action.payload };
+    case actions.TOGGLE_MODAL:
+      return {...state, showModal: !state.showModal };
     default:
       return state;
   }
@@ -34,7 +38,9 @@ export function Provider({ children }) {
 
   const value = {
     search: state.search,
-    setSearch: (e) => dispatch({type: actions.SET_SEARCH, payload: e.target.value})
+    showModal: state.showModal,
+    setSearch: (e) => dispatch({type: actions.SET_SEARCH, payload: e.target.value}),
+    toggleModal: () => dispatch({type: actions.TOGGLE_MODAL})
   }
 
   return <QAContext.Provider value={value}>{children}</QAContext.Provider>;

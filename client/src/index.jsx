@@ -7,8 +7,12 @@ import ProductDetails from './components/overview/productDetails.jsx';
 import ProductDescription from './components/overview/productDescription.jsx';
 import Selectors from './components/overview/selectors.jsx';
 import Reviews from './components/reviews/Reviews.jsx';
+
+// Overview imports
 import { OverviewProvider } from './components/overview/OverviewContext.jsx';
 import { DefaultView } from './components/overview/DefaultView.jsx';
+
+// Q&A imports
 import { Provider as QAProvider } from './components/QA/QAContext.jsx';
 import QuestionsAnswers from './components/QA/QASection.jsx';
 import Loader from 'react-loader-spinner';
