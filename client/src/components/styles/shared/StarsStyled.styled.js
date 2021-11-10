@@ -8,7 +8,7 @@ export const StarsStyled = styled.div`
 
 export const Rating1 = styled.div`
   position: absolute;
-  color: #6d8a94;
+  color: #71915d;
   z-index: 10;
   overflow: hidden;
   &::before {
@@ -23,3 +23,29 @@ export const Rating2= styled.div`
   }
 `
 
+export const SelectedStarsStyled = styled.div`
+  float: left;
+
+  &.select-star-rating > input {
+    display: none;
+  }
+
+  &.select-star-rating > label:before {
+  display: inline-block;
+  content: '★ '
+  }
+
+  &.select-star-rating > label {
+    color: #d3d3d3;
+    float: right;
+  }
+
+  &.select-star-rating > input:checked ~ label {
+    color: #a7bb9b;
+  }
+
+  &.select-star-rating:not(:checked) > label:hover,
+  &.select-star-rating:not(:checked) > label:hover ~ label {
+    color: #d5e3cc;
+  }
+`
