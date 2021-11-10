@@ -1,18 +1,19 @@
 import styled from "styled-components";
 
 export const ReviewContainer = styled.div`
-  margin: 0px 20px 20px 0px;
-  width: 50vw;
+  margin: 0px 0px 20px 0px;
+  width: auto;
+  padding: 0px 20px 0px 5px;
 `
 
 export const ReviewDate = styled.div`
-  font-size: 9pt;
+  font-size: 10pt;
   color: #6d6c6c;
   text-align: right;
 `
 export const ReviewUser = styled.div`
   color: #6d6c6c;
-  font-size: 9pt;
+  font-size: 10pt;
   text-align: right;
   font-style: italic;
 `
@@ -22,14 +23,14 @@ export const ReviewStars = styled.div`
 `
 
 export const ReviewTitle = styled.div`
-  font-size: 14pt;
+  font-size: 16pt;
   font-weight: bold;
   margin-bottom: 10px;
 `
 
 export const ReviewBody = styled.div`
   margin-bottom: 10px;
-  font-size: 10pt;
+  font-size: 12pt;
 `
 
 export const ReviewResponse = styled.div`
@@ -52,7 +53,7 @@ export const ReviewPhotos = styled.div`
 `
 
 export const ReviewHelpfulness = styled.div`
-  font-size: 9pt;
+  font-size: 10pt;
   color: #6d6c6c;
   margin-bottom: 30px;
 `

@@ -1,7 +1,7 @@
 import React from 'react';
 import Score from './Score.jsx';
 import Stars from '../shared/Stars.jsx';
-import { RatingScoreContainer, NumberOfReviewsBar } from '../styles/reviews/RatingScoreContainer.styled.js';
+import { RatingScoreContainer, NumberOfReviewsBar, FlexRow, StarScore } from '../styles/reviews/RatingScoreContainer.styled.js';
 
 function RatingScore({ reviews, numOfReviews, avgRating }) {
   if (!avgRating || reviews.length === 0) {
@@ -10,8 +10,12 @@ function RatingScore({ reviews, numOfReviews, avgRating }) {
 
   return (
     <RatingScoreContainer>
+      <FlexRow>
       <Score avgRating={avgRating}/>
-      <Stars rating={avgRating} id={avgRating}/>
+      <StarScore>
+        <Stars rating={avgRating} id={avgRating}/>
+      </StarScore>
+      </FlexRow>
       <NumberOfReviewsBar>
         {numOfReviews} reviews
       </NumberOfReviewsBar>

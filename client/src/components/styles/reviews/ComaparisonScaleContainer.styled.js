@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 export const ComparisonScaleContainer = styled.div`
-  width: 200px;
+  width: auto;
 `
 
 export const CharScale = styled.div`
   margin-top: 10px;
-  font-size: 10pt;
+  font-size: 12pt;
 `
 export const FlexSpaceBetween = styled.div`
   display: flex;
