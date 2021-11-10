@@ -1,5 +1,5 @@
 import React from 'react';
-import { ReviewModalWindowStyled } from '../styles/reviews/ModalStyled.styled';
+import { ReviewModalWindowStyled, LabelStyled, FormInput, ReviewBodyInput, QuestionWrapper } from '../styles/reviews/ModalStyled.styled';
 import SelectStars from '../shared/SelectStars.jsx';
 
 function ReviewModal({ setOverallRating, setIsRecommended, setReviewSummary, setReviewBody, setUsername, setEmail, characteristics, setCharRating }) {
@@ -18,12 +18,12 @@ function ReviewModal({ setOverallRating, setIsRecommended, setReviewSummary, set
 
   return (
     <ReviewModalWindowStyled>
-      <label>Overall rating:</label>
-      <div>
+      <LabelStyled>Overall rating:</LabelStyled>
+      <QuestionWrapper>
         <SelectStars handleStarRatingOnChange={handleStarRatingOnChange}/>
-      </div>
-      <div>
-        <label>Would you recommend this product?</label>
+      </QuestionWrapper>
+      <QuestionWrapper>
+        <LabelStyled>Would you recommend this product?</LabelStyled>
         <div>
           <input
             type="radio"
@@ -43,66 +43,61 @@ function ReviewModal({ setOverallRating, setIsRecommended, setReviewSummary, set
           />
           <label for="no">No</label>
         </div>
-      </div>
-      <div>
-        <label>Review summary:</label>
+      </QuestionWrapper>
+      <QuestionWrapper>
+        <LabelStyled>Review summary:</LabelStyled>
         <div>
-          <input
+          <FormInput
             type="text"
             id="review-summary"
             maxLength="60"
-            size="60"
             placeholder="Best purchase ever!"
             onChange={ e => setReviewSummary(e.target.value) }
           />
         </div>
-      </div>
-      <div>
-        <label>Review body:</label>
+      </QuestionWrapper>
+      <QuestionWrapper>
+        <LabelStyled>Review body:</LabelStyled>
         <div>
-          <textarea
+          <ReviewBodyInput
             id="review-body"
-            rows="3"
-            columns="100"
             maxLength="1000"
             placeholder="Why did you like the product or not?"
             required
             onChange={ e => setReviewBody(e.target.value) }
           />
         </div>
-      </div>
-      <div>
-        <label>What is your nickname:</label>
+      </QuestionWrapper>
+      <QuestionWrapper>
+        <LabelStyled>What is your nickname:</LabelStyled>
         <div>
-          <input
+          <FormInput
             type="text"
             id="username"
             maxLength="60"
-            size="30"
             placeholder="Example: jackson11!"
             required
             onChange={ e => setUsername(e.target.value) }
           />
         </div>
-      </div>
-      <div>
-        <label>Your email:</label>
+      </QuestionWrapper>
+      <QuestionWrapper>
+        <LabelStyled>Your email:</LabelStyled>
         <div>
-          <input
+          <FormInput
             type="email"
             id="email"
             maxLength="60"
-            size="30"
             placeholder="Example: jackson11@email.com"
             required
             onChange={ e => setEmail(e.target.value) }
           />
         </div>
-      </div>
+      </QuestionWrapper>
       <div>
       {characteristics.map(char => (
-        <div key={char.id} id={char.id} name={char.name}>
-          <label>{char.name}</label>
+        <QuestionWrapper key={char.id} id={char.id} name={char.name}>
+          <LabelStyled>{char.name}</LabelStyled>
           <div>
             <label for={char.name}>1</label>
             <input
@@ -145,7 +140,7 @@ function ReviewModal({ setOverallRating, setIsRecommended, setReviewSummary, set
               onChange={ e =>  handleCharRadioOnChange(e) }
             />
           </div>
-        </div>
+        </QuestionWrapper>
       ))}
       </div>
     </ReviewModalWindowStyled>
