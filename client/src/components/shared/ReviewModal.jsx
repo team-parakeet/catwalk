@@ -1,73 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { postNewReview } from '../../request.js';
+import React from 'react';
 import { ReviewModalWindowStyled } from '../styles/reviews/ModalStyled.styled';
+import SelectStars from '../shared/SelectStars.jsx';
 
-function ReviewModal({ toggleModal, productId, reviewMeta }) {
-  const [overallRating, setOverallRating] = useState(0);
-  const [isRecommended, setIsRecommended] = useState(true);
-  const [reviewSummary, setReviewSummary] = useState('');
-  const [reviewBody, setReviewBody] = useState('');
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [characteristics, setCharacteristics] = useState([])
-  const [charRating, setCharRating] = useState([])
-
-  useEffect(() => {
-    if (Object.keys(reviewMeta).length !== 0) {
-      const newCharacteristics = []
-      for (let key in reviewMeta) {
-        const charSet = {}
-        charSet.name = key
-        charSet.id= reviewMeta[key].id
-        newCharacteristics.push(charSet)
-      }
-      setCharacteristics(newCharacteristics)
-    }
-  }, [reviewMeta])
-
-  if (!characteristics.length) {
-    return null
-  }
-
-  const handleStarChangeOnClick = e => {
-    setOverallRating(e);
+function ReviewModal({ setOverallRating, setIsRecommended, setReviewSummary, setReviewBody, setUsername, setEmail, characteristics, setCharRating }) {
+  const handleStarRatingOnChange = e => {
+    const rating = Number(e.target.value);
+    setOverallRating(rating);
   };
 
-  const handleCharRadioOnChange = (e) => {
-    const charId = e.target.name
-    const rating = e.target.value
-    // setCharRating(prev => {
-    //   [...prev, {[charId]: rating}]
-    // })
+  const handleCharRadioOnChange = e => {
+    const charId = e.target.name.toString()
+    const rating = Number(e.target.value)
+    setCharRating(prev => ({
+      ...prev, [charId]: rating
+    }))
   }
-
-  const handleSubmitOnClick = () => {
-    const data = {
-      product_id: productId,
-      rating: overallRating,
-      summary: reviewSummary,
-      body: reviewBody,
-      recommend: isRecommended,
-      name: username,
-      email: email,
-      photos: [],
-      characteristics: {
-        131841: 5,
-        131840: 5,
-        131838: 5,
-        131839: 5,
-      },
-    };
-    postNewReview(data)
-    toggleModal()
-  };
-
-  console.log(charRating)
 
   return (
     <ReviewModalWindowStyled>
-      Write Your Review
       <label>Overall rating:</label>
+      <div>
+        <SelectStars handleStarRatingOnChange={handleStarRatingOnChange}/>
+      </div>
       <div>
         <label>Would you recommend this product?</label>
         <div>
@@ -77,7 +31,7 @@ function ReviewModal({ toggleModal, productId, reviewMeta }) {
             name="recommended"
             value="yes"
             defaultChecked
-            onChange={e => setIsRecommended(true)}
+            onChange={ () => setIsRecommended(true) }
           />
           <label for="yes">Yes</label>
           <input
@@ -85,7 +39,7 @@ function ReviewModal({ toggleModal, productId, reviewMeta }) {
             id="no"
             name="recommended"
             value="no"
-            onChange={e => setIsRecommended(false)}
+            onChange={ () => setIsRecommended(false) }
           />
           <label for="no">No</label>
         </div>
@@ -99,7 +53,7 @@ function ReviewModal({ toggleModal, productId, reviewMeta }) {
             maxLength="60"
             size="60"
             placeholder="Best purchase ever!"
-            onChange={e => setReviewSummary(e.target.value)}
+            onChange={ e => setReviewSummary(e.target.value) }
           />
         </div>
       </div>
@@ -113,7 +67,7 @@ function ReviewModal({ toggleModal, productId, reviewMeta }) {
             maxLength="1000"
             placeholder="Why did you like the product or not?"
             required
-            onChange={e => setReviewBody(e.target.value)}
+            onChange={ e => setReviewBody(e.target.value) }
           />
         </div>
       </div>
@@ -127,7 +81,7 @@ function ReviewModal({ toggleModal, productId, reviewMeta }) {
             size="30"
             placeholder="Example: jackson11!"
             required
-            onChange={e => setUsername(e.target.value)}
+            onChange={ e => setUsername(e.target.value) }
           />
         </div>
       </div>
@@ -141,7 +95,7 @@ function ReviewModal({ toggleModal, productId, reviewMeta }) {
             size="30"
             placeholder="Example: jackson11@email.com"
             required
-            onChange={e => setEmail(e.target.value)}
+            onChange={ e => setEmail(e.target.value) }
           />
         </div>
       </div>
@@ -156,9 +110,7 @@ function ReviewModal({ toggleModal, productId, reviewMeta }) {
               id={char.id}
               name={char.id}
               value="1"
-              onChange={e => {
-                handleCharRadioOnChange(e)
-              }}
+              onChange={ e => handleCharRadioOnChange(e) }
             />
             <label for={char.name}>2</label>
             <input
@@ -166,9 +118,7 @@ function ReviewModal({ toggleModal, productId, reviewMeta }) {
               id={char.id}
               name={char.id}
               value="2"
-              onChange={e => {
-                handleCharRadioOnChange(e)
-              }}
+              onChange={ e => handleCharRadioOnChange(e) }
             />
             <label for={char.name}>3</label>
             <input
@@ -176,10 +126,7 @@ function ReviewModal({ toggleModal, productId, reviewMeta }) {
               id={char.id}
               name={char.id}
               value="3"
-              defaultChecked
-              onChange={e => {
-                handleCharRadioOnChange(e)
-              }}
+              onChange={ e => handleCharRadioOnChange(e) }
             />
             <label for={char.name}>4</label>
             <input
@@ -187,8 +134,7 @@ function ReviewModal({ toggleModal, productId, reviewMeta }) {
               id={char.id}
               name={char.id}
               value="4"
-              defaultChecked
-              onChange={e => { handleCharRadioOnChange(e) }}
+              onChange={ e => handleCharRadioOnChange(e) }
             />
             <label for={char.name}>5</label>
             <input
@@ -196,17 +142,11 @@ function ReviewModal({ toggleModal, productId, reviewMeta }) {
               id={char.id}
               name={char.id}
               value="5"
-              defaultChecked
-              onChange={e => {
-                handleCharRadioOnChange(e)
-              }}
+              onChange={ e =>  handleCharRadioOnChange(e) }
             />
           </div>
         </div>
       ))}
-      </div>
-      <div>
-        <button onClick={handleSubmitOnClick}>Submit</button>
       </div>
     </ReviewModalWindowStyled>
   );
