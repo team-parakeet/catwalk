@@ -6,8 +6,6 @@ export const ModalWindow = styled.div`
   flex-direction: column;
   border: 1px solid black;
   border-radius: 10px;
-  top: 9%;
-  left: 25%;
   z-index: 10;
   background-color: #fff;
   max-width: 80%;
@@ -74,20 +72,20 @@ export const ModalSubmit = styled.button`
 export const ReviewModalWindowStyled = styled.div`
   display: flex;
   flex-direction: column;
-  position: relative;
   background-color: #fefefe;
   padding: 20px;
 `
 
 export const Overlay = styled.div`
   display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
   z-index: 1;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
   background-color: rgba(0,0,0,0.4);
 `
 
