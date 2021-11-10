@@ -3,12 +3,12 @@ import Search from './Search.jsx';
 import QuestionsList from './QuestionsList.jsx';
 import { getAllQuestions } from '../../request.js';
 import { QAContext } from './QAContext.jsx';
-import Modal from '../shared/Modal.jsx';
+import AddQuestionModal from './AddQuestionModal.jsx';
 
 const QASection = () => {
   const [questions, setQuestions] = useState([]); // keep track of the questions
   const [searchResults, setSearchResults] = useState([]); // keep track of searchResults
-  const { search, showModal, toggleModal } = useContext(QAContext);
+  const { search, showModal } = useContext(QAContext);
 
   useEffect(() => {
     getAllQuestions(39334)
@@ -87,7 +87,7 @@ const QASection = () => {
       <span style={{ fontSize: '1.5rem' }}>QUESTIONS {'&'} ANSWERS</span>
       <Search />
       <QuestionsList questions={questions} searchResults={searchResults} />
-      {showModal && <Modal toggleModal={toggleModal} />}
+      {showModal && <AddQuestionModal />}
     </>
   );
 };

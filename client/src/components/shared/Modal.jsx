@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Overlay, ModalWindow, ModalHeader, ModalExit, Line, ModalSubmit, ModalFooter } from '../styles/reviews/ModalStyled.styled';
 
-function Modal({ toggleModal = () => {}, headerText, handleSubmit = () => {}, children}) {
+function ModalForm({ toggleModal = () => {}, headerText, handleSubmit = () => {}, children}) {
 
   const modalRef = useRef();
   const renders = useRef(0);
@@ -30,7 +30,8 @@ function Modal({ toggleModal = () => {}, headerText, handleSubmit = () => {}, ch
 
   // const handleOutsideClick = useCallback(() => toggleModal());
 
-  const handleSubmitOnClick = () => {
+  const handleSubmitOnClick = (e) => {
+    e.preventDefault();
     handleSubmit();
     toggleModal();
   }
@@ -45,15 +46,17 @@ function Modal({ toggleModal = () => {}, headerText, handleSubmit = () => {}, ch
           <ModalExit onClick={() => toggleModal()}>&times;</ModalExit>
         </ModalHeader>
         <Line />
-        {children}
-        <ModalFooter>
-          <ModalSubmit type="submit" onClick={() => handleSubmitOnClick()}>
-            Submit
-          </ModalSubmit>
-        </ModalFooter>
+        <form onSubmit={handleSubmitOnClick}>
+          {children}
+          <ModalFooter>
+            <ModalSubmit type="submit" onClick={() => handleSubmitOnClick()}>
+              Submit
+            </ModalSubmit>
+          </ModalFooter>
+        </form>
       </ModalWindow>
     </Overlay>
   )
 }
 
-export default Modal;
+export default ModalForm;

@@ -43,6 +43,19 @@ export const ModalExit = styled.button`
   }
 `
 
+export const Line = styled.hr`
+  width: 90%;
+  border: 1px solid;
+  border-color: rgb(171, 169, 172);
+`
+
+export const ModalFooter = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  outline: 1px solid orange;
+`
+
 export const ModalSubmit = styled.button`
   border: none;
   background: aquamarine;
@@ -59,18 +72,6 @@ export const ModalSubmit = styled.button`
   &:active {
     transform: scale(1.0);
   }
-`
-
-export const Line = styled.hr`
-  width: 90%;
-  border: 1px solid;
-  border-color: rgb(171, 169, 172);
-`
-
-export const ModalFooter = styled.div`
-  display: flex;
-  align-self: flex-end;
-  /* outline: 1px solid orange; */
 `
 
 export const ReviewModalWindow = styled(ModalWindow)`
