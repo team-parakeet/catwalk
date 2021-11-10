@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { Overlay, ModalStyled } from '../styles/reviews/ModalStyled.styled';
 
 function Modal({ toggleModal, handleSubmit, children}) {
-
   useEffect(() => {
     const originalOverflow = window.getComputedStyle(document.body).overflow;
     document.body.style.overflow = 'hidden';
