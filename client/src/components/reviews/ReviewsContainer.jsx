@@ -1,15 +1,27 @@
 import React, { useState, useEffect } from 'react';
+import { getProductReviewMeta } from '../../request.js';
 import ReviewsList from './ReviewsList.jsx';
 import SortBy from './SortBy.jsx';
 import Button from './Button.jsx';
 import ReviewModal from '../shared/ReviewModal.jsx';
 import { ReviewsContainerStyled } from '../styles/reviews/ReviewsContainerStyled.styled.js';
 import { ButtonWrapper } from '../styles/reviews/ReviewsWrapper.styled.js';
+import TestModal from '../shared/TestModal.jsx';
+import ModalForm from '../shared/Modal.jsx';
 
 function ReviewsContainer({ reviews, productId }) {
   const [currentReviews, setCurrentReviews] = useState(null);
   const [numReviewsShown, setNumReviewsShown] = useState(2);
   const [showModal, setShowModal] = useState(false);
+  const [reviewMeta, setReviewMeta] = useState({})
+
+  useEffect(() => {
+    getProductReviewMeta(productId)
+    .then(r => {
+      const chars = r.data.characteristics;
+      setReviewMeta(chars)
+    })
+  }, [])
 
   useEffect(() => {
     if (reviews.length !== 0) {
@@ -55,7 +67,9 @@ function ReviewsContainer({ reviews, productId }) {
         <Button handleOnClick={toggleModal} text={'Add a review'} />
       </ButtonWrapper>
       {showModal ?
-      <ReviewModal toggleModal={toggleModal} productId={productId}/>
+      <ModalForm toggleModal={toggleModal}>
+        <ReviewModal productId={productId} reviewMeta={reviewMeta} />
+      </ModalForm>
       :
       null}
     </ReviewsContainerStyled>
