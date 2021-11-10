@@ -39,6 +39,7 @@ export const DefaultView = () => {
       <BackgroundImageContainer className='background-img-container'>
         {images.length && <BackgroundImage src={images[currentImage]['url']} onClick={handleBackgroundImageClick} />}
       </BackgroundImageContainer>
+      {/* TODO: Add selectors */}
     </DefaultViewContainer>
   );
 };
