@@ -133,16 +133,14 @@ const App = ( {productId} ) => {
         <OverviewProvider>
           <div className="image-gallery">
             {/* TODO: Give DefaultView a prop for currently-selected style */}
-            <DefaultView />
+            <DefaultView
+              product={product}
+              productId={productId}
+              styles={styles}
+              rating={rating}
+              addItemToCart={addItemToCart}
+            />
           </div>
-          <ProductDetails product={product} productId={productId} rating={rating}/>
-          <br></br>
-          <Selectors
-            addToCart={addItemToCart}
-            styles={styles}
-            product={product}
-            productId={productId}
-          />
           <br></br>
           <ProductDescription product={product} />
         </OverviewProvider>
