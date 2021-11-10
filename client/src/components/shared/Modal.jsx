@@ -4,7 +4,6 @@ import { Overlay, ModalWindow, ModalHeader, ModalExit, Line, ModalSubmit, ModalF
 function ModalForm({ toggleModal = () => {}, headerText, handleSubmit = () => {}, children}) {
 
   const modalRef = useRef();
-  const renders = useRef(0);
 
   useEffect(() => {
     const handleKeyDown = e => {
@@ -26,17 +25,11 @@ function ModalForm({ toggleModal = () => {}, headerText, handleSubmit = () => {}
     }
   }, [toggleModal]);
 
-
-
-  // const handleOutsideClick = useCallback(() => toggleModal());
-
   const handleSubmitOnClick = (e) => {
     e.preventDefault();
     handleSubmit();
     toggleModal();
   }
-
-  console.log('rendered ', renders.current++);
 
   return (
     <Overlay>
