@@ -39,7 +39,6 @@ export function postNewReview(data) {
   return axios.post(url, data, {
     headers: header
   })
-  .catch(() => alert('Please fill in all fields to leave a review!'))
 }
 
 export function putReviewAsHelpful(reviewId) {

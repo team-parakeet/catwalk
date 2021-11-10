@@ -5,9 +5,9 @@ import ComparisonScales from "./ComparisonScales.jsx";
 import { ReviewsColumnContainer } from "../styles/reviews/ReviewsColumnContainer.styled.js";
 import { PercentBar } from "../styles/reviews/PercentBar.styled.js";
 
-function ReviewsColumn({ reviews, productId, avgRating }) {
+function ReviewsColumn({ reviews, productId, avgRating, numOfReviews }) {
   const [ratings, setRatings] = useState({ 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 })
-  const [numOfReviews, setNumOfReviews] = useState(null);
+  // const [numOfReviews, setNumOfReviews] = useState(null);
   const [recommendPercent, setRecommendPercent] = useState(null);
 
 
@@ -30,7 +30,7 @@ function ReviewsColumn({ reviews, productId, avgRating }) {
       }
       return Math.round((sum / reviews.length) * 100);
     }
-    setNumOfReviews(reviews.length)
+    // setNumOfReviews(reviews.length)
     setRecommendPercent(getRecommendPercentage())
   }, [reviews])
 

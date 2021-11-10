@@ -9,7 +9,7 @@ import { ButtonWrapper } from '../styles/reviews/ReviewsWrapper.styled.js';
 import ModalForm from '../shared/Modal.jsx';
 import { postNewReview } from '../../request.js';
 
-function ReviewsContainer({ reviews, productId }) {
+function ReviewsContainer({ reviews, productId, setNumOfReviews }) {
   const [currentReviews, setCurrentReviews] = useState(null);
   const [numReviewsShown, setNumReviewsShown] = useState(2);
   const [showModal, setShowModal] = useState(false);
@@ -75,6 +75,8 @@ function ReviewsContainer({ reviews, productId }) {
       characteristics: charRating,
     };
     postNewReview(data)
+    .then(() => setNumOfReviews(prev => prev + 1))
+    .catch(() => alert('Please fill in all fields to leave a review!'))
   };
 
   const toggleModal = () => {
