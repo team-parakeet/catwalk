@@ -7,12 +7,11 @@ function ModalForm({ toggleModal = () => {}, headerText, handleSubmit = () => {}
 
   useEffect(() => {
     const handleKeyDown = e => {
-      e.preventDefault();
       (e.key === 'Escape') ? toggleModal() : null;
     }
 
     const handleOutsideClick = e => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
+      if (modalRef.current && !modalRef.current.contains(e.target)) {
         toggleModal();
       }
     }
