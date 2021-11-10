@@ -7,8 +7,10 @@ function ModalForm({ toggleModal = () => {}, headerText, handleSubmit = () => {}
 
   useEffect(() => {
     const handleKeyDown = e => {
-      e.preventDefault();
-      (e.key === 'Escape') ? toggleModal() : null;
+      if (e.key === 'Escape') {
+        e.preventDefault(); // must call prevent default here otherwise other key downs will be captured by this handler.
+        toggleModal();
+      }
     }
 
     const handleOutsideClick = e => {
@@ -27,7 +29,7 @@ function ModalForm({ toggleModal = () => {}, headerText, handleSubmit = () => {}
 
   const handleSubmitOnClick = (e) => {
     e.preventDefault();
-    handleSubmit();
+    handleSubmit(e);
     toggleModal();
   }
 
@@ -36,13 +38,13 @@ function ModalForm({ toggleModal = () => {}, headerText, handleSubmit = () => {}
       <ModalWindow ref={modalRef}>
         <ModalHeader>
           <h3>{headerText || 'Insert Header Text Here'}</h3>
-          <ModalExit onClick={() => toggleModal()}>&times;</ModalExit>
+          <ModalExit tabIndex="0" onClick={() => toggleModal()}>&times;</ModalExit>
         </ModalHeader>
         <Line />
         <form onSubmit={handleSubmitOnClick}>
           {children}
           <ModalFooter>
-            <ModalSubmit type="submit" onClick={() => handleSubmitOnClick()}>
+            <ModalSubmit type="submit" onClick={(e) => handleSubmitOnClick(e)}>
               Submit
             </ModalSubmit>
           </ModalFooter>

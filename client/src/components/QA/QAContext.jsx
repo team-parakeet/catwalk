@@ -6,6 +6,7 @@ import React from 'react';
  */
 const initialState = {
   search: '',
+  product_id: 39334,
   showModal: false
 };
 
@@ -15,6 +16,7 @@ const initialState = {
  */
 const actions = {
   SET_SEARCH: 'SET_SEARCH',
+  SET_PRODUCT_ID: 'SET_PRODUCT_ID',
   TOGGLE_MODAL: 'TOGGLE_MODAL'
 };
 
@@ -24,6 +26,8 @@ function reducer(state = initialState, action) {
       return { ...state, search: action.payload };
     case actions.TOGGLE_MODAL:
       return {...state, showModal: !state.showModal };
+    case actions.SET_PRODUCT_ID:
+      return {...state, product_id: action.payload };
     default:
       return state;
   }
@@ -38,7 +42,9 @@ export function Provider({ children }) {
 
   const value = {
     search: state.search,
+    product_id: state.product_id,
     showModal: state.showModal,
+    setProductId: (value) => dispatch({type: actions.SET_PRODUCT_ID, payload: value}),
     setSearch: (e) => dispatch({type: actions.SET_SEARCH, payload: e.target.value}),
     toggleModal: () => dispatch({type: actions.TOGGLE_MODAL})
   }

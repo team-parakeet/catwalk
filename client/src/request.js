@@ -2,7 +2,8 @@ import axios from 'axios';
 import {TOKEN} from '../../config.js';
 
 const header = {
-  Authorization: TOKEN
+  Authorization: TOKEN,
+  Accept: '*/*'
 };
 
 /**
@@ -17,6 +18,19 @@ export function getAllQuestions(productId) {
     params: {
       product_id: productId
     }
+  })
+}
+
+/**
+ * Returns a promise that resolves to the server response to a POST request.
+ *
+ * @param {Object} data Object containing params for posting: name, body, email, product_id
+ * @returns {Promise<any>} Promise object resolves to api results
+ */
+export function postQuestion(data) {
+  return axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/qa/questions', {
+    headers: header,
+    data: data
   })
 }
 
