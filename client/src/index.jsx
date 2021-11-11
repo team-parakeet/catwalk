@@ -18,6 +18,9 @@ import QuestionsAnswers from './components/QA/QASection.jsx';
 import Loader from 'react-loader-spinner';
 import { LoaderWrapper } from './components/styles/reviews/ReviewsWrapper.styled.js';
 
+// Review imports
+import { getReviews } from './request.js';
+
 const SiteWrapper = styled.div`
   border: hsla(205, 37%, 60%, 50%) solid 5px;
   padding: 10px;
@@ -42,14 +45,13 @@ const App = ( {productId} ) => {
     axios(config)
       .then(results => {
         setProduct(results.data);
-
         getStyles();
-        getReviews();
-
       })
       .catch(err => {
         console.error(err);
       });
+
+    fetchReviews();
   }, []);
 
   useEffect(() => {
@@ -77,25 +79,6 @@ const App = ( {productId} ) => {
       });
   }
 
-  // GET all reviews for a product
-  const getReviews = () => {
-    const config = {
-      method: 'get',
-      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/?sort="relevant"&product_id=${productId}&count=50`,
-      headers: {
-        Authorization: `${TOKEN}`,
-      },
-    };
-
-    axios(config)
-      .then( (reviews) => {
-        setReviews(reviews.data.results);
-      })
-      .catch(err => {
-        console.error(err);
-      });
-  }
-
   // POST the item obj to the API
   const addItemToCart = (item) => {
     let config = {
@@ -115,6 +98,16 @@ const App = ( {productId} ) => {
       .catch(err => {
         console.error(err);
       });
+  }
+
+  const fetchReviews = () => {
+    getReviews(productId)
+    .then(reviews => {
+      setReviews(reviews.data.results);
+    })
+    .catch(err => {
+      console.error(err);
+    });
   }
 
   const getAvgRating = () => {
@@ -160,7 +153,7 @@ const App = ( {productId} ) => {
               />
             </LoaderWrapper>)
             :
-            (<Reviews reviews={reviews} productId={productId} avgRating={rating}/>
+            (<Reviews reviews={reviews} productId={productId} avgRating={rating} fetchReviews={fetchReviews}/>
           )}
         </div>
         <br></br>

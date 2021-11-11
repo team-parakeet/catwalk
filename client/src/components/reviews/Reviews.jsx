@@ -4,23 +4,15 @@ import ReviewsContainer from './ReviewsContainer.jsx';
 import { SectionWrapper } from './../styles/reviews/SectionWrapper.styled.js';
 import { ReviewsHeader } from './../styles/reviews/ReviewsHeader.styled.js';
 
-function Reviews({ reviews, productId, avgRating }) {
-  const [numOfReviews, setNumOfReviews] = useState(null);
-
-  useEffect(() => {
-    if (reviews.length) {
-      setNumOfReviews(reviews.length)
-    }
-  }, [])
-
+function Reviews({ reviews, productId, avgRating, fetchReviews }) {
   return (
     <>
       <ReviewsHeader>
         RATINGS & REVIEWS
       </ReviewsHeader>
       <SectionWrapper>
-        <ReviewsColumn reviews={reviews} productId={productId} avgRating={avgRating} numOfReviews={numOfReviews} />
-        <ReviewsContainer reviews={reviews} productId={productId} setNumOfReviews={setNumOfReviews} />
+        <ReviewsColumn reviews={reviews} productId={productId} avgRating={avgRating} />
+        <ReviewsContainer reviews={reviews} productId={productId} fetchReviews={fetchReviews}/>
       </SectionWrapper>
     </>
   )
