@@ -6,6 +6,7 @@ import Selectors from './selectors.jsx';
 import ProductDetails from './productDetails.jsx';
 import { OverviewContext } from './OverviewContext.jsx';
 import { getProductPhotosOfAStyle } from '../../request.js';
+import { ProductDetailsContainer } from '../styles/Overview/ProductDetails.styled.js';
 import { DefaultViewContainer, BackgroundImageContainer, BackgroundImage, ThumbnailSliderContainer } from '../styles/Overview/DefaultView.styled';
 import { Arrow, FadedArrow, ActiveThumbnail, FadedThumbnail, ThumbnailContainer, SliderContainer } from '../styles/Overview/Slider.styled';
 
@@ -57,17 +58,20 @@ export const DefaultView = (props) => {
       <BackgroundImageContainer className='background-img-container'>
         {images.length && <BackgroundImage src={images[currentImage].url} onClick={handleImageClick} />}
       </BackgroundImageContainer>
-      <ProductDetails
-        product={props.product}
-        productId={props.productId}
-        rating={props.rating}
-      />
-      <Selectors
-        productId={props.productId}
-        styles={props.styles}
-        addItemToCart={props.addItemToCart}
-        updateStyle={updateStyle}
-      />
+      <ProductDetailsContainer>
+        <ProductDetails
+          product={props.product}
+          productId={props.productId}
+          rating={props.rating}
+        />
+        <br></br>
+        <Selectors
+          productId={props.productId}
+          styles={props.styles}
+          addItemToCart={props.addItemToCart}
+          updateStyle={updateStyle}
+        />
+      </ProductDetailsContainer >
       { expandedView ? <ModalForm submitInModal={false} toggleModal={() => {setExpandedView(false)}} >
         <ExpandedView src={images[currentImage].url} />
       </ModalForm> : null}
