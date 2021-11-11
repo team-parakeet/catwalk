@@ -1,21 +1,24 @@
 import React, { useContext, useState, useEffect, useCallback } from 'react';
 import ExpandedView from './ExpandedView.jsx';
+import { getProductStyles } from '../../request.js';
+import Selectors from './selectors.jsx';
+import ProductDetails from './productDetails.jsx';
 import { OverviewContext } from './OverviewContext.jsx';
 import { getProductPhotosOfAStyle } from '../../request.js';
 import { DefaultViewContainer, BackgroundImageContainer, BackgroundImage, ThumbnailSliderContainer } from '../styles/Overview/DefaultView.styled';
 import { Arrow, FadedArrow, ActiveThumbnail, FadedThumbnail, ThumbnailContainer, SliderContainer } from '../styles/Overview/Slider.styled';
 
-export const DefaultView = () => {
-  // TODO: have DefaultView manage state
+export const DefaultView = (props) => {
+  const [ styles, setStyles ] = useState([]);
+  const [ selectedStyle, setSelectedStyle ] = useState(props.styles[0].style_id);
   const [ expandedView, setExpandedView ] = useState(false);
   const { images, setImages, currentImage, handleKeyPress } = useContext(OverviewContext);
   const context = useContext(OverviewContext);
 
   useEffect(() => {
-    // TODO: Refactor this to take a prop, selectedStyle
-    // ISSUE: How do we get selectedStyle info from styleSelector to this component?
-    getProductPhotosOfAStyle(39333, 234004)
+    getProductPhotosOfAStyle(props.productId, selectedStyle)
       .then( (results) => {
+        // TODO: Get the setImages method to re-render images every time the state of selectedStyle changes
         setImages(results.photos.map((photo, id) => { return {id, ...photo}} ));
       })
       .catch( (err) => {
@@ -23,12 +26,19 @@ export const DefaultView = () => {
       });
 
     // TODO: If expandedView is active, render the expandedView component. Else, hide it
-
+    if (expandedView) {
+      // open expanded view modal window
+    }
   }, []);
 
   // TODO: Method that sets expandedview
   const handleBackgroundImageClick = () => {
     setExpandedView(!expandedView);
+  }
+
+  const updateStyle = (styleId) => {
+    console.log('updating style in default view');
+    setSelectedStyle(styleId);
   }
 
   return (
@@ -39,7 +49,18 @@ export const DefaultView = () => {
       <BackgroundImageContainer className='background-img-container'>
         {images.length && <BackgroundImage src={images[currentImage]['url']} onClick={handleBackgroundImageClick} />}
       </BackgroundImageContainer>
-      {/* TODO: Add selectors */}
+      <ProductDetails
+        product={props.product}
+        productId={props.productId}
+        rating={props.rating}
+      />
+      <Selectors
+        // product={props.product}
+        productId={props.productId}
+        styles={props.styles}
+        addItemToCart={props.addItemToCart}
+        updateStyle={updateStyle}
+      />
     </DefaultViewContainer>
   );
 };
