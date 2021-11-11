@@ -15,9 +15,10 @@ export const DefaultView = (props) => {
   const { images, setImages, currentImage, handleKeyPress } = useContext(OverviewContext);
   const context = useContext(OverviewContext);
 
-  useEffect(() => {
+  useEffect( () => {
     getProductPhotosOfAStyle(props.productId, selectedStyle)
       .then( (results) => {
+        console.log('results: ', results);
         // TODO: Get the setImages method to re-render images every time the state of selectedStyle changes
         setImages(results.photos.map((photo, id) => { return {id, ...photo}} ));
       })
@@ -31,14 +32,25 @@ export const DefaultView = (props) => {
     }
   }, []);
 
-  // TODO: Method that sets expandedview
-  const handleBackgroundImageClick = () => {
-    setExpandedView(!expandedView);
+  // TODO: Method that opens expandedview
+  const handleImageClick = () => {
+    setExpandedView(true);
+  }
+
+  // TODO: Method that exits expandedview
+  const handleBackgroundClick = () => {
+    setExpandedView(false);
   }
 
   const updateStyle = (styleId) => {
-    console.log('updating style in default view');
     setSelectedStyle(styleId);
+    getProductPhotosOfAStyle(props.productId, styleId)
+      .then( (results) => {
+        setImages(results.photos.map((photo, id) => { return {id, ...photo}} ));
+      })
+      .catch( (err) => {
+        console.error(err);
+      });
   }
 
   return (
@@ -47,7 +59,7 @@ export const DefaultView = (props) => {
         <ThumbnailSlider />
       </ThumbnailSliderContainer>
       <BackgroundImageContainer className='background-img-container'>
-        {images.length && <BackgroundImage src={images[currentImage]['url']} onClick={handleBackgroundImageClick} />}
+        {images.length && <BackgroundImage src={images[currentImage]['url']} onClick={handleImageClick} />}
       </BackgroundImageContainer>
       <ProductDetails
         product={props.product}
@@ -55,7 +67,6 @@ export const DefaultView = (props) => {
         rating={props.rating}
       />
       <Selectors
-        // product={props.product}
         productId={props.productId}
         styles={props.styles}
         addItemToCart={props.addItemToCart}
