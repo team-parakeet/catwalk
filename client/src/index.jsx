@@ -92,9 +92,6 @@ const App = ( {productId} ) => {
     };
 
     axios(config)
-      .then( () => {
-        alert(`Added ${item.count} ${product.name} to your cart`)
-      })
       .catch(err => {
         console.error(err);
       });

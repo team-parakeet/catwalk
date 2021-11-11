@@ -5,7 +5,6 @@ import StyleThumbnail from './styleThumbnail.jsx';
 import StyleSelector from './styleSelector.jsx';
 import SizeSelector from './sizeSelector.jsx';
 import QuantitySelector from './quantitySelector.jsx';
-import styled from 'styled-components';
 
 const DEFAULT_QUANTITIES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 
