@@ -41,11 +41,11 @@ export const SelectedStarsStyled = styled.div`
   }
 
   &.select-star-rating > input:checked ~ label {
-    color: #a7bb9b;
+    color: #ffd700;
   }
 
   &.select-star-rating:not(:checked) > label:hover,
   &.select-star-rating:not(:checked) > label:hover ~ label {
-    color: #d5e3cc;
+    color: #f8de7e;
   }
 `
