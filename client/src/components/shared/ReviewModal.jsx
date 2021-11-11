@@ -1,8 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ReviewModalWindowStyled, LabelStyled, FormInput, ReviewBodyInput, QuestionWrapper } from '../styles/reviews/ModalStyled.styled';
 import SelectStars from '../shared/SelectStars.jsx';
+import { ModalSubmit } from '../styles/reviews/ModalStyled.styled';
+import { postNewReview } from '../../request.js';
 
-function ReviewModal({ setOverallRating, setIsRecommended, setReviewSummary, setReviewBody, setUsername, setEmail, characteristics, setCharRating }) {
+function ReviewModal({ productId, reviewMeta, fetchReviews, toggleModal }) {
+  const [overallRating, setOverallRating] = useState(0);
+  const [isRecommended, setIsRecommended] = useState(true);
+  const [reviewSummary, setReviewSummary] = useState('');
+  const [reviewBody, setReviewBody] = useState('');
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [characteristics, setCharacteristics] = useState([])
+  const [charRating, setCharRating] = useState({})
+
+  useEffect(() => {
+    if (Object.keys(reviewMeta).length !== 0) {
+      const newCharacteristics = []
+      for (let key in reviewMeta) {
+        const charSet = {}
+        charSet.name = key
+        charSet.id= reviewMeta[key].id
+        newCharacteristics.push(charSet)
+      }
+      setCharacteristics(newCharacteristics)
+    }
+  }, [reviewMeta])
+
   const handleStarRatingOnChange = e => {
     const rating = Number(e.target.value);
     setOverallRating(rating);
@@ -15,6 +39,24 @@ function ReviewModal({ setOverallRating, setIsRecommended, setReviewSummary, set
       ...prev, [charId]: rating
     }))
   }
+
+  const handleSubmit = () => {
+    const data = {
+      product_id: productId,
+      rating: overallRating,
+      summary: reviewSummary,
+      body: reviewBody,
+      recommend: isRecommended,
+      name: username,
+      email: email,
+      photos: [],
+      characteristics: charRating,
+    };
+    postNewReview(data)
+    .then(() => fetchReviews())
+    .catch(() => alert('Please fill in all fields to leave a review!'))
+    toggleModal()
+  };
 
   return (
     <ReviewModalWindowStyled>
@@ -143,8 +185,22 @@ function ReviewModal({ setOverallRating, setIsRecommended, setReviewSummary, set
         </QuestionWrapper>
       ))}
       </div>
+      <ModalSubmit type="submit" onClick={() => handleSubmit()}>
+        Submit
+      </ModalSubmit>
     </ReviewModalWindowStyled>
   );
 }
 
 export default ReviewModal;
+
+
+// const characteristicsReviewMap = {
+//   "Quality": {
+//     1: "Poor",
+//     2: "Below average",
+//     3: "What I expected",
+//     4: "Pretty great ",
+//     5: "Perfect"
+//   }
+// }
