@@ -17,3 +17,7 @@ export const ProductCategory = styled.span`
 export const ProductPrice = styled.div`
   color: hsla(33, 22%, 45%, 1);
 `
+
+export const ProductDetailsContainer = styled.div`
+
+`
