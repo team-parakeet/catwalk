@@ -1,16 +1,16 @@
 import React, { useEffect, useRef } from 'react';
 import { Overlay, ModalWindow, ModalHeader, ModalExit, Line, ModalSubmit, ModalFooter } from '../styles/reviews/ModalStyled.styled';
 
-function ModalForm({ submitInModal = true, toggleModal = () => {}, headerText, handleSubmit = () => {}, children }) {
+function ModalForm({ submitInModal = true, toggleModal = () => {}, headerText = '', handleSubmit = () => {}, children }) {
 
   const modalRef = useRef();
 
   useEffect(() => {
-    const handleKeyDown = e => {
+    const handleKeyDown = (e) => {
       (e.key === 'Escape') ? toggleModal() : null;
     }
 
-    const handleOutsideClick = e => {
+    const handleOutsideClick = (e) => {
       if (modalRef.current && !modalRef.current.contains(e.target)) {
         toggleModal();
       }
@@ -33,7 +33,7 @@ function ModalForm({ submitInModal = true, toggleModal = () => {}, headerText, h
     <Overlay>
       <ModalWindow ref={modalRef}>
         <ModalHeader>
-          <h3>{headerText || 'Insert Header Text Here'}</h3>
+          { headerText && <h3>{headerText || 'Insert Header Text Here'}</h3> }
           <ModalExit onClick={() => toggleModal()}>&times;</ModalExit>
         </ModalHeader>
         <Line />
