@@ -132,14 +132,13 @@ const App = ( {productId} ) => {
         { /* TODO: Wrap the image gallery and product-details in a grid container for responsive layout on mobile */ }
         <OverviewProvider>
           <div className="image-gallery">
-            {/* TODO: Give DefaultView a prop for currently-selected style */}
-            <DefaultView
+            { styles.length && <DefaultView
               product={product}
               productId={productId}
               styles={styles}
               rating={rating}
               addItemToCart={addItemToCart}
-            />
+            /> }
           </div>
           <br></br>
           <ProductDescription product={product} />
