@@ -3,7 +3,7 @@ import Score from './Score.jsx';
 import Stars from '../shared/Stars.jsx';
 import { RatingScoreContainer, NumberOfReviewsBar, FlexRow, StarScore } from '../styles/reviews/RatingScoreContainer.styled.js';
 
-function RatingScore({ reviews, numOfReviews, avgRating }) {
+function RatingScore({ reviews, avgRating, numOfReviews }) {
   if (!avgRating || reviews.length === 0) {
     return null
   }
