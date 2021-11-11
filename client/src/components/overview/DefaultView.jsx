@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect, useCallback } from 'react';
 import ExpandedView from './ExpandedView.jsx';
+import ModalForm from '../shared/Modal.jsx';
 import { getProductStyles } from '../../request.js';
 import Selectors from './selectors.jsx';
 import ProductDetails from './productDetails.jsx';
@@ -18,8 +19,6 @@ export const DefaultView = (props) => {
   useEffect( () => {
     getProductPhotosOfAStyle(props.productId, selectedStyle)
       .then( (results) => {
-        console.log('results: ', results);
-        // TODO: Get the setImages method to re-render images every time the state of selectedStyle changes
         setImages(results.photos.map((photo, id) => { return {id, ...photo}} ));
       })
       .catch( (err) => {
@@ -37,11 +36,6 @@ export const DefaultView = (props) => {
     setExpandedView(true);
   }
 
-  // TODO: Method that exits expandedview
-  const handleBackgroundClick = () => {
-    setExpandedView(false);
-  }
-
   const updateStyle = (styleId) => {
     setSelectedStyle(styleId);
     getProductPhotosOfAStyle(props.productId, styleId)
@@ -54,12 +48,14 @@ export const DefaultView = (props) => {
   }
 
   return (
-    <DefaultViewContainer className='default-view-container' tabIndex="0" onKeyUp={(e) => { e.preventDefault(); handleKeyPress(e); }}>
+    <DefaultViewContainer className='default-view-container'
+      tabIndex='0'
+      onKeyUp={(e) => { e.preventDefault(); handleKeyPress(e); }} >
       <ThumbnailSliderContainer className='thumbnail-slider-container'>
         <ThumbnailSlider />
       </ThumbnailSliderContainer>
       <BackgroundImageContainer className='background-img-container'>
-        {images.length && <BackgroundImage src={images[currentImage]['url']} onClick={handleImageClick} />}
+        {images.length && <BackgroundImage src={images[currentImage].url} onClick={handleImageClick} />}
       </BackgroundImageContainer>
       <ProductDetails
         product={props.product}
@@ -72,6 +68,9 @@ export const DefaultView = (props) => {
         addItemToCart={props.addItemToCart}
         updateStyle={updateStyle}
       />
+      { expandedView ? <ModalForm submitInModal={false} toggleModal={() => {setExpandedView(false)}} >
+        <ExpandedView src={images[currentImage].url} />
+      </ModalForm> : null}
     </DefaultViewContainer>
   );
 };
