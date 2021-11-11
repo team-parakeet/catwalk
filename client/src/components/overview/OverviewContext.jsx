@@ -41,11 +41,11 @@ export function OverviewProvider({children}) {
 
   const handleKeyPress = (e) => {
     if ((e.key === 'ArrowRight' /*|| e.key === 'ArrowDown'*/) && state.currentImage < state.images.length - 1) {
-      event.preventDefault();
+      e.preventDefault();
       dispatch({type: actions.NEXT_PIC})
     }
     else if ((e.key === 'ArrowLeft' /*|| e.key === 'ArrowUp'*/) && state.currentImage > 0) {
-      event.preventDefault();
+      e.preventDefault();
       dispatch({type: actions.PREV_PIC})
     }
   }
