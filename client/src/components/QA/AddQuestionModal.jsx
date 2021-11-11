@@ -18,7 +18,7 @@ const AddQuestionModal = () => {
     body: '',
     name: '',
     email: '',
-    product_id: 39334,
+    product_id: product_id,
   });
 
   const handleChange = e => {
@@ -28,9 +28,8 @@ const AddQuestionModal = () => {
   };
 
   const handleSubmit = e => {
-    console.log(formData);
     postQuestion(formData)
-      .then((response) => console.log(response))
+      .then(response => console.log(response))
       .catch(err => console.error('There was an error >>>', err));
   };
 
