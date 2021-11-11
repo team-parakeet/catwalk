@@ -3,6 +3,5 @@ import styled from "styled-components";
 export const SectionWrapper = styled.div`
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-between;
 `

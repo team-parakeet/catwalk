@@ -1,18 +1,17 @@
 import React, { useEffect, useRef } from 'react';
 import { Overlay, ModalWindow, ModalHeader, ModalExit, Line, ModalSubmit, ModalFooter } from '../styles/reviews/ModalStyled.styled';
 
-function ModalForm({ toggleModal = () => {}, headerText, handleSubmit = () => {}, children}) {
+function ModalForm({ submitInModal = true, toggleModal = () => {}, headerText, handleSubmit = () => {}, children }) {
 
   const modalRef = useRef();
 
   useEffect(() => {
     const handleKeyDown = e => {
-      e.preventDefault();
       (e.key === 'Escape') ? toggleModal() : null;
     }
 
     const handleOutsideClick = e => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
+      if (modalRef.current && !modalRef.current.contains(e.target)) {
         toggleModal();
       }
     }
@@ -25,8 +24,7 @@ function ModalForm({ toggleModal = () => {}, headerText, handleSubmit = () => {}
     }
   }, [toggleModal]);
 
-  const handleSubmitOnClick = (e) => {
-    e.preventDefault();
+  const handleSubmitOnClick = () => {
     handleSubmit();
     toggleModal();
   }
@@ -39,14 +37,14 @@ function ModalForm({ toggleModal = () => {}, headerText, handleSubmit = () => {}
           <ModalExit onClick={() => toggleModal()}>&times;</ModalExit>
         </ModalHeader>
         <Line />
-        <form onSubmit={handleSubmitOnClick}>
-          {children}
-          <ModalFooter>
-            <ModalSubmit type="submit" onClick={() => handleSubmitOnClick()}>
-              Submit
-            </ModalSubmit>
-          </ModalFooter>
-        </form>
+        {children}
+        {submitInModal &&
+        <ModalFooter>
+          <ModalSubmit type="submit" onClick={() => handleSubmitOnClick()}>
+            Submit
+          </ModalSubmit>
+        </ModalFooter>
+        }
       </ModalWindow>
     </Overlay>
   )

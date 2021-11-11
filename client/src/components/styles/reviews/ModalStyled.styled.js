@@ -6,15 +6,13 @@ export const ModalWindow = styled.div`
   flex-direction: column;
   border: 1px solid black;
   border-radius: 10px;
-  top: 25%;
-  left: 25%;
   z-index: 10;
   background-color: #fff;
-  width: 50%;
-  height: 50%;
   max-width: 80%;
   max-height: 80%;
   padding: 10px;
+  overflow: scroll;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
 `
 
 export const ModalHeader = styled.div`
@@ -22,7 +20,6 @@ export const ModalHeader = styled.div`
   justify-content: space-between;
   padding-left: 1rem;
   padding-right: 1rem;
-  /* outline: 1px solid red; */
 `
 
 export const ModalExit = styled.button`
@@ -33,6 +30,7 @@ export const ModalExit = styled.button`
   font-size: 1.5rem;
   font-weight: 600;
   cursor: pointer;
+  margin-left: 30px;
 
   &:hover {
     transform: scale(1.1);
@@ -53,51 +51,61 @@ export const ModalFooter = styled.div`
   display: flex;
   justify-content: flex-end;
   width: 100%;
-  outline: 1px solid orange;
 `
 
 export const ModalSubmit = styled.button`
   border: none;
-  background: aquamarine;
-  /* box-shadow: 0 0 grey; */
-  border-radius: 10px;
+  background: white;
   font-size: 1rem;
   cursor: pointer;
+  padding: 0px 20px 20px 0px;
 
   &:hover {
     transform: scale(1.1);
   }
 
-  /* On click/active, shrink */
   &:active {
     transform: scale(1.0);
   }
 `
 
-export const ReviewModalWindow = styled(ModalWindow)`
-  top: 25%;
-  left: 25%;
-  position: absolute;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
+export const ReviewModalWindowStyled = styled.div`
   display: flex;
-  width: 50%;
-  height: 50%;
-  background: #fff;
-  border: 1px solid hotpink;
-  font-size: 10pt;
+  flex-direction: column;
+  background-color: #fefefe;
+  padding: 20px;
 `
 
 export const Overlay = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
-  top: 0;
+  z-index: 1;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0,0,0,0.2);
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.4);
 `
 
-export const ModalBody = styled.div`
+export const LabelStyled = styled.label`
+  font-weight: bold;
+`
 
+export const FormInput = styled.input`
+  width: 500px;
+  border: 1px solid #939393;
+  border-radius: 3px;
+`
+
+export const ReviewBodyInput = styled.textarea`
+  width: 500px;
+  height: 200px;
+  border: 1px solid #939393;
+  border-radius: 3px;
+`
+
+export const QuestionWrapper = styled.div`
+  margin-bottom: 20px;
 `

@@ -2,11 +2,11 @@ import styled from "styled-components";
 
 export const StarsChartStyled = styled.div`
   margin-bottom: 20px;
-  width: 200px;
+  width: auto;
 `
 
 export const StarBar = styled.div`
-  font-size: 10pt;
+  font-size: 12pt;
   display: flex;
-  justify-content: space-between
+  justify-content: space-between;
 `

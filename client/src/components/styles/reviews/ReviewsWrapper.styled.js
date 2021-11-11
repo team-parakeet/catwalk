@@ -7,7 +7,7 @@ export const ButtonWrapper = styled.div`
 `
 
 export const SmallFont = styled.div`
-  font-size: 8pt;
+  font-size: 9pt;
   color: #939393;
 `
 

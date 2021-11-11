@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
 export const ScoreStyled = styled.div`
-  font-size: 45px;
-  font-weight: bold;
+  font-size: 60pt;
+  margin: 0px 0px -15px;
 `
