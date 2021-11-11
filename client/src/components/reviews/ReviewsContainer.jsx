@@ -7,21 +7,12 @@ import ReviewModal from '../shared/ReviewModal.jsx';
 import { ReviewsContainerStyled } from '../styles/reviews/ReviewsContainerStyled.styled.js';
 import { ButtonWrapper } from '../styles/reviews/ReviewsWrapper.styled.js';
 import ModalForm from '../shared/Modal.jsx';
-import { postNewReview } from '../../request.js';
 
-function ReviewsContainer({ reviews, productId, setNumOfReviews }) {
+function ReviewsContainer({ reviews, productId, fetchReviews }) {
   const [currentReviews, setCurrentReviews] = useState(null);
   const [numReviewsShown, setNumReviewsShown] = useState(2);
   const [showModal, setShowModal] = useState(false);
   const [reviewMeta, setReviewMeta] = useState({})
-  const [overallRating, setOverallRating] = useState(0);
-  const [isRecommended, setIsRecommended] = useState(true);
-  const [reviewSummary, setReviewSummary] = useState('');
-  const [reviewBody, setReviewBody] = useState('');
-  const [username, setUsername] = useState('');
-  const [email, setEmail] = useState('');
-  const [characteristics, setCharacteristics] = useState([])
-  const [charRating, setCharRating] = useState({})
 
   useEffect(() => {
     getProductReviewMeta(productId)
@@ -41,19 +32,6 @@ function ReviewsContainer({ reviews, productId, setNumOfReviews }) {
     setNumReviewsShown(2)
   }, [currentReviews])
 
-  useEffect(() => {
-    if (Object.keys(reviewMeta).length !== 0) {
-      const newCharacteristics = []
-      for (let key in reviewMeta) {
-        const charSet = {}
-        charSet.name = key
-        charSet.id= reviewMeta[key].id
-        newCharacteristics.push(charSet)
-      }
-      setCharacteristics(newCharacteristics)
-    }
-  }, [reviewMeta])
-
   const handleMoreReviewsOnClick = () => {
     numReviewsShown + 2 <= reviews.length ? setNumReviewsShown(prev => prev + 2) : setNumReviewsShown(reviews.length)
   }
@@ -61,23 +39,6 @@ function ReviewsContainer({ reviews, productId, setNumOfReviews }) {
   const handleShowLessOnClick = () => {
     setNumReviewsShown(2)
   }
-
-  const handleSubmit = () => {
-    const data = {
-      product_id: productId,
-      rating: overallRating,
-      summary: reviewSummary,
-      body: reviewBody,
-      recommend: isRecommended,
-      name: username,
-      email: email,
-      photos: [],
-      characteristics: charRating,
-    };
-    postNewReview(data)
-    .then(() => setNumOfReviews(prev => prev + 1))
-    .catch(() => alert('Please fill in all fields to leave a review!'))
-  };
 
   const toggleModal = () => {
     setShowModal(prev => !prev);
@@ -105,14 +66,8 @@ function ReviewsContainer({ reviews, productId, setNumOfReviews }) {
         <Button handleOnClick={toggleModal} text={'Add a review'} />
       </ButtonWrapper>
       {showModal ?
-      <ModalForm toggleModal={toggleModal} headerText={'Write Your Review'} handleSubmit={handleSubmit}>
-        <ReviewModal productId={productId} setOverallRating={setOverallRating} setIsRecommended={setIsRecommended}
-        setReviewSummary={setReviewSummary}
-        setReviewBody={setReviewBody}
-        setUsername={setUsername}
-        setEmail={setEmail}
-        characteristics={characteristics}
-        setCharRating={setCharRating}/>
+      <ModalForm toggleModal={toggleModal} headerText={'Write Your Review'} submitInModal={false}>
+        <ReviewModal productId={productId} reviewMeta={reviewMeta} fetchReviews={fetchReviews} toggleModal={toggleModal} />
       </ModalForm>
       :
       null
