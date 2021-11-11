@@ -7,9 +7,7 @@ import { PercentBar } from "../styles/reviews/PercentBar.styled.js";
 
 function ReviewsColumn({ reviews, productId, avgRating }) {
   const [ratings, setRatings] = useState({ 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 })
-  const [numOfReviews, setNumOfReviews] = useState(null);
   const [recommendPercent, setRecommendPercent] = useState(null);
-
 
   useEffect(() => {
     reviews.forEach(review => {
@@ -30,13 +28,14 @@ function ReviewsColumn({ reviews, productId, avgRating }) {
       }
       return Math.round((sum / reviews.length) * 100);
     }
-    setNumOfReviews(reviews.length)
     setRecommendPercent(getRecommendPercentage())
   }, [reviews])
 
+  const numOfReviews = reviews.length;
+
   return (
     <ReviewsColumnContainer>
-      <RatingScore reviews={reviews} numOfReviews={numOfReviews} avgRating={avgRating}/>
+      <RatingScore reviews={reviews} avgRating={avgRating} numOfReviews={numOfReviews} />
       <StarsChart ratings={ratings} numOfReviews={numOfReviews} />
       <PercentBar>
         {recommendPercent}% of reviews recommend this product

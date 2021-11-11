@@ -6,6 +6,7 @@ function StarsChart({ ratings, numOfReviews }) {
 
   const stars = [5, 4, 3, 2, 1];
 
+
   return (
     <StarsChartStyled>
       {stars.map(star => {

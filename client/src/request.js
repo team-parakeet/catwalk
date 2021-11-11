@@ -90,3 +90,10 @@ export function getProductPhotosOfAStyle(productId, styleId) {
       return result;
     }, {}));
 }
+
+export function getReviews(productId) {
+  const url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/?sort="relevant"&product_id=${productId}&count=50`
+  return axios.get(url, {
+    headers: header
+  })
+}
