@@ -48,4 +48,4 @@ const Home = () => {
   )
 }
 
-ReactDOM.render(<Home />, document.getElementById('app'));
+// ReactDOM.render(<Home />, document.getElementById('app'));

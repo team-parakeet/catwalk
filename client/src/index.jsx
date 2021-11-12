@@ -166,4 +166,4 @@ const App = ( {productId} ) => {
   );
 }
 
-// ReactDOM.render(<App productId={39333} />, document.getElementById('app'));
+ReactDOM.render(<App productId={39333} />, document.getElementById('app'));
