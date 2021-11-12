@@ -13,7 +13,7 @@ function ModalForm({
   type = '',
   submitInModal = true,
   toggleModal = () => {},
-  headerText,
+  headerText = '',
   handleSubmit = () => {},
   children,
 }) {
@@ -50,10 +50,10 @@ function ModalForm({
   return (
     <Overlay>
       <ModalWindow ref={modalRef}>
-        {type !== 'overview' && ( //For having overview use modal too.
+        {type !== 'overview' ? //For having overview use modal too.
           <>
             <ModalHeader>
-              <h3>{headerText || 'Insert Header Text Here'}</h3>
+              <h3>{headerText}</h3>
               <ModalExit tabIndex="0" onClick={() => toggleModal()}>
                 &times;
               </ModalExit>
@@ -71,7 +71,16 @@ function ModalForm({
               </ModalFooter>
             </form>
           </>
-        )}
+        :
+        <>
+        <ModalHeader>
+          <h3>{headerText}</h3>
+          <ModalExit tabIndex='0' onClick={() => toggleModal()}>
+            &times;
+          </ModalExit>
+        </ModalHeader>
+        <Line />
+        </>}
       </ModalWindow>
     </Overlay>
   );
