@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Helpful from '../../QA/Helpful.jsx';
 
 export const QuestionContainer = styled.div`
   position: relative;
@@ -19,5 +18,15 @@ export const StyledDiv = styled.div`
 
 export const HelpfulContainer = styled.div`
   position: relative;
+  font-size: 1rem;
+`
+
+export const AddAnswerBtn = styled.button`
+  display: inline;
+  border: none;
+  background: none;
+  outline: none;
+  text-decoration: underline;
+  cursor: pointer;
   font-size: 1rem;
 `

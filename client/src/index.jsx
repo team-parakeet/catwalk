@@ -159,8 +159,6 @@ const App = ( {productId} ) => {
         <div className="q-and-a">
           <QAProvider>
             <QuestionsAnswers />
-            <button className="add-question">Add a question</button>
-            <button className="add-answer">Add an answer [modal]</button>
           </QAProvider>
         </div>
       </ SiteWrapper>

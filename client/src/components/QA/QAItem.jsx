@@ -6,7 +6,7 @@ import Answer from './Answer.jsx';
 const QAItem = props => {
   return (
     <div style={{ marginBottom: '0.6rem' }} className={props.className}>
-      <Question question={props.question} className="question" />
+      <Question question={props.question} question_id={props.id} className="question" />
       <Answer answers={props.question.answers} className="answer" />
     </div>
   );
