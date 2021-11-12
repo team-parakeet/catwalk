@@ -60,7 +60,7 @@ export const DefaultView = (props) => {
           updateStyle={updateStyle}
         />
       </ProductDetailsContainer >
-      { expandedView ? <ModalForm submitInModal={false} toggleModal={() => {setExpandedView(false)}} >
+      { expandedView ? <ModalForm toggleModal={() => {setExpandedView(false)}} type={'overview'}>
         <ExpandedView src={images[currentImage].url} />
       </ModalForm> : null}
     </DefaultViewContainer>
