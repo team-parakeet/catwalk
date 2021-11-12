@@ -51,7 +51,7 @@ function ModalForm({
     <Overlay>
       <ModalWindow ref={modalRef}>
         <ModalHeader>
-          { type !== 'overview' ? {headerText} : null }
+          { type !== 'overview' ? headerText : null }
           <ModalExit onClick={() => toggleModal()}>&times;</ModalExit>
         </ModalHeader>
         <Line />
