@@ -14,13 +14,13 @@ export const StyledDiv = styled.div`
   position: relative;
   font-weight: bold;
   font-size: 1.2rem;
-  border: 1px solid green;
+  /* border: 1px solid green; */
 `
 
 export const HelpfulContainer = styled.div`
   position: relative;
   font-size: 1rem;
-  border: 2px solid blue;
+  /* border: 2px solid blue; */
 `
 
 export const AddAnswerBtn = styled.button`

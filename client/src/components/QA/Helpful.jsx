@@ -6,6 +6,7 @@ import {
   updateAnswerHelpfulCount,
 } from '../../request.js';
 
+// TODO: all helpful components are re-rendering even when only one is clicked, (bc of the useEffect api call most likely)
 const Helpful = ({ count, id, type }) => {
   // const [localCount, setLocalCount] = useState(count);
   const [wasIncremented, setWasIncremented] = useState(false);
