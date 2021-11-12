@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { ReviewModalWindowStyled, LabelStyled, FormInput, ReviewBodyInput, QuestionWrapper } from '../styles/reviews/ModalStyled.styled';
-import SelectStars from '../shared/SelectStars.jsx';
-import { ModalSubmit } from '../styles/reviews/ModalStyled.styled';
+import SelectStars from './SelectStars.jsx';
+import Button from './Button.jsx';
 import { postNewReview } from '../../request.js';
+import { ReviewModalWindowStyled, LabelStyled, FormInput, ReviewBodyInput, QuestionWrapper, ButtonWrapper, StarWrapper, DescriptionWrapper, CharRadioWrapper } from '../styles/reviews/ReviewModalStyled.styled';
 
 function ReviewModal({ productId, reviewMeta, fetchReviews, toggleModal }) {
-  const [overallRating, setOverallRating] = useState(0);
+  const [overallRating, setOverallRating] = useState(null);
   const [isRecommended, setIsRecommended] = useState(true);
   const [reviewSummary, setReviewSummary] = useState('');
   const [reviewBody, setReviewBody] = useState('');
@@ -58,11 +58,65 @@ function ReviewModal({ productId, reviewMeta, fetchReviews, toggleModal }) {
     toggleModal()
   };
 
+  const starReviewMap = ['Poor', 'Fair', 'Average', 'Good', 'Great']
+
+  const characteristicsReviewMap = {
+    "Quality": {
+      1: "Poor",
+      2: "Below average",
+      3: "What I expected",
+      4: "Pretty great ",
+      5: "Perfect"
+    },
+    "Size": {
+      1: "A size too small",
+      2: "½ size too small",
+      3: "Perfect",
+      4: "½ a size too big",
+      5: "A size too big"
+    },
+    "Width": {
+      1: "Too narrow",
+      2: "Slightly narrow",
+      3: "Perfect",
+      4: "Slightly wide",
+      5: "Too wide"
+    },
+    "Comfort": {
+      1: "Uncomfortable",
+      2: "Slightly uncomfortable",
+      3: "Ok",
+      4: "Comfortable",
+      5: "Perfect"
+    },
+    "Length": {
+      1: "Runs short",
+      2: "Runs slightly short",
+      3: "Perfect",
+      4: "Runs slightly long",
+      5: "Runs long"
+    },
+    "Fit": {
+      1: "Runs tight",
+      2: "Runs slightly tight",
+      3: "Perfect",
+      4: "Runs slightly loose",
+      5: "Runs loose"
+    }
+  }
+
   return (
     <ReviewModalWindowStyled>
-      <LabelStyled>Overall rating:</LabelStyled>
       <QuestionWrapper>
-        <SelectStars handleStarRatingOnChange={handleStarRatingOnChange}/>
+        <LabelStyled>Overall rating:</LabelStyled>
+        <StarWrapper>
+          <div>
+          <SelectStars handleStarRatingOnChange={handleStarRatingOnChange}/>
+          </div>
+          <div>
+          {overallRating ? <DescriptionWrapper>{starReviewMap[overallRating - 1]}</DescriptionWrapper> : <br></br>}
+          </div>
+        </StarWrapper>
       </QuestionWrapper>
       <QuestionWrapper>
         <LabelStyled>Would you recommend this product?</LabelStyled>
@@ -136,71 +190,73 @@ function ReviewModal({ productId, reviewMeta, fetchReviews, toggleModal }) {
           />
         </div>
       </QuestionWrapper>
-      <div>
+      <QuestionWrapper>
       {characteristics.map(char => (
-        <QuestionWrapper key={char.id} id={char.id} name={char.name}>
+        <div key={char.id} id={char.id} name={char.name}>
           <LabelStyled>{char.name}</LabelStyled>
-          <div>
-            <label for={char.name}>1</label>
-            <input
-              type="radio"
-              id={char.id}
-              name={char.id}
-              value="1"
-              onChange={ e => handleCharRadioOnChange(e) }
-            />
-            <label for={char.name}>2</label>
-            <input
-              type="radio"
-              id={char.id}
-              name={char.id}
-              value="2"
-              onChange={ e => handleCharRadioOnChange(e) }
-            />
-            <label for={char.name}>3</label>
-            <input
-              type="radio"
-              id={char.id}
-              name={char.id}
-              value="3"
-              onChange={ e => handleCharRadioOnChange(e) }
-            />
-            <label for={char.name}>4</label>
-            <input
-              type="radio"
-              id={char.id}
-              name={char.id}
-              value="4"
-              onChange={ e => handleCharRadioOnChange(e) }
-            />
-            <label for={char.name}>5</label>
-            <input
-              type="radio"
-              id={char.id}
-              name={char.id}
-              value="5"
-              onChange={ e =>  handleCharRadioOnChange(e) }
-            />
-          </div>
-        </QuestionWrapper>
+          <CharRadioWrapper>
+            <div>
+              <label for={char.name}>1</label>
+              <input
+                type="radio"
+                id={char.id}
+                name={char.id}
+                value="1"
+                onChange={ e => handleCharRadioOnChange(e) }
+              />
+            </div>
+            <div>
+              <label for={char.name}>2</label>
+              <input
+                type="radio"
+                id={char.id}
+                name={char.id}
+                value="2"
+                onChange={ e => handleCharRadioOnChange(e) }
+              />
+            </div>
+            <div>
+              <label for={char.name}>3</label>
+              <input
+                type="radio"
+                id={char.id}
+                name={char.id}
+                value="3"
+                onChange={ e => handleCharRadioOnChange(e) }
+              />
+            </div>
+            <div>
+              <label for={char.name}>4</label>
+              <input
+                type="radio"
+                id={char.id}
+                name={char.id}
+                value="4"
+                onChange={ e => handleCharRadioOnChange(e) }
+              />
+            </div>
+            <div>
+              <label for={char.name}>5</label>
+              <input
+                type="radio"
+                id={char.id}
+                name={char.id}
+                value="5"
+                onChange={ e =>  handleCharRadioOnChange(e) }
+              />
+            </div>
+            <DescriptionWrapper>
+              {characteristicsReviewMap[char.name][charRating[reviewMeta[char.name].id]]}
+            </DescriptionWrapper>
+          </CharRadioWrapper>
+        </div>
       ))}
-      </div>
-      <ModalSubmit type="submit" onClick={() => handleSubmit()}>
-        Submit
-      </ModalSubmit>
+      </QuestionWrapper>
+      <ButtonWrapper>
+        <Button handleOnClick={() => handleSubmit()} text={'Submit'}/>
+      </ButtonWrapper>
     </ReviewModalWindowStyled>
   );
 }
 
 export default ReviewModal;
-
-
-// const characteristicsReviewMap = {
-//   "Quality": {
-//     1: "Poor",
-//     2: "Below average",
-//     3: "What I expected",
-//     4: "Pretty great ",
-//     5: "Perfect"
-//   }
-// }

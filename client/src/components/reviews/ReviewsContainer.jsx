@@ -3,10 +3,9 @@ import { getProductReviewMeta } from '../../request.js';
 import ReviewsList from './ReviewsList.jsx';
 import SortBy from './SortBy.jsx';
 import Button from './Button.jsx';
-import ReviewModal from '../shared/ReviewModal.jsx';
-import { ReviewsContainerStyled } from '../styles/reviews/ReviewsContainerStyled.styled.js';
-import { ButtonWrapper } from '../styles/reviews/ReviewsWrapper.styled.js';
 import ModalForm from '../shared/Modal.jsx';
+import ReviewModal from './ReviewModal.jsx';
+import { ReviewsContainerStyled, ButtonWrapper } from '../styles/reviews/ReviewsContainerStyled.styled.js';
 
 function ReviewsContainer({ reviews, productId, fetchReviews }) {
   const [currentReviews, setCurrentReviews] = useState(null);

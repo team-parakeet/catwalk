@@ -1,14 +1,14 @@
 import styled from 'styled-components';
 
-export const Btn = styled.button`
-  font-size: 10pt;
+export const ButtonStyled = styled.button`
+  font-size: 12pt;
   background-color: #fff;
   text-align: left;
   border: 0px;
-  color: #939393;
+  color: #000000;
   padding: 0px;
 
   &:hover {
-    color: #000000;
+    transform: scale(1.1);
   }
 `

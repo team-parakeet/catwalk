@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Overlay, ModalWindow, ModalHeader, ModalExit, Line, ModalSubmit, ModalFooter } from '../styles/reviews/ModalStyled.styled';
+import { Overlay, ModalWindow, ModalHeader, ModalExit, Line, ModalSubmit, ModalFooter } from '../styles/shared/ModalStyled.styled.js';
 
 function ModalForm({ submitInModal = true, toggleModal = () => {}, headerText = '', handleSubmit = () => {}, children }) {
 

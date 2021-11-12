@@ -69,13 +69,6 @@ export const ModalSubmit = styled.button`
   }
 `
 
-export const ReviewModalWindowStyled = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: #fefefe;
-  padding: 20px;
-`
-
 export const Overlay = styled.div`
   display: flex;
   justify-content: center;
@@ -87,25 +80,4 @@ export const Overlay = styled.div`
   width: 100%;
   height: 100%;
   background-color: rgba(0,0,0,0.4);
-`
-
-export const LabelStyled = styled.label`
-  font-weight: bold;
-`
-
-export const FormInput = styled.input`
-  width: 500px;
-  border: 1px solid #939393;
-  border-radius: 3px;
-`
-
-export const ReviewBodyInput = styled.textarea`
-  width: 500px;
-  height: 200px;
-  border: 1px solid #939393;
-  border-radius: 3px;
-`
-
-export const QuestionWrapper = styled.div`
-  margin-bottom: 20px;
 `
