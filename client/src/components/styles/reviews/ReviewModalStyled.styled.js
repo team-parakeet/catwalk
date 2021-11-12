@@ -32,3 +32,21 @@ export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
 `
+
+export const StarWrapper = styled.div`
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+
+`
+
+export const DescriptionWrapper = styled.div`
+  color: #939393;
+  font-style: italic;
+`
+
+export const CharRadioWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+`
