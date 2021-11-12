@@ -50,6 +50,7 @@ function ModalForm({
   return (
     <Overlay>
       <ModalWindow ref={modalRef}>
+<<<<<<< HEAD
         {type !== 'overview' && ( //For having overview use modal too.
           <>
             <ModalHeader>
@@ -72,6 +73,21 @@ function ModalForm({
             </form>
           </>
         )}
+=======
+        <ModalHeader>
+          { headerText && <h3>{headerText || 'Insert Header Text Here'}</h3> }
+          <ModalExit onClick={() => toggleModal()}>&times;</ModalExit>
+        </ModalHeader>
+        <Line />
+        { children }
+        {submitInModal &&
+        <ModalFooter>
+          <ModalSubmit type="submit" onClick={() => handleSubmitOnClick()}>
+            Submit
+          </ModalSubmit>
+        </ModalFooter>
+        }
+>>>>>>> homepage
       </ModalWindow>
     </Overlay>
   );

@@ -176,6 +176,7 @@ const App = () => {
       </SiteWrapper>
     </div>
   );
+<<<<<<< HEAD
 };
 
 ReactDOM.render(
@@ -193,3 +194,8 @@ ReactDOM.render(
   </Router>,
   document.getElementById('app')
 );
+=======
+}
+
+// ReactDOM.render(<App productId={39333} />, document.getElementById('app'));
+>>>>>>> homepage
