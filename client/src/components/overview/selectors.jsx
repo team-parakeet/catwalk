@@ -20,7 +20,7 @@ const Selectors = (props) => {
     setCurrentStyle(props.styles[0]);
     retrieveSizesByStyle(props.styles[0].style_id);
     setCurrentSize('Select a size');
-  }, [currentStyle]);
+  }, []);
 
   // On style select, gets all the sizes based off of the style's id
   const retrieveSizesByStyle = (styleId) => {
