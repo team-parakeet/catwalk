@@ -20,19 +20,25 @@ import Reviews from './components/reviews/Reviews.jsx';
 import { getReviews } from './request.js';
 import { LoaderWrapper } from './components/styles/reviews/LoaderWrapper.styled.js';
 
+// Routing
+import { BrowserRouter as Router, Routes, Route, Link, useParams } from 'react-router-dom';
+import Home from './components/Home/Home.jsx';
+
 const SiteWrapper = styled.div`
   border: hsla(205, 37%, 60%, 50%) solid 5px;
   padding: 10px;
 `;
 
-const App = ( {productId} ) => {
+const App = () => {
   const [product, setProduct] = useState({});
   const [styles, setStyles] = useState([]);
   const [reviews, setReviews] = useState([]);
   const [rating, setRating] = useState(0);
+  const {productId} = useParams();
 
   // On mount, retrieve product and styles
-  useEffect( () => {
+  useEffect(() => {
+    console.log('productId is:', productId)
     const config = {
       method: 'get',
       url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/39333',
@@ -57,7 +63,7 @@ const App = ( {productId} ) => {
     if (reviews.length !== 0) {
       setRating(getAvgRating());
     }
-  }, [reviews])
+  }, [reviews]);
 
   // Retrieve product's styles from API, set state to reflect those styles
   const getStyles = () => {
@@ -76,10 +82,10 @@ const App = ( {productId} ) => {
       .catch(err => {
         console.error(err);
       });
-  }
+  };
 
   // POST the item obj to the API
-  const addItemToCart = (item) => {
+  const addItemToCart = item => {
     let config = {
       method: 'post',
       url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/cart`,
@@ -90,21 +96,20 @@ const App = ( {productId} ) => {
       data: JSON.stringify(item),
     };
 
-    axios(config)
-      .catch(err => {
-        console.error(err);
-      });
-  }
+    axios(config).catch(err => {
+      console.error(err);
+    });
+  };
 
   const fetchReviews = () => {
     getReviews(productId)
-    .then(reviews => {
-      setReviews(reviews.data.results);
-    })
-    .catch(err => {
-      console.error(err);
-    });
-  }
+      .then(reviews => {
+        setReviews(reviews.data.results);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
 
   const getAvgRating = () => {
     if (reviews.length !== 0) {
@@ -116,21 +121,23 @@ const App = ( {productId} ) => {
       let avg = sum / reviews.length;
       return avg;
     }
-  }
+  };
 
   return (
     <div>
       <SiteWrapper>
-        { /* TODO: Wrap the image gallery and product-details in a grid container for responsive layout on mobile */ }
+        {/* TODO: Wrap the image gallery and product-details in a grid container for responsive layout on mobile */}
         <OverviewProvider>
           <div className="image-gallery">
-            { styles.length && <DefaultView
-              product={product}
-              productId={productId}
-              styles={styles}
-              rating={rating}
-              addItemToCart={addItemToCart}
-            /> }
+            {styles.length && (
+              <DefaultView
+                product={product}
+                productId={productId}
+                styles={styles}
+                rating={rating}
+                addItemToCart={addItemToCart}
+              />
+            )}
           </div>
           <br></br>
           <ProductDescription product={product} />
@@ -139,17 +146,22 @@ const App = ( {productId} ) => {
         <hr></hr>
         <br></br>
         <div className="ratings-and-reviews">
-          {reviews.length === 0 ?
-            (<LoaderWrapper>
+          {reviews.length === 0 ? (
+            <LoaderWrapper>
               <Loader
                 type="TailSpin"
                 color="#d3d3d3"
                 height={100}
                 width={100}
               />
-            </LoaderWrapper>)
-            :
-            (<Reviews reviews={reviews} productId={productId} avgRating={rating} fetchReviews={fetchReviews}/>
+            </LoaderWrapper>
+          ) : (
+            <Reviews
+              reviews={reviews}
+              productId={productId}
+              avgRating={rating}
+              fetchReviews={fetchReviews}
+            />
           )}
         </div>
         <br></br>
@@ -160,9 +172,23 @@ const App = ( {productId} ) => {
             <QuestionsAnswers />
           </QAProvider>
         </div>
-      </ SiteWrapper>
+      </SiteWrapper>
     </div>
   );
-}
+};
 
-ReactDOM.render(<App productId={39333} />, document.getElementById('app'));
+ReactDOM.render(
+  <Router>
+    <nav>
+      <Link to="/">Home</Link>{' '}
+      <Link to="/39334">Test Product 39334</Link>
+    </nav>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path='/:productId' element={<App />} />
+      {/* <Route path='*' element={<NotFound />} /> */}
+    </Routes>
+    {/* <App productId={39333} /> */}
+  </Router>,
+  document.getElementById('app')
+);

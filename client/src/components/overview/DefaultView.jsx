@@ -8,6 +8,8 @@ import { OverviewContext } from './OverviewContext.jsx';
 import { ProductDetailsContainer } from '../styles/Overview/ProductDetails.styled.js';
 import { DefaultViewContainer, BackgroundImageContainer, BackgroundImage, ThumbnailSliderContainer } from '../styles/Overview/DefaultView.styled';
 import { Arrow, FadedArrow, ActiveThumbnail, FadedThumbnail, ThumbnailContainer, SliderContainer } from '../styles/Overview/Slider.styled';
+import ChevronUp from '../../assets/images/chevron-up.svg'
+import ChevronDown from '../../assets/images/chevron-down.svg'
 
 export const DefaultView = (props) => {
   const [ styles, setStyles ] = useState([]);
@@ -74,12 +76,12 @@ export const ThumbnailSlider = () => {
 
   return (
     <SliderContainer>
-      <Arrow className={isAboveLowerBounds ? 'showContent' : 'hideContent'} src={'./images/chevron-up.svg'} onClick={() => (isAboveLowerBounds) ? displayPrevImage() : {}} />
+      <Arrow className={isAboveLowerBounds ? 'showContent' : 'hideContent'} src={ChevronUp} onClick={() => (isAboveLowerBounds) ? displayPrevImage() : {}} />
       {images.map((image, idx) => (idx < 7) ?
         <ThumbnailItem key={image.id} id={image.id} image={image}/>
         : null
       )}
-      <Arrow className={isBelowUpperBounds ? 'showContent' : 'hideContent'} src={'./images/chevron-down.svg'} onClick={() => (isBelowUpperBounds) ? displayNextImage() : {}} />
+      <Arrow className={isBelowUpperBounds ? 'showContent' : 'hideContent'} src={ChevronDown} onClick={() => (isBelowUpperBounds) ? displayNextImage() : {}} />
     </SliderContainer>
   );
 };
