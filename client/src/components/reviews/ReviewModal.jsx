@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { ReviewModalWindowStyled, LabelStyled, FormInput, ReviewBodyInput, QuestionWrapper } from '../styles/reviews/ReviewModalStyled.styled';
 import SelectStars from '../shared/SelectStars.jsx';
-import { ModalSubmit } from '../styles/shared/ModalStyled.styled';
+import Button from './Button.jsx';
 import { postNewReview } from '../../request.js';
+import { ReviewModalWindowStyled, LabelStyled, FormInput, ReviewBodyInput, QuestionWrapper, ButtonWrapper } from '../styles/reviews/ReviewModalStyled.styled';
 
 function ReviewModal({ productId, reviewMeta, fetchReviews, toggleModal }) {
   const [overallRating, setOverallRating] = useState(0);
@@ -185,9 +185,9 @@ function ReviewModal({ productId, reviewMeta, fetchReviews, toggleModal }) {
         </QuestionWrapper>
       ))}
       </div>
-      <ModalSubmit type="submit" onClick={() => handleSubmit()}>
-        Submit
-      </ModalSubmit>
+      <ButtonWrapper>
+        <Button handleOnClick={() => handleSubmit()} text={'Submit'}/>
+      </ButtonWrapper>
     </ReviewModalWindowStyled>
   );
 }

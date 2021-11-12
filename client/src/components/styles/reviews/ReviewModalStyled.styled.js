@@ -5,6 +5,7 @@ export const ReviewModalWindowStyled = styled.div`
   flex-direction: column;
   background-color: #fefefe;
   padding: 20px;
+  font-size: 12pt;
 `
 export const LabelStyled = styled.label`
   font-weight: bold;
@@ -25,4 +26,9 @@ export const ReviewBodyInput = styled.textarea`
 
 export const QuestionWrapper = styled.div`
   margin-bottom: 20px;
+`
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
 `

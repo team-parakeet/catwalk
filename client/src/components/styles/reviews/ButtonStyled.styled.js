@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ButtonStyled = styled.button`
-  font-size: 10pt;
+  font-size: 12pt;
   background-color: #fff;
   text-align: left;
   border: 0px;
