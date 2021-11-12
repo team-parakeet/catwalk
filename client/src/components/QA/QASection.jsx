@@ -5,11 +5,12 @@ import { getAllQuestions } from '../../request.js';
 import { QAContext } from './QAContext.jsx';
 import AddQuestionModal from './AddQuestionModal.jsx';
 import AddAnswerModal from './AddAnswerModal.jsx';
+import { QASectionContainer, AddQuestionButton } from '../styles/QA/QASection.styled';
 
 const QASection = () => {
   const [questions, setQuestions] = useState([]); // keep track of the questions
   const [searchResults, setSearchResults] = useState([]); // keep track of searchResults
-  const { search, toggleModal, question_id, showQuestionModal, showAnswerModal } = useContext(QAContext);
+  const { search, toggleModal, reload, question_id, showQuestionModal, showAnswerModal } = useContext(QAContext);
 
   useEffect(() => {
     getAllQuestions(39334)
@@ -22,7 +23,7 @@ const QASection = () => {
           err
         )
       );
-  }, []);
+  }, [reload]);
 
   useEffect(() => {
     search.length >= 3 ? getSearchResults() : clearSearchResults(); // Clear the searchResults if we don't want to search
@@ -82,16 +83,16 @@ const QASection = () => {
   };
 
   return (
-    <>
+    <QASectionContainer>
       {/* we want it to have font color #525252 */}
       {/* Putting in a span tag so that childrens listed on the context is just the span as opposed to Question, Answers, &*/}
       <span style={{ fontSize: '1.5rem' }}>QUESTIONS {'&'} ANSWERS</span>
       <Search />
       <QuestionsList questions={questions} searchResults={searchResults} />
-      <button onClick={() => toggleModal('showQuestionModal')} className="add-question">Add a question</button>
+      <AddQuestionButton onClick={() => toggleModal('showQuestionModal')} className="add-question">ADD A QUESTION</AddQuestionButton>
       {showQuestionModal && <AddQuestionModal />}
       {showAnswerModal && <AddAnswerModal question_id={question_id} />}
-    </>
+    </QASectionContainer>
   );
 };
 

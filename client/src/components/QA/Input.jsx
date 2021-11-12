@@ -10,6 +10,7 @@ const Input = props => {
     <InputContainer>
       <LabelStyled htmlFor={props.htmlFor}>{props.label}</LabelStyled>
       <InputStyled
+        required={props.required}
         id={props.id}
         type={props.type}
         name={props.name}

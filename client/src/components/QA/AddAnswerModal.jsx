@@ -3,9 +3,10 @@ import Modal from '../shared/Modal.jsx';
 import { QAContext } from './QAContext.jsx';
 import Input from './Input.jsx';
 import { postAnswer } from '../../request.js';
+import { InputContainer } from '../styles/QA/AddAnswerModal.styled';
 
 const AddAnswerModal = (props) => {
-  const { toggleModal } = useContext(QAContext);
+  const { toggleModal, triggerReload} = useContext(QAContext);
   const [formData, setFormData] = useState({
     body: '',
     name: '',
@@ -21,7 +22,7 @@ const AddAnswerModal = (props) => {
 
   const handleSubmit = e => {
     postAnswer(props.question_id, formData)
-      .then(response => console.log(response))
+      .then(response => triggerReload())
       .catch(err => console.error('There was an error >>>', err));
   };
 
@@ -68,19 +69,19 @@ const AddAnswerModal = (props) => {
 
   return (
     <Modal toggleModal={() => toggleModal('showAnswerModal')} headerText={"Write your answer:"} handleSubmit={handleSubmit}>
-      {inputs.map(({ label, htmlFor, id, type, name, placeholder }) => (
-        <Input
-          key={id}
-          handleChange={handleChange}
-          inputValue={formData[name]}
-          label={label}
-          htmlFor={htmlFor}
-          id={id}
-          type={type}
-          name={name}
-          placeholder={placeholder}
-        />
-      ))}
+        {inputs.map(({ label, htmlFor, id, type, name, placeholder }) => (
+          <Input
+            key={id}
+            handleChange={handleChange}
+            inputValue={formData[name]}
+            label={label}
+            htmlFor={htmlFor}
+            id={id}
+            type={type}
+            name={name}
+            placeholder={placeholder}
+          />
+        ))}
     </Modal>
   );
 };

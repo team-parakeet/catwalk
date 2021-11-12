@@ -41,6 +41,7 @@ const AddQuestionModal = () => {
       type: 'text',
       name: 'body',
       placeholder: 'Enter your question...',
+      required: true
     },
     {
       label: 'Username',
@@ -49,6 +50,7 @@ const AddQuestionModal = () => {
       type: 'text',
       name: 'name',
       placeholder: 'Enter your username...',
+      required: true
     },
     {
       label: 'Email',
@@ -57,13 +59,15 @@ const AddQuestionModal = () => {
       type: 'email',
       name: 'email',
       placeholder: 'john@smith.com',
+      required: true
     },
   ];
 
   return (
     <Modal toggleModal={() => toggleModal('showQuestionModal')} headerText={"What's your question?"} handleSubmit={handleSubmit}>
-      {inputs.map(({ label, htmlFor, id, type, name, placeholder }) => (
+      {inputs.map(({ label, htmlFor, id, type, name, placeholder, required }) => (
         <Input
+          required={required}
           key={id}
           handleChange={handleChange}
           inputValue={formData[name]}

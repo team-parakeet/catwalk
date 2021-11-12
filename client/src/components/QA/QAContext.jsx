@@ -10,6 +10,7 @@ const initialState = {
   question_id: -1,
   showQuestionModal: false,
   showAnswerModal: false,
+  reload: 0
 };
 
 /**
@@ -20,7 +21,8 @@ const actions = {
   SET_SEARCH: 'SET_SEARCH',
   SET_PRODUCT_ID: 'SET_PRODUCT_ID',
   SET_QUESTION_ID: 'SET_QUESTION_ID',
-  TOGGLE_MODAL: 'TOGGLE_MODAL'
+  TOGGLE_MODAL: 'TOGGLE_MODAL',
+  RELOAD: 'RELOAD'
 };
 
 function reducer(state = initialState, action) {
@@ -33,6 +35,8 @@ function reducer(state = initialState, action) {
       return {...state, product_id: action.payload };
     case actions.SET_QUESTION_ID:
       return {...state, question_id: action.payload };
+    case actions.RELOAD:
+      return {...state, reload: state.reload + 1}
     default:
       return state;
   }
@@ -49,8 +53,10 @@ export function Provider({ children }) {
     search: state.search,
     product_id: state.product_id,
     question_id: state.question_id,
+    reload: state.reload,
     showQuestionModal: state.showQuestionModal,
     showAnswerModal: state.showAnswerModal,
+    triggerReload: () => dispatch({type: actions.RELOAD}),
     setProductId: (value) => dispatch({type: actions.SET_PRODUCT_ID, payload: value}),
     setQuestionId: (value) => dispatch({type: actions.SET_QUESTION_ID, payload: value}),
     setSearch: (e) => dispatch({type: actions.SET_SEARCH, payload: e.target.value}),

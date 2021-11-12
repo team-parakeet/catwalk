@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { StyledSpan } from '../styles/QA/Helpful.styled';
-import styled from 'styled-components';
+import { QAContext } from './QAContext.jsx';
 import {
   updateQuestionHelpfulCount,
   updateAnswerHelpfulCount,
 } from '../../request.js';
 
 const Helpful = ({ count, id, type }) => {
-  const [localCount, setLocalCount] = useState(count);
+  // const [localCount, setLocalCount] = useState(count);
   const [wasIncremented, setWasIncremented] = useState(false);
+  const { triggerReload } = useContext(QAContext);
 
   const handleOnClick = e => {
     if (!wasIncremented) {
@@ -16,14 +17,16 @@ const Helpful = ({ count, id, type }) => {
         updateQuestionHelpfulCount(id)
           .then(results => {
             setWasIncremented(true);
-            setLocalCount(localCount => localCount + 1);
+            // setLocalCount(localCount => localCount + 1);
+            triggerReload();
           })
           .catch(err => console.error(err));
       } else if (type === 'answer') {
         updateAnswerHelpfulCount(id)
           .then(results => {
             setWasIncremented(true);
-            setLocalCount(localCount => localCount + 1);
+            // setLocalCount(localCount => localCount + 1);
+            triggerReload();
           })
           .catch(err => console.error(err));
       }
@@ -33,7 +36,7 @@ const Helpful = ({ count, id, type }) => {
   return (
     <span>
       Helpful? <StyledSpan onClick={e => handleOnClick(e)}>Yes</StyledSpan> (
-      {localCount})
+      {count})
     </span>
   );
 };

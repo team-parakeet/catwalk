@@ -56,12 +56,12 @@ const Answer = ({ answers }) => {
           })}
           {moreAnswers > 0 && (
             <LoadMoreAnswersBtn onClick={() => setLoadFactor(loadFactor + 2)}>
-              Load more answers ({moreAnswers})
+              See more answers ({moreAnswers})
             </LoadMoreAnswersBtn>
           )}
           {loadFactor > 2 && (
             <CollapseAnswersBtn onClick={() => setLoadFactor(2)}>
-              Collapse all answers
+              Collapse answers
             </CollapseAnswersBtn>
           )}
         </ResponsesContainer>
