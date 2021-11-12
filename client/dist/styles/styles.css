@@ -16,3 +16,17 @@ hr {
   color: hsla(99, 49%, 11%, 1);
   opacity: 50%;
 }
+
+figure {
+  background-repeat: no-repeat;
+}
+
+.expanded-view:hover img {
+  opacity: 0;
+}
+
+.expanded-thumbnail img {
+  display: block;
+  width: 100%;
+  pointer-events: none;
+}

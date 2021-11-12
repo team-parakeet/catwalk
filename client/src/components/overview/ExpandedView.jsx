@@ -24,7 +24,7 @@ const ExpandedView = ( {src} ) => {
   }
 
   return (
-    <Figure className='expanded-view' onMouseMove={handleMouseMove} >
+    <Figure className='expanded-view' onMouseMove={handleMouseMove} style={ {backgroundImage: `url(${src})`, backgroundPosition: `${position}`}}>
       <Image className='expanded-thumbnail' src={src} />
     </Figure>
   )
