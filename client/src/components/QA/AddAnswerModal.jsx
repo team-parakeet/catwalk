@@ -2,23 +2,15 @@ import React, { useContext, useState } from 'react';
 import Modal from '../shared/Modal.jsx';
 import { QAContext } from './QAContext.jsx';
 import Input from './Input.jsx';
-import {
-  InputContainer,
-  LabelStyled,
-  InputStyled,
-  QuestionInput,
-  UsernameInput,
-  EmailInput,
-} from '../styles/QA/AddQuestionModal.styled';
-import { postQuestion } from '../../request.js';
+import { postAnswer } from '../../request.js';
 
-const AddQuestionModal = () => {
-  const { toggleModal, product_id } = useContext(QAContext);
+const AddAnswerModal = (props) => {
+  const { toggleModal } = useContext(QAContext);
   const [formData, setFormData] = useState({
     body: '',
     name: '',
     email: '',
-    product_id: product_id,
+    photos: []
   });
 
   const handleChange = e => {
@@ -28,19 +20,25 @@ const AddQuestionModal = () => {
   };
 
   const handleSubmit = e => {
-    postQuestion(formData)
+    postAnswer(props.question_id, formData)
       .then(response => console.log(response))
       .catch(err => console.error('There was an error >>>', err));
   };
 
+  /**
+   * Name key/attribute must match the state keyname corresponding to the respective input element
+   * e.g. state object has key named 'photos' then input name attribute must be 'photos'
+   *
+   * @type {Array<Object>}
+   */
   const inputs = [
     {
-      label: 'Question',
-      htmlFor: 'question-input',
-      id: 'question-input',
+      label: 'Answer',
+      htmlFor: 'answer-input',
+      id: 'answer-input',
       type: 'text',
       name: 'body',
-      placeholder: 'Enter your question...',
+      placeholder: 'Enter your answer...',
     },
     {
       label: 'Username',
@@ -58,10 +56,18 @@ const AddQuestionModal = () => {
       name: 'email',
       placeholder: 'john@smith.com',
     },
+    {
+      label: 'Photos',
+      htmlFor: 'photos-input',
+      id: 'photos-input',
+      type: 'text',
+      name: 'photos',
+      placeholder: 'enter some photos'
+    }
   ];
 
   return (
-    <Modal toggleModal={() => toggleModal('showQuestionModal')} headerText={"What's your question?"} handleSubmit={handleSubmit}>
+    <Modal toggleModal={() => toggleModal('showAnswerModal')} headerText={"Write your answer:"} handleSubmit={handleSubmit}>
       {inputs.map(({ label, htmlFor, id, type, name, placeholder }) => (
         <Input
           key={id}
@@ -75,29 +81,8 @@ const AddQuestionModal = () => {
           placeholder={placeholder}
         />
       ))}
-
-      {/* <InputContainer>
-        <LabelStyled htmlFor="username-input">Username</LabelStyled>
-        <UsernameInput
-          id="username-input"
-          type="text"
-          name="name"
-          placeholder="Enter your username..."
-          value={formData.name}
-          onChange={(e) => handleChange(e)}
-        />
-      </InputContainer>
-      <InputContainer>
-        <LabelStyled htmlFor="email-input">Email</LabelStyled>
-        <EmailInput
-          id="email-input"
-          type="email"
-          name="email"
-          placeholder="john@smith.com"
-        />
-      </InputContainer> */}
     </Modal>
   );
 };
 
-export default AddQuestionModal;
+export default AddAnswerModal;

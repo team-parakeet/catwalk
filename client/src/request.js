@@ -32,6 +32,30 @@ export function postQuestion(data) {
   })
 }
 
+/**
+ *
+ * @param {Object} data Object containing body params for answer posting: name, body, email, photos, question_id
+ * @returns
+ */
+export function postAnswer(questionId, data) {
+  return axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/qa/questions/${questionId}/answers`, data, {
+    headers: header,
+    params: questionId
+  })
+}
+
+export function updateQuestionHelpfulCount(questionId) {
+  return axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/qa/questions/${questionId}/helpful`, {}, {
+    headers: header
+  })
+}
+
+export function updateAnswerHelpfulCount(answerId) {
+  return axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/qa/answers/${answerId}/helpful`, {}, {
+    headers: header
+  })
+}
+
 export function getProductReviewMeta(productId) {
   const url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/meta/?product_id=${productId}`
   return axios.get(url, {

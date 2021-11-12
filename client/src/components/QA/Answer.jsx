@@ -47,7 +47,7 @@ const Answer = ({ answers }) => {
                 <SubAnswerBody className='answer-sub-text'>
                   <By answer={answers[answer]} />
                   <Spacer>|</Spacer>
-                  <Helpful count={answers[answer].helpfulness} />
+                  <Helpful id={answer} type={'answer'} count={answers[answer].helpfulness} />
                   <Spacer>|</Spacer>
                   <Report />
                 </SubAnswerBody>

@@ -2,21 +2,24 @@ import React from 'react';
 
 /**
  * State object
- * @type {{search: string}}
+ * @type {{search: string, product_id: number, question_id: number, showQuestionModal: boolean, showAnswerModal: boolean}}
  */
 const initialState = {
   search: '',
   product_id: 39334,
-  showModal: false
+  question_id: -1,
+  showQuestionModal: false,
+  showAnswerModal: false,
 };
 
 /**
  * Actions object
- * @type {{ACTION: string}}
+ * @type {{SET_SEARCH: string, SET_PRODUCT_ID: string, SET_QUESTION_ID: string, TOGGLE_MODAL: string}}
  */
 const actions = {
   SET_SEARCH: 'SET_SEARCH',
   SET_PRODUCT_ID: 'SET_PRODUCT_ID',
+  SET_QUESTION_ID: 'SET_QUESTION_ID',
   TOGGLE_MODAL: 'TOGGLE_MODAL'
 };
 
@@ -25,9 +28,11 @@ function reducer(state = initialState, action) {
     case actions.SET_SEARCH:
       return { ...state, search: action.payload };
     case actions.TOGGLE_MODAL:
-      return {...state, showModal: !state.showModal };
+      return {...state, [action.payload]: !state[action.payload] };
     case actions.SET_PRODUCT_ID:
       return {...state, product_id: action.payload };
+    case actions.SET_QUESTION_ID:
+      return {...state, question_id: action.payload };
     default:
       return state;
   }
@@ -43,10 +48,13 @@ export function Provider({ children }) {
   const value = {
     search: state.search,
     product_id: state.product_id,
-    showModal: state.showModal,
+    question_id: state.question_id,
+    showQuestionModal: state.showQuestionModal,
+    showAnswerModal: state.showAnswerModal,
     setProductId: (value) => dispatch({type: actions.SET_PRODUCT_ID, payload: value}),
+    setQuestionId: (value) => dispatch({type: actions.SET_QUESTION_ID, payload: value}),
     setSearch: (e) => dispatch({type: actions.SET_SEARCH, payload: e.target.value}),
-    toggleModal: () => dispatch({type: actions.TOGGLE_MODAL})
+    toggleModal: (value) => dispatch({type: actions.TOGGLE_MODAL, payload: value})
   }
 
   return <QAContext.Provider value={value}>{children}</QAContext.Provider>;
