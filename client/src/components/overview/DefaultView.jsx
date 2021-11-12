@@ -1,11 +1,10 @@
-import React, { useContext, useState, useEffect, useCallback } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import ExpandedView from './ExpandedView.jsx';
 import ModalForm from '../shared/Modal.jsx';
-import { getProductStyles } from '../../request.js';
+import { getProductStyles, getProductPhotosOfAStyle  } from '../../request.js';
 import Selectors from './selectors.jsx';
 import ProductDetails from './productDetails.jsx';
 import { OverviewContext } from './OverviewContext.jsx';
-import { getProductPhotosOfAStyle } from '../../request.js';
 import { ProductDetailsContainer } from '../styles/Overview/ProductDetails.styled.js';
 import { DefaultViewContainer, BackgroundImageContainer, BackgroundImage, ThumbnailSliderContainer } from '../styles/Overview/DefaultView.styled';
 import { Arrow, FadedArrow, ActiveThumbnail, FadedThumbnail, ThumbnailContainer, SliderContainer } from '../styles/Overview/Slider.styled';
