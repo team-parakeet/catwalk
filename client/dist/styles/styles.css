@@ -16,3 +16,11 @@ hr {
   color: hsla(99, 49%, 11%, 1);
   opacity: 50%;
 }
+
+.expanded-view:hover {
+  transform: scale(2.0);
+}
+
+.expanded-thumbnail {
+  pointer-events: none;
+}
