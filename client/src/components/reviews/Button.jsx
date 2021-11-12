@@ -1,10 +1,10 @@
 import React from 'react';
-import { Btn } from './../styles/reviews/Btn.styled.js';
+import { ButtonStyled } from '../styles/reviews/ButtonStyled.styled.js';
 
 function Button({ handleOnClick, text }) {
 
   return (
-    <Btn onClick={handleOnClick}>{text}</Btn>
+    <ButtonStyled onClick={handleOnClick}>{text}</ButtonStyled>
   )
 }
 

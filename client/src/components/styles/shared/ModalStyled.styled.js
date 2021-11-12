@@ -15,6 +15,8 @@ export const ModalWindow = styled.div`
   max-width: 80%;
   max-height: 80%;
   padding: 10px;
+  overflow: scroll;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
 `
 
 export const ModalHeader = styled.div`
@@ -22,7 +24,6 @@ export const ModalHeader = styled.div`
   justify-content: space-between;
   padding-left: 1rem;
   padding-right: 1rem;
-  /* outline: 1px solid red; */
 `
 
 export const ModalExit = styled.button`
@@ -53,7 +54,6 @@ export const ModalFooter = styled.div`
   display: flex;
   justify-content: flex-end;
   width: 100%;
-  outline: 1px solid orange;
 `
 
 export const ModalSubmit = styled.button`
@@ -63,6 +63,7 @@ export const ModalSubmit = styled.button`
   border-radius: 10px;
   font-size: 1rem;
   cursor: pointer;
+  padding: 0px 20px 20px 0px;
 
   &:hover {
     transform: scale(1.1);
@@ -95,9 +96,5 @@ export const Overlay = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0,0,0,0.2);
-`
-
-export const ModalBody = styled.div`
-
+  background-color: rgba(0,0,0,0.4);
 `

@@ -63,6 +63,13 @@ export function getProductReviewMeta(productId) {
   })
 }
 
+export function getProductReviews(productId) {
+  const url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/?sort="relevant"&product_id=${productId}&count=50`
+  return axios.get(url, {
+    headers: header
+  })
+}
+
 export function getSelectedSortByReviews(selected, productId) {
   const url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/?sort=${selected}&product_id=${productId}&count=50`
   return axios.get(url, {

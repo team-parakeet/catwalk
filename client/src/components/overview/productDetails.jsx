@@ -1,34 +1,16 @@
 import React from 'react';
 import Stars from '../shared/Stars.jsx';
-import styled from 'styled-components';
+import { ProductName, ProductCategory, ProductPrice, ProductDetailsContainer } from '../styles/Overview/ProductDetails.styled.js';
 
-const ProductName = styled.span`
-  font-size: 30px;
-  font-style: bold;
-  color: hsla(196, 17%, 29%, 1);
-`
-
-const ProductCategory = styled.span`
-  font-size: 15px;
-  font-style: italic;
-  color: hsla(196, 17%, 45%, 85%);
-  margin-left: 20px;
-`
-
-const ProductPrice = styled.div`
-  color: hsla(33, 22%, 45%, 1);
-`
-
-const ProductDetails = ( {product, rating} ) => {
+const ProductDetails = ( {product, rating, productId} ) => {
   return (
-      <div className='product-details'>
-        { /* TODO: Make Stars color match theme */ }
-        <Stars avgRating={rating} style={ {margin: 'auto', color: 'hsl(196, 17%, 29%)'}}/>
-        <br></br>
-        <ProductName>{product.name}</ProductName>
-        <ProductCategory>{product.category}</ProductCategory>
-        <ProductPrice>{product.default_price}</ProductPrice>
-      </div>
+    <div className='product-details'>
+      <Stars rating={rating} id={productId}/>
+      <br></br>
+      <ProductName>{product.name}</ProductName>
+      <ProductCategory>{product.category}</ProductCategory>
+      <ProductPrice>{product.default_price}</ProductPrice>
+    </div>
   )
 }
 

@@ -5,7 +5,6 @@ import StyleThumbnail from './styleThumbnail.jsx';
 import StyleSelector from './styleSelector.jsx';
 import SizeSelector from './sizeSelector.jsx';
 import QuantitySelector from './quantitySelector.jsx';
-import styled from 'styled-components';
 
 const DEFAULT_QUANTITIES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
 
@@ -35,13 +34,14 @@ const Selectors = (props) => {
 
   // On size select, retrieves quantities for that size
   const retrieveQuantitiesBySize = (size) => {
+    size = size.toString();
     let maxQuantity;
 
     for (let i = 0; i < props.styles.length; i++) {
       const style = props.styles[i];
       if (style.style_id === currentStyle.style_id) {
         for (let k in style.skus) {
-          if (style.skus[k][size]) {
+          if (style.skus[k].size === size) {
             maxQuantity = style.skus[k].quantity;
             if (style.skus[k].quantity < 1) {
               setOutOfStock(true);
@@ -67,14 +67,15 @@ const Selectors = (props) => {
   // On click, set state to reflect chosen style
   // Make sure that e.target.value is an ID number
   const handleStyleSelect = (style) => {
-    retrieveSizesByStyle(style.style_id );
     setCurrentStyle(style);
+    retrieveSizesByStyle( style.style_id );
+
+    props.updateStyle( style.style_id );
   }
 
   // On change, updates state to reflect chosen size and hides 'Choose a size' error msg
   const handleSizeSelect = (e) => {
     document.querySelector('.size-error-msg').style.visibility = 'hidden';
-
     retrieveQuantitiesBySize( e.target.value );
     setCurrentSize(e.target.value);
   }
@@ -105,7 +106,7 @@ const Selectors = (props) => {
         }
       }
 
-      props.addToCart(item);
+      props.addItemToCart(item);
     }
   }
 

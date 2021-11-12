@@ -20,13 +20,12 @@ const StyleThumbnail = (props) => {
 
   return (
     <Image
-      isSelected={props.selected}
+      isSelected={props.isSelected}
       onClick={ () => {
         setIsSelected(true);
         props.onClick(props.info);
       }}
       src={props.url}
-      alt={ isSelected ? props.info.name : null}
     />
   )
 }

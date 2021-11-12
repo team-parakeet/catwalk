@@ -27,7 +27,7 @@ function ModalForm({
       }
     };
 
-    const handleOutsideClick = e => {
+    const handleOutsideClick = (e) => {
       if (modalRef.current && !modalRef.current.contains(e.target)) {
         toggleModal();
       }
