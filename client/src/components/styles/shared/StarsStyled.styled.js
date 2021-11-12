@@ -8,7 +8,7 @@ export const StarsStyled = styled.div`
 
 export const Rating1 = styled.div`
   position: absolute;
-  color: #71915d;
+  color: #a7bb9b;
   z-index: 10;
   overflow: hidden;
   &::before {

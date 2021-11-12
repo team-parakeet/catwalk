@@ -6,24 +6,21 @@ export const SliderContainer = styled.div`
   justify-content: center;
   align-items: center;
   max-width: 90px;
-  /* outline: 2px solid blue; */
-
+  max-height: 600px;
 `
 
 export const ThumbnailContainer = styled.div`
-  /* outline: 1px solid orange; */
   padding: 0.5rem;
 `
 
 export const Thumbnail = styled.img`
-  max-height: 100%;
+  max-height: 60px;
   max-width: 100%;
   border: 1px solid black;
 `
 
 export const FadedThumbnail = styled(Thumbnail)`
   opacity: 0.5;
-
 `
 
 export const ActiveThumbnail = styled(Thumbnail)`

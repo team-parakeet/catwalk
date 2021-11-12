@@ -92,9 +92,6 @@ const App = ( {productId} ) => {
     };
 
     axios(config)
-      .then( () => {
-        alert(`Added ${item.count} ${product.name} to your cart`)
-      })
       .catch(err => {
         console.error(err);
       });
@@ -125,22 +122,22 @@ const App = ( {productId} ) => {
   return (
     <div>
       <SiteWrapper>
-        { /* TODO: Wrap the image gallery and product-details in a grid container for reponsive layout on mobile */ }
+        { /* TODO: Wrap the image gallery and product-details in a grid container for responsive layout on mobile */ }
         <OverviewProvider>
           <div className="image-gallery">
-            <DefaultView />
+            { styles.length && <DefaultView
+              product={product}
+              productId={productId}
+              styles={styles}
+              rating={rating}
+              addItemToCart={addItemToCart}
+            /> }
           </div>
-          <ProductDetails product={product} rating={rating} productId={productId}/>
-          <br></br>
-          <Selectors
-            addToCart={addItemToCart}
-            styles={styles}
-            product={product}
-            productId={productId}
-          />
           <br></br>
           <ProductDescription product={product} />
         </OverviewProvider>
+        <br></br>
+        <hr></hr>
         <br></br>
         <div className="ratings-and-reviews">
           {reviews.length === 0 ?
@@ -156,6 +153,8 @@ const App = ( {productId} ) => {
             (<Reviews reviews={reviews} productId={productId} avgRating={rating} fetchReviews={fetchReviews}/>
           )}
         </div>
+        <br></br>
+        <hr></hr>
         <br></br>
         <div className="q-and-a">
           <QAProvider>

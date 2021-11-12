@@ -37,16 +37,15 @@ export const OverviewContext = React.createContext();
 
 export function OverviewProvider({children}) {
 
-  // You can name the destructured variables anyway you want
   const [state, dispatch] = React.useReducer(reducer, initialState)
 
   const handleKeyPress = (e) => {
     if ((e.key === 'ArrowRight' /*|| e.key === 'ArrowDown'*/) && state.currentImage < state.images.length - 1) {
-      event.preventDefault();
+      e.preventDefault();
       dispatch({type: actions.NEXT_PIC})
     }
     else if ((e.key === 'ArrowLeft' /*|| e.key === 'ArrowUp'*/) && state.currentImage > 0) {
-      event.preventDefault();
+      e.preventDefault();
       dispatch({type: actions.PREV_PIC})
     }
   }

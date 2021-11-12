@@ -20,6 +20,13 @@ export function getAllQuestions(productId) {
   })
 }
 
+export function getProductReviews(productId) {
+  const url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/?sort="relevant"&product_id=${productId}&count=50`
+  return axios.get(url, {
+    headers: header
+  })
+}
+
 export function getProductReviewMeta(productId) {
   const url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/meta/?product_id=${productId}`
   return axios.get(url, {

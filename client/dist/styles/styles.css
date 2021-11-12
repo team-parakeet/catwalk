@@ -11,3 +11,8 @@
 .description-text {
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
+
+hr {
+  color: hsla(99, 49%, 11%, 1);
+  opacity: 50%;
+}
