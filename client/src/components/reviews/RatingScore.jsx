@@ -1,7 +1,7 @@
 import React from 'react';
 import Score from './Score.jsx';
 import Stars from '../shared/Stars.jsx';
-import { RatingScoreContainer, NumberOfReviewsBar, FlexRow, StarScore } from '../styles/reviews/RatingScoreContainer.styled.js';
+import { RatingScoreContainer, NumberOfReviewsBar, FlexRow, StarScore } from '../styles/reviews/RatingScoreStyled.styled.js';
 
 function RatingScore({ reviews, avgRating, numOfReviews }) {
   if (!avgRating || reviews.length === 0) {

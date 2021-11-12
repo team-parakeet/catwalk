@@ -1,5 +1,5 @@
 import React from 'react';
-import { Btn } from './../styles/reviews/Btn.styled.js';
+import { Btn } from './../styles/reviews/ButtonStyled.styled.js';
 
 function Button({ handleOnClick, text }) {
 

@@ -16,10 +16,10 @@ import { DefaultView } from './components/overview/DefaultView.jsx';
 import { Provider as QAProvider } from './components/QA/QAContext.jsx';
 import QuestionsAnswers from './components/QA/QASection.jsx';
 import Loader from 'react-loader-spinner';
-import { LoaderWrapper } from './components/styles/reviews/ReviewsWrapper.styled.js';
 
 // Review imports
 import { getReviews } from './request.js';
+import { LoaderWrapper } from './components/styles/reviews/LoaderWrapper.styled.js';
 
 const SiteWrapper = styled.div`
   border: hsla(205, 37%, 60%, 50%) solid 5px;

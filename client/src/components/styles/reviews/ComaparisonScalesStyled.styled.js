@@ -13,3 +13,8 @@ export const FlexSpaceBetween = styled.div`
   flex-direction: row;
   justify-content: space-between;
 `
+
+export const SmallFont = styled.div`
+  font-size: 9pt;
+  color: #939393;
+`

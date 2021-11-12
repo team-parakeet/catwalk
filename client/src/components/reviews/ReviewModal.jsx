@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { ReviewModalWindowStyled, LabelStyled, FormInput, ReviewBodyInput, QuestionWrapper } from '../styles/reviews/ModalStyled.styled';
+import { ReviewModalWindowStyled, LabelStyled, FormInput, ReviewBodyInput, QuestionWrapper } from '../styles/reviews/ReviewModalStyled.styled';
 import SelectStars from '../shared/SelectStars.jsx';
-import { ModalSubmit } from '../styles/reviews/ModalStyled.styled';
+import { ModalSubmit } from '../styles/shared/ModalStyled.styled';
 import { postNewReview } from '../../request.js';
 
 function ReviewModal({ productId, reviewMeta, fetchReviews, toggleModal }) {
