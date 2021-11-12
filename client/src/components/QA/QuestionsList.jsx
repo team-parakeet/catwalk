@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import QAItem from './QAItem.jsx';
+import { QuestionsListContainer } from '../styles/QA/QuestionsListContainer.styled';
 
 const QuestionsList = ({ questions, searchResults }) => {
   const [loadFactor, setLoadFactor] = useState(4); // Determines the default number of questions to display
@@ -8,7 +9,7 @@ const QuestionsList = ({ questions, searchResults }) => {
   let remainingResponses = responses.length - loadFactor;
 
   return (
-    <div className='questions-list'>
+    <QuestionsListContainer className='questions-list'>
       {responses.map((q, idx) =>
         idx < loadFactor ? <QAItem key={q.question_id} id={q.question_id} question={q} className={"qa-item"} /> : null
       )}
@@ -16,7 +17,7 @@ const QuestionsList = ({ questions, searchResults }) => {
             Load more answered questions ({remainingResponses})
           </button>}
       {loadFactor > 4 && <button onClick={() => setLoadFactor(4)} className="collapse-questions">Collapse all questions</button>}
-    </div>
+    </QuestionsListContainer>
   );
 };
 

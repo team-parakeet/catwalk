@@ -2,20 +2,27 @@ import React from 'react';
 
 /**
  * State object
- * @type {{search: string}}
+ * @type {{search: string, product_id: number, question_id: number, showQuestionModal: boolean, showAnswerModal: boolean}}
  */
 const initialState = {
   search: '',
-  showModal: false
+  product_id: 39334,
+  question_id: -1,
+  showQuestionModal: false,
+  showAnswerModal: false,
+  reload: 0
 };
 
 /**
  * Actions object
- * @type {{ACTION: string}}
+ * @type {{SET_SEARCH: string, SET_PRODUCT_ID: string, SET_QUESTION_ID: string, TOGGLE_MODAL: string}}
  */
 const actions = {
   SET_SEARCH: 'SET_SEARCH',
-  TOGGLE_MODAL: 'TOGGLE_MODAL'
+  SET_PRODUCT_ID: 'SET_PRODUCT_ID',
+  SET_QUESTION_ID: 'SET_QUESTION_ID',
+  TOGGLE_MODAL: 'TOGGLE_MODAL',
+  RELOAD: 'RELOAD'
 };
 
 function reducer(state = initialState, action) {
@@ -23,7 +30,13 @@ function reducer(state = initialState, action) {
     case actions.SET_SEARCH:
       return { ...state, search: action.payload };
     case actions.TOGGLE_MODAL:
-      return {...state, showModal: !state.showModal };
+      return {...state, [action.payload]: !state[action.payload] };
+    case actions.SET_PRODUCT_ID:
+      return {...state, product_id: action.payload };
+    case actions.SET_QUESTION_ID:
+      return {...state, question_id: action.payload };
+    case actions.RELOAD:
+      return {...state, reload: state.reload + 1}
     default:
       return state;
   }
@@ -38,9 +51,16 @@ export function Provider({ children }) {
 
   const value = {
     search: state.search,
-    showModal: state.showModal,
+    product_id: state.product_id,
+    question_id: state.question_id,
+    reload: state.reload,
+    showQuestionModal: state.showQuestionModal,
+    showAnswerModal: state.showAnswerModal,
+    triggerReload: () => dispatch({type: actions.RELOAD}),
+    setProductId: (value) => dispatch({type: actions.SET_PRODUCT_ID, payload: value}),
+    setQuestionId: (value) => dispatch({type: actions.SET_QUESTION_ID, payload: value}),
     setSearch: (e) => dispatch({type: actions.SET_SEARCH, payload: e.target.value}),
-    toggleModal: () => dispatch({type: actions.TOGGLE_MODAL})
+    toggleModal: (value) => dispatch({type: actions.TOGGLE_MODAL, payload: value})
   }
 
   return <QAContext.Provider value={value}>{children}</QAContext.Provider>;

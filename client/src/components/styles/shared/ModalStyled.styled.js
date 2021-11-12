@@ -6,8 +6,12 @@ export const ModalWindow = styled.div`
   flex-direction: column;
   border: 1px solid black;
   border-radius: 10px;
+  top: 25%;
+  left: 25%;
   z-index: 10;
   background-color: #fff;
+  width: 50%;
+  height: 50%;
   max-width: 80%;
   max-height: 80%;
   padding: 10px;
@@ -30,7 +34,6 @@ export const ModalExit = styled.button`
   font-size: 1.5rem;
   font-weight: 600;
   cursor: pointer;
-  margin-left: 30px;
 
   &:hover {
     transform: scale(1.1);
@@ -55,29 +58,43 @@ export const ModalFooter = styled.div`
 
 export const ModalSubmit = styled.button`
   border: none;
-  background: white;
+  border-radius: 10px;
+  background: aquamarine;
   font-size: 1rem;
   cursor: pointer;
-  padding: 0px 20px 20px 0px;
+  padding: 5px 10px;
 
   &:hover {
     transform: scale(1.1);
   }
 
+  /* On click/active, shrink */
   &:active {
     transform: scale(1.0);
   }
 `
 
-export const Overlay = styled.div`
+export const ReviewModalWindow = styled(ModalWindow)`
+  top: 25%;
+  left: 25%;
+  position: absolute;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 50%;
+  height: 50%;
+  background: #fff;
+  border: 1px solid hotpink;
+  font-size: 10pt;
+`
+
+export const Overlay = styled.div`
   position: fixed;
-  z-index: 1;
-  left: 0;
   top: 0;
-  width: 100%;
-  height: 100%;
+  left: 0;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
   background-color: rgba(0,0,0,0.4);
 `
