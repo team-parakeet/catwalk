@@ -3,12 +3,10 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import { TOKEN } from '../../config.js';
-import ProductDetails from './components/overview/productDetails.jsx';
-import ProductDescription from './components/overview/productDescription.jsx';
-import Selectors from './components/overview/selectors.jsx';
-import Reviews from './components/reviews/Reviews.jsx';
 
 // Overview imports
+import ProductDescription from './components/overview/productDescription.jsx';
+import Selectors from './components/overview/selectors.jsx';
 import { OverviewProvider } from './components/overview/OverviewContext.jsx';
 import { DefaultView } from './components/overview/DefaultView.jsx';
 
@@ -18,6 +16,7 @@ import QuestionsAnswers from './components/QA/QASection.jsx';
 import Loader from 'react-loader-spinner';
 
 // Review imports
+import Reviews from './components/reviews/Reviews.jsx';
 import { getReviews } from './request.js';
 import { LoaderWrapper } from './components/styles/reviews/LoaderWrapper.styled.js';
 
