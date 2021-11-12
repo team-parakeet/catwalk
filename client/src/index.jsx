@@ -137,6 +137,8 @@ const App = ( {productId} ) => {
           <ProductDescription product={product} />
         </OverviewProvider>
         <br></br>
+        <hr></hr>
+        <br></br>
         <div className="ratings-and-reviews">
           {reviews.length === 0 ?
             (<LoaderWrapper>
@@ -151,6 +153,8 @@ const App = ( {productId} ) => {
             (<Reviews reviews={reviews} productId={productId} avgRating={rating} fetchReviews={fetchReviews}/>
           )}
         </div>
+        <br></br>
+        <hr></hr>
         <br></br>
         <div className="q-and-a">
           <QAProvider>
