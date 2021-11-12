@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import ExpandedView from './ExpandedView.jsx';
 import ModalForm from '../shared/Modal.jsx';
-import { getProductStyles } from '../../request.js';
+import { getProductStyles, getProductPhotosOfAStyle  } from '../../request.js';
 import Selectors from './selectors.jsx';
 import ProductDetails from './productDetails.jsx';
 import { OverviewContext } from './OverviewContext.jsx';
