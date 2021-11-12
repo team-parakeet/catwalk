@@ -3,7 +3,6 @@ import { getProductReviewMeta } from '../../request.js';
 import ReviewsList from './ReviewsList.jsx';
 import SortBy from './SortBy.jsx';
 import Button from './Button.jsx';
-import ModalForm from '../shared/Modal.jsx';
 import ReviewModal from './ReviewModal.jsx';
 import { ReviewsContainerStyled, ButtonWrapper } from '../styles/reviews/ReviewsContainerStyled.styled.js';
 
@@ -65,9 +64,7 @@ function ReviewsContainer({ reviews, productId, fetchReviews }) {
         <Button handleOnClick={toggleModal} text={'Add a review'} />
       </ButtonWrapper>
       {showModal ?
-      <ModalForm toggleModal={toggleModal} headerText={'Write Your Review'} submitInModal={false}>
-        <ReviewModal productId={productId} reviewMeta={reviewMeta} fetchReviews={fetchReviews} toggleModal={toggleModal} />
-      </ModalForm>
+      <ReviewModal productId={productId} reviewMeta={reviewMeta} fetchReviews={fetchReviews} toggleModal={toggleModal} />
       :
       null
       }

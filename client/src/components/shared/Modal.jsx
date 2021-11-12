@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Overlay, ModalWindow, ModalHeader, ModalExit, Line, ModalSubmit, ModalFooter } from '../styles/shared/ModalStyled.styled.js';
 
-function ModalForm({ submitInModal = true, toggleModal = () => {}, headerText = '', handleSubmit = () => {}, children }) {
+function ModalForm({ toggleModal = () => {}, headerText = '', handleSubmit = () => {}, children }) {
 
   const modalRef = useRef();
 
@@ -38,13 +38,11 @@ function ModalForm({ submitInModal = true, toggleModal = () => {}, headerText = 
         </ModalHeader>
         <Line />
         {children}
-        {submitInModal &&
         <ModalFooter>
           <ModalSubmit type="submit" onClick={() => handleSubmitOnClick()}>
             Submit
           </ModalSubmit>
         </ModalFooter>
-        }
       </ModalWindow>
     </Overlay>
   )
