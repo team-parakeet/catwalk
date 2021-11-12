@@ -18,7 +18,7 @@ const Slogan = styled.span`
 const ProductDescription = ( {product} ) => {
   return (
     <DescriptionContainer className='product-description'>
-      <Slogan className='slogan'>{product.slogan}</Slogan>
+      <Slogan className='slogan'><b>{product.slogan}</b></Slogan>
       <span className='description description-text' style={ {color: 'hsla(196, 17%, 45%, 1)', fontSize: '25px'} }>{product.description}</span>
     </DescriptionContainer>
   )
