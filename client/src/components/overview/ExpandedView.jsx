@@ -6,8 +6,6 @@ import { DefaultViewContainer, BackgroundImageContainer, BackgroundImage, Thumbn
 import { Arrow, FadedArrow, ActiveThumbnail, FadedThumbnail, ThumbnailContainer, SliderContainer } from '../styles/Overview/Slider.styled';
 
 const ExpandedView = ( {src} ) => {
-  // props: src url,
-
   const [ zoom, setZoom ] = useState(false);
   const [ position, setPosition ] = useState('0% 0%');
 
@@ -26,8 +24,8 @@ const ExpandedView = ( {src} ) => {
   }
 
   return (
-    <Figure class='expanded-view' onMouseMove={handleMouseMove} >
-      <Image class='expanded-thumbnail' src={src} />
+    <Figure className='expanded-view' onMouseMove={handleMouseMove} >
+      <Image className='expanded-thumbnail' src={src} />
     </Figure>
   )
 }
