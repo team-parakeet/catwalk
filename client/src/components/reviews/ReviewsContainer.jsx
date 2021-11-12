@@ -52,7 +52,7 @@ function ReviewsContainer({ reviews, productId, fetchReviews }) {
     <ReviewsContainerStyled>
       <SortBy setCurrentReviews={setCurrentReviews} productId={productId} />
       {reviews.length !== 0 &&
-      <ReviewsList reviews={reviewsToShow}/>
+      <ReviewsList reviews={reviewsToShow} />
       }
       <ButtonWrapper>
         {reviews.length < 2 || reviewsToShow.length === reviews.length ? null :
