@@ -5,10 +5,10 @@ export const ButtonStyled = styled.button`
   background-color: #fff;
   text-align: left;
   border: 0px;
-  color: #939393;
+  color: #000000;
   padding: 0px;
 
   &:hover {
-    color: #000000;
+    transform: scale(1.1);
   }
 `
