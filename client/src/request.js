@@ -2,7 +2,7 @@ import axios from 'axios';
 import {TOKEN} from '../../config.js';
 
 const header = {
-  Authorization: TOKEN
+  Authorization: TOKEN,
 };
 
 /**
@@ -20,15 +20,51 @@ export function getAllQuestions(productId) {
   })
 }
 
-export function getProductReviews(productId) {
-  const url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/?sort="relevant"&product_id=${productId}&count=50`
-  return axios.get(url, {
+/**
+ * Returns a promise that resolves to the server response to a POST request.
+ *
+ * @param {Object} data Object containing body params for posting: name, body, email, product_id
+ * @returns {Promise<any>} Promise object resolves to api results
+ */
+export function postQuestion(data) {
+  return axios.post('https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/qa/questions/', data, {
+    headers: header,
+  })
+}
+
+/**
+ *
+ * @param {Object} data Object containing body params for answer posting: name, body, email, photos, question_id
+ * @returns
+ */
+export function postAnswer(questionId, data) {
+  return axios.post(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/qa/questions/${questionId}/answers`, data, {
+    headers: header,
+    params: questionId
+  })
+}
+
+export function updateQuestionHelpfulCount(questionId) {
+  return axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/qa/questions/${questionId}/helpful`, {}, {
+    headers: header
+  })
+}
+
+export function updateAnswerHelpfulCount(answerId) {
+  return axios.put(`https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/qa/answers/${answerId}/helpful`, {}, {
     headers: header
   })
 }
 
 export function getProductReviewMeta(productId) {
   const url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/meta/?product_id=${productId}`
+  return axios.get(url, {
+    headers: header
+  })
+}
+
+export function getProductReviews(productId) {
+  const url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/reviews/?sort="relevant"&product_id=${productId}&count=50`
   return axios.get(url, {
     headers: header
   })
