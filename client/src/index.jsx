@@ -38,10 +38,9 @@ const App = () => {
 
   // On mount, retrieve product and styles
   useEffect(() => {
-    console.log('productId is:', productId)
     const config = {
       method: 'get',
-      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/39333',
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/${productId}`,
       headers: {
         Authorization: `${TOKEN}`,
       },
@@ -69,7 +68,7 @@ const App = () => {
   const getStyles = () => {
     const config = {
       method: 'get',
-      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/39333/styles',
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/${productId}/styles`,
       headers: {
         Authorization: `${TOKEN}`,
       },
