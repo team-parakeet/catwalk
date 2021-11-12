@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Zen+Antique+Soft&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@500&family=Zen+Antique+Soft&family=Zen+Kaku+Gothic+Antique:wght@500&display=swap');
+
+* {
+  border-color: hsl(33, 22%, 45%);
+  color: hsla(99, 49%, 11%, 1);
+  font-family: 'Zen Antique Soft', serif;
+  width: auto;
+}
+
+.description-text {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+hr {
+  color: hsla(99, 49%, 11%, 1);
+  opacity: 50%;
+}

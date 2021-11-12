@@ -4,9 +4,10 @@
   "description": "Not express, express shopping app",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --coverage",
     "start": "npx live-server",
-    "build": "webpack --watch --mode development"
+    "build": "webpack --watch --mode development",
+    "doc": "jsdoc -c jsdoc.json"
   },
   "repository": {
     "type": "git",
@@ -20,16 +21,27 @@
   },
   "homepage": "https://github.com/team-parakeet/catwalk#readme",
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@fortawesome/react-fontawesome": "^0.1.16",
+    "axios": "^0.24.0",
+    "express": "^4.17.1",
+    "iso-date-formatter": "^2.0.2",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "react-loader-spinner": "^4.0.0",
+    "styled-components": "^5.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
     "@babel/preset-env": "^7.15.8",
     "@babel/preset-react": "^7.14.5",
+    "babel-jest": "^27.3.1",
     "babel-loader": "^8.2.3",
     "jest": "^27.3.1",
     "jest-puppeteer": "^6.0.0",
+    "jest-styled-components": "^7.0.5",
+    "jsdoc": "^3.6.7",
     "puppeteer": "^10.4.0",
     "webpack": "^5.60.0",
     "webpack-cli": "^4.9.1"
