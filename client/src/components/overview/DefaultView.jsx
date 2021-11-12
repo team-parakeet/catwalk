@@ -20,19 +20,15 @@ export const DefaultView = (props) => {
   useEffect( () => {
     getProductPhotosOfAStyle(props.productId, selectedStyle)
       .then( (results) => {
-        setImages(results.photos.map((photo, id) => { return {id, ...photo}} ));
+        setImages(results.photos.map((photo, id) => {
+          return {id, ...photo}}
+        ));
       })
       .catch( (err) => {
         console.error(err);
       });
-
-    // TODO: If expandedView is active, render the expandedView component. Else, hide it
-    if (expandedView) {
-      // open expanded view modal window
-    }
   }, []);
 
-  // TODO: Method that opens expandedview
   const handleImageClick = () => {
     setExpandedView(true);
   }
