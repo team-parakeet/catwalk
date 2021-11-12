@@ -1,9 +1,9 @@
 import React from 'react';
-import { SelectedStarsStyled } from '../styles/shared/StarsStyled.styled.js';
+import { SelectStarsStyled } from '../styles/shared/SelectStarsStyled.styled.js';
 
 export function SelectStars({ handleStarRatingOnChange }) {
   return (
-    <SelectedStarsStyled className="select-star-rating">
+    <SelectStarsStyled className="select-star-rating">
       <input type="radio" id="star5" name="select-star-rating" value="5" onChange={ e => handleStarRatingOnChange(e) }/>
       <label for="star5"></label>
       <input type="radio" id="star4" name="select-star-rating" value="4" onChange={ e => handleStarRatingOnChange(e) }/>
@@ -14,7 +14,7 @@ export function SelectStars({ handleStarRatingOnChange }) {
       <label for="star2"></label>
       <input type="radio" id="star1" name="select-star-rating" value="1" onChange={ e => handleStarRatingOnChange(e) }/>
       <label for="star1"></label>
-  </SelectedStarsStyled>
+  </SelectStarsStyled>
   )
 }
 
