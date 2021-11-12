@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Btn = styled.button`
+export const ButtonStyled = styled.button`
   font-size: 10pt;
   background-color: #fff;
   text-align: left;
