@@ -3,12 +3,10 @@ import ReactDOM from 'react-dom';
 import axios from 'axios';
 import styled from 'styled-components';
 import { TOKEN } from '../../config.js';
-import ProductDetails from './components/overview/productDetails.jsx';
-import ProductDescription from './components/overview/productDescription.jsx';
-import Selectors from './components/overview/selectors.jsx';
-import Reviews from './components/reviews/Reviews.jsx';
 
 // Overview imports
+import ProductDescription from './components/overview/productDescription.jsx';
+import Selectors from './components/overview/selectors.jsx';
 import { OverviewProvider } from './components/overview/OverviewContext.jsx';
 import { DefaultView } from './components/overview/DefaultView.jsx';
 
@@ -18,6 +16,7 @@ import QASection from './components/QA/QASection.jsx';
 import Loader from 'react-loader-spinner';
 
 // Review imports
+import Reviews from './components/reviews/Reviews.jsx';
 import { getReviews } from './request.js';
 import { LoaderWrapper } from './components/styles/reviews/LoaderWrapper.styled.js';
 
@@ -39,10 +38,9 @@ const App = () => {
 
   // On mount, retrieve product and styles
   useEffect(() => {
-    console.log('productId is:', productId)
     const config = {
       method: 'get',
-      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/39333',
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/${productId}`,
       headers: {
         Authorization: `${TOKEN}`,
       },
@@ -70,7 +68,7 @@ const App = () => {
   const getStyles = () => {
     const config = {
       method: 'get',
-      url: 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/39333/styles',
+      url: `https://app-hrsei-api.herokuapp.com/api/fec2/hr-nyc/products/${productId}/styles`,
       headers: {
         Authorization: `${TOKEN}`,
       },
