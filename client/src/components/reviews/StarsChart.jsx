@@ -12,8 +12,9 @@ function StarsChart({ ratings, numOfReviews }) {
       {stars.map(star => {
         return (
         <StarBar key={star}>
-          {star} stars: <span>
-          <Slider id={star} value={ratings[star]} max={numOfReviews} />
+          {star} stars:
+          <span>
+            <Slider id={star} value={ratings[star]} max={numOfReviews} />
           </span>
           {ratings[star]}
         </StarBar>

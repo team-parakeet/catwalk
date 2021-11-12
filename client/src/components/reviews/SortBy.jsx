@@ -1,6 +1,6 @@
 import React from 'react';
 import { getSelectedSortByReviews } from '../../request.js';
-import { SortByContainer, SortBySelect } from '../styles/reviews/SortBySelect.styled.js';
+import { SortByContainer, SortBySelect } from '../styles/reviews/SortByStyled.styled.js';
 
 function SortBy({ setCurrentReviews, productId }) {
   const handleOnChange = e => {

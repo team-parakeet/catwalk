@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getProductReviewMeta } from '../../request.js';
 import Slider from './Slider.jsx';
-import { ComparisonScaleContainer, CharScale, FlexSpaceBetween } from '../styles/reviews/ComaparisonScaleContainer.styled.js';
-import { SmallFont } from '../styles/reviews/ReviewsWrapper.styled.js';
+import { ComparisonScaleContainer, CharScale, FlexSpaceBetween, SmallFont } from '../styles/reviews/ComaparisonScalesStyled.styled.js';
 
 function ComparisonScales({ productId }) {
   const [reviewMeta, setReviewMeta] = useState({})

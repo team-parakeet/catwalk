@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import ReviewsColumn from './ReviewsColumn.jsx';
 import ReviewsContainer from './ReviewsContainer.jsx';
-import { SectionWrapper } from './../styles/reviews/SectionWrapper.styled.js';
-import { ReviewsHeader } from './../styles/reviews/ReviewsHeader.styled.js';
+import { ReviewsHeader, SectionWrapper } from './../styles/reviews/ReviewsStyled.styled.js';
 
 function Reviews({ reviews, productId, avgRating, fetchReviews }) {
   return (

@@ -6,3 +6,9 @@ export const ReviewsContainerStyled = styled.div`
   flex-direction: column;
   margin-right: 20px;
 `
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+`

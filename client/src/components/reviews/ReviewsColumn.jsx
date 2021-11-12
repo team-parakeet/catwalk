@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import RatingScore from "./RatingScore.jsx";
 import StarsChart from "./StarsChart.jsx"
 import ComparisonScales from "./ComparisonScales.jsx";
-import { ReviewsColumnContainer } from "../styles/reviews/ReviewsColumnContainer.styled.js";
-import { PercentBar } from "../styles/reviews/PercentBar.styled.js";
+import { ReviewsColumnContainer, PercentBar } from "../styles/reviews/ReviewsColumnStyled.styled.js";
 
 function ReviewsColumn({ reviews, productId, avgRating }) {
   const [ratings, setRatings] = useState({ 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 })
