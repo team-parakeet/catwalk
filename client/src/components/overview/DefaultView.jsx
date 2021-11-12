@@ -26,7 +26,7 @@ export const DefaultView = (props) => {
       .catch( (err) => {
         console.error(err);
       });
-  }, []);
+  }, [selectedStyle]);
 
   const handleImageClick = () => {
     setExpandedView(true);
@@ -34,13 +34,6 @@ export const DefaultView = (props) => {
 
   const updateStyle = (styleId) => {
     setSelectedStyle(styleId);
-    getProductPhotosOfAStyle(props.productId, styleId)
-      .then( (results) => {
-        setImages(results.photos.map((photo, id) => { return {id, ...photo}} ));
-      })
-      .catch( (err) => {
-        console.error(err);
-      });
   }
 
   return (
