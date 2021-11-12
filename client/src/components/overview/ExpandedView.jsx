@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { Figure, Image } from '../styles/Overview/ExpandedView.styled.js';
 import { OverviewContext } from './OverviewContext.jsx';
