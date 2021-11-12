@@ -60,7 +60,9 @@ export const DefaultView = (props) => {
           updateStyle={updateStyle}
         />
       </ProductDetailsContainer >
+      { console.log('expandedView: ', expandedView) }
       { expandedView ? <ModalForm toggleModal={() => {setExpandedView(false)}} type={'overview'}>
+        {console.log('inside modal form')}
         <ExpandedView src={images[currentImage].url} />
       </ModalForm> : null}
     </DefaultViewContainer>

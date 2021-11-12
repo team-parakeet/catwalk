@@ -6,7 +6,6 @@ import { DefaultViewContainer, BackgroundImageContainer, BackgroundImage, Thumbn
 import { Arrow, FadedArrow, ActiveThumbnail, FadedThumbnail, ThumbnailContainer, SliderContainer } from '../styles/Overview/Slider.styled';
 
 const ExpandedView = ( {src} ) => {
-  const [ zoom, setZoom ] = useState(false);
   const [ position, setPosition ] = useState('0% 0%');
 
   // Handles modal window overflow
@@ -25,6 +24,7 @@ const ExpandedView = ( {src} ) => {
 
   return (
     <Figure className='expanded-view' onMouseMove={handleMouseMove} >
+      {console.log('woooooooo')}
       <Image className='expanded-thumbnail' src={src} />
     </Figure>
   )
