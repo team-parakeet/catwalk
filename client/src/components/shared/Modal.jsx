@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Overlay, ModalWindow, ModalHeader, ModalExit, Line, ModalSubmit, ModalFooter } from '../styles/shared/ModalStyled.styled';
 
-function ModalForm({ toggleModal = () => {}, headerText, handleSubmit = () => {}, children}) {
+function ModalForm({ submitInModal = true, toggleModal = () => {}, headerText, handleSubmit = () => {}, children }) {
 
   const modalRef = useRef();
 
@@ -14,7 +14,7 @@ function ModalForm({ toggleModal = () => {}, headerText, handleSubmit = () => {}
     }
 
     const handleOutsideClick = e => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
+      if (modalRef.current && !modalRef.current.contains(e.target)) {
         toggleModal();
       }
     }

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
-import { StarsStyled, Rating1, Rating2 } from '../styles/reviews/StarsStyled.styled.js';
+import { StarsStyled, Rating1, Rating2 } from '../styles/shared/StarsStyled.styled.js';
 
-function Stars({ rating = 0, id }) {
+export function Stars({ rating = 0, id }) {
   const id2 = 521 + (id * 17);
   useEffect(() => {
     if (rating) {
@@ -17,7 +17,6 @@ function Stars({ rating = 0, id }) {
     }
   }, [rating])
 
-
   return (
     <StarsStyled>
       <Rating1 id={id}></Rating1>
@@ -25,6 +24,5 @@ function Stars({ rating = 0, id }) {
     </StarsStyled>
   )
 }
-
 
 export default Stars;
