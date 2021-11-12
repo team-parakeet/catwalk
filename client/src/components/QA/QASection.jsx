@@ -17,6 +17,7 @@ const QASection = ({productId}) => {
   }, [productId])
 
   useEffect(() => {
+    console.log(product_id)
     getAllQuestions(productId)
       .then(results => {
         setQuestions(results.data.results); // Already sorted by Question Helpfulness
