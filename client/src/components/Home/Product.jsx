@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { TextContainer, Image, ProductContainer } from './Product.styled.js';
+import { TextContainer, Image, ProductContainer } from '../styles/Home/Product.styled.js';
 
 const Product = ( {id, name, price} ) => {
   return (

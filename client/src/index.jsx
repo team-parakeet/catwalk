@@ -23,7 +23,7 @@ import { LoaderWrapper } from './components/styles/reviews/LoaderWrapper.styled.
 
 // Routing
 import { BrowserRouter as Router, Routes, Route, Link, useParams } from 'react-router-dom';
-import Home from './components/Home.jsx';
+import Home from './components/Home/Home.jsx';
 
 const SiteWrapper = styled.div`
   border: hsla(205, 37%, 60%, 50%) solid 5px;
@@ -176,7 +176,6 @@ const App = () => {
       </SiteWrapper>
     </div>
   );
-<<<<<<< HEAD
 };
 
 ReactDOM.render(
@@ -194,8 +193,3 @@ ReactDOM.render(
   </Router>,
   document.getElementById('app')
 );
-=======
-}
-
-// ReactDOM.render(<App productId={39333} />, document.getElementById('app'));
->>>>>>> homepage
