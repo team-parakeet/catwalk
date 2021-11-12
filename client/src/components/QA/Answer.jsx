@@ -47,7 +47,7 @@ const Answer = ({ answers }) => {
                 <SubAnswerBody className='answer-sub-text'>
                   <By answer={answers[answer]} />
                   <Spacer>|</Spacer>
-                  <Helpful count={answers[answer].helpfulness} />
+                  <Helpful id={answer} type={'answer'} count={answers[answer].helpfulness} />
                   <Spacer>|</Spacer>
                   <Report />
                 </SubAnswerBody>
@@ -56,12 +56,12 @@ const Answer = ({ answers }) => {
           })}
           {moreAnswers > 0 && (
             <LoadMoreAnswersBtn onClick={() => setLoadFactor(loadFactor + 2)}>
-              Load more answers ({moreAnswers})
+              See more answers ({moreAnswers})
             </LoadMoreAnswersBtn>
           )}
           {loadFactor > 2 && (
             <CollapseAnswersBtn onClick={() => setLoadFactor(2)}>
-              Collapse all answers
+              Collapse answers
             </CollapseAnswersBtn>
           )}
         </ResponsesContainer>
