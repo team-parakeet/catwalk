@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useCallback } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import ExpandedView from './ExpandedView.jsx';
 import ModalForm from '../shared/Modal.jsx';
 import { getProductStyles } from '../../request.js';
