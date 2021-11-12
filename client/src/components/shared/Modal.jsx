@@ -37,7 +37,7 @@ function ModalForm({ submitInModal = true, toggleModal = () => {}, headerText = 
           <ModalExit onClick={() => toggleModal()}>&times;</ModalExit>
         </ModalHeader>
         <Line />
-        {children}
+        { children }
         {submitInModal &&
         <ModalFooter>
           <ModalSubmit type="submit" onClick={() => handleSubmitOnClick()}>
