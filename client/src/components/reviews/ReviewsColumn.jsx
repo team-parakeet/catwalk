@@ -5,16 +5,18 @@ import ComparisonScales from "./ComparisonScales.jsx";
 import { ReviewsColumnContainer, PercentBar } from "../styles/reviews/ReviewsColumnStyled.styled.js";
 
 function ReviewsColumn({ reviews, productId, avgRating }) {
-  const [ratings, setRatings] = useState({ 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 })
+  const [ratings, setRatings] = useState({})
   const [recommendPercent, setRecommendPercent] = useState(null);
 
   useEffect(() => {
+
+    const newRatings = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 }
+
     reviews.forEach(review => {
       const currentRating = review.rating;
-      setRatings(prevState => ({
-        ...prevState,
-        [currentRating]: prevState[currentRating] + 1
-      }))
+      newRatings[currentRating] = newRatings[currentRating] + 1
+      console.log(newRatings)
+      setRatings(newRatings)
     })
 
     const getRecommendPercentage = () => {
@@ -31,6 +33,8 @@ function ReviewsColumn({ reviews, productId, avgRating }) {
   }, [reviews])
 
   const numOfReviews = reviews.length;
+
+  console.log(ratings)
 
   return (
     <ReviewsColumnContainer>
