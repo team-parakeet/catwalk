@@ -12,7 +12,7 @@ import { DefaultView } from './components/overview/DefaultView.jsx';
 
 // Q&A imports
 import { Provider as QAProvider } from './components/QA/QAContext.jsx';
-import QuestionsAnswers from './components/QA/QASection.jsx';
+import QASection from './components/QA/QASection.jsx';
 import Loader from 'react-loader-spinner';
 
 // Review imports
@@ -168,7 +168,7 @@ const App = () => {
         <br></br>
         <div className="q-and-a">
           <QAProvider>
-            <QuestionsAnswers />
+            <QASection productId={productId}/>
           </QAProvider>
         </div>
       </SiteWrapper>

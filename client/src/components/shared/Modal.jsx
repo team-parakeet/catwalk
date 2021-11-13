@@ -56,7 +56,7 @@ function ModalForm({
         { children }
         {type !== 'overview' &&
           <ModalFooter>
-            <ModalSubmit type="submit" onClick={() => handleSubmitOnClick()}>
+            <ModalSubmit type="submit" onClick={(e) => handleSubmitOnClick(e)}>
               Submit
             </ModalSubmit>
           </ModalFooter>
