@@ -43,7 +43,16 @@ function ReviewsContainer({ reviews, productId, fetchReviews }) {
   }
 
   if (!reviews.length || !currentReviews) {
-    return null
+    return (
+      <div>
+        <Button handleOnClick={toggleModal} text={'Add a review'} />
+        {showModal ?
+          <ReviewModal productId={productId} reviewMeta={reviewMeta} fetchReviews={fetchReviews} toggleModal={toggleModal} />
+          :
+          null
+        }
+      </div>
+    )
   }
 
   const reviewsToShow = currentReviews.slice(0, numReviewsShown);
@@ -57,9 +66,6 @@ function ReviewsContainer({ reviews, productId, fetchReviews }) {
       <ButtonWrapper>
         {reviews.length < 2 || reviewsToShow.length === reviews.length ? null :
         <Button handleOnClick={handleMoreReviewsOnClick} text={'Show more reviews'} />
-        }
-        {reviewsToShow.length === reviews.length &&
-        <Button handleOnClick={handleShowLessOnClick} text={'Show less reviews'} />
         }
         <Button handleOnClick={toggleModal} text={'Add a review'} />
       </ButtonWrapper>
