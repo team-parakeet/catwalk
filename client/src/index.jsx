@@ -157,7 +157,7 @@ const App = () => {
           ) : (
             <Reviews
               reviews={reviews}
-              productId={productId}
+              productId={Number(productId)}
               avgRating={rating}
               fetchReviews={fetchReviews}
             />

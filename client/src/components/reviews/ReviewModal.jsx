@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ModalForm from '../shared/Modal.jsx';
 import SelectStars from './SelectStars.jsx';
-import Button from './Button.jsx';
 import { postNewReview } from '../../request.js';
 import { ReviewModalWindowStyled, LabelStyled, FormInput, ReviewBodyInput, QuestionWrapper, ButtonWrapper, StarWrapper, DescriptionWrapper, CharRadioWrapper } from '../styles/reviews/ReviewModalStyled.styled';
 
@@ -53,6 +52,7 @@ function ReviewModal({ productId, reviewMeta, fetchReviews, toggleModal }) {
       photos: [],
       characteristics: charRating,
     };
+    console.log(data)
     postNewReview(data)
     .then(() => fetchReviews())
     .catch(() => alert('Please fill in all fields to leave a review!'))
