@@ -65,3 +65,8 @@ export const HelpfulLink = styled.a`
     text-decoration: none;
   }
 `
+
+export const ImgStyled = styled.img`
+  height: 100px;
+  width: 100px;
+`

@@ -8,9 +8,9 @@ export const ModalWindow = styled.div`
   border-radius: 10px;
   top: 25%;
   left: 25%;
-  z-index: 10;
+  z-index: 999;
   background-color: #fff;
-  width: 50%;
+  width: auto;
   height: 50%;
   max-width: 80%;
   max-height: 80%;
@@ -59,7 +59,7 @@ export const ModalFooter = styled.div`
 export const ModalSubmit = styled.button`
   border: none;
   border-radius: 10px;
-  background: aquamarine;
+  background: #ffffff;
   font-size: 1rem;
   cursor: pointer;
   padding: 5px 10px;
@@ -74,20 +74,6 @@ export const ModalSubmit = styled.button`
   }
 `
 
-export const ReviewModalWindow = styled(ModalWindow)`
-  top: 25%;
-  left: 25%;
-  position: absolute;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  display: flex;
-  width: 50%;
-  height: 50%;
-  background: #fff;
-  border: 1px solid hotpink;
-  font-size: 10pt;
-`
 
 export const Overlay = styled.div`
   position: fixed;
@@ -97,4 +83,5 @@ export const Overlay = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: rgba(0,0,0,0.4);
+  z-index: 1;
 `

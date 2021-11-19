@@ -3,7 +3,6 @@ import { getProductReviewMeta } from '../../request.js';
 import ReviewsList from './ReviewsList.jsx';
 import SortBy from './SortBy.jsx';
 import Button from './Button.jsx';
-import ModalForm from '../shared/Modal.jsx';
 import ReviewModal from './ReviewModal.jsx';
 import { ReviewsContainerStyled, ButtonWrapper } from '../styles/reviews/ReviewsContainerStyled.styled.js';
 
@@ -44,7 +43,16 @@ function ReviewsContainer({ reviews, productId, fetchReviews }) {
   }
 
   if (!reviews.length || !currentReviews) {
-    return null
+    return (
+      <div>
+        <Button handleOnClick={toggleModal} text={'Add a review'} />
+        {showModal ?
+          <ReviewModal productId={productId} reviewMeta={reviewMeta} fetchReviews={fetchReviews} toggleModal={toggleModal} />
+          :
+          null
+        }
+      </div>
+    )
   }
 
   const reviewsToShow = currentReviews.slice(0, numReviewsShown);
@@ -53,21 +61,16 @@ function ReviewsContainer({ reviews, productId, fetchReviews }) {
     <ReviewsContainerStyled>
       <SortBy setCurrentReviews={setCurrentReviews} productId={productId} />
       {reviews.length !== 0 &&
-      <ReviewsList reviews={reviewsToShow}/>
+      <ReviewsList reviews={reviewsToShow} />
       }
       <ButtonWrapper>
         {reviews.length < 2 || reviewsToShow.length === reviews.length ? null :
         <Button handleOnClick={handleMoreReviewsOnClick} text={'Show more reviews'} />
         }
-        {reviewsToShow.length === reviews.length &&
-        <Button handleOnClick={handleShowLessOnClick} text={'Show less reviews'} />
-        }
         <Button handleOnClick={toggleModal} text={'Add a review'} />
       </ButtonWrapper>
       {showModal ?
-      <ModalForm toggleModal={toggleModal} headerText={'Write Your Review'} submitInModal={false}>
-        <ReviewModal productId={productId} reviewMeta={reviewMeta} fetchReviews={fetchReviews} toggleModal={toggleModal} />
-      </ModalForm>
+      <ReviewModal productId={productId} reviewMeta={reviewMeta} fetchReviews={fetchReviews} toggleModal={toggleModal} />
       :
       null
       }

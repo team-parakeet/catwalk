@@ -7,6 +7,7 @@ export const ButtonStyled = styled.button`
   border: 0px;
   color: #000000;
   padding: 0px;
+  height: 20px;
 
   &:hover {
     transform: scale(1.1);

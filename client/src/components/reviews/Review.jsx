@@ -5,8 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCheck } from '@fortawesome/free-solid-svg-icons'
 import Stars from '../shared/Stars.jsx';
 import {
-  ReviewContainer, ReviewTitle, ReviewDate, ReviewStars, ReviewBody, ReviewResponse, ReviewResponseBody, ReviewRecommend, ReviewUser, ReviewHelpfulness, ReviewPhotos, HelpfulLink
-} from '../styles/reviews/ReviewStyled.styled.js';
+  ReviewContainer, ReviewTitle, ReviewDate, ReviewStars, ReviewBody, ReviewResponse, ReviewResponseBody, ReviewRecommend, ReviewUser, ReviewHelpfulness, ReviewPhotos, HelpfulLink, ImgStyled } from '../styles/reviews/ReviewStyled.styled.js';
 
 function Review({ review, id }) {
 
@@ -52,9 +51,9 @@ function Review({ review, id }) {
       {review.response ? response : null}
       {review.recommend ? recommend : null}
       <ReviewPhotos>
-        { review.photos.map(photo => {
-          return <div key={photo.id}>Photo url: {photo.url}</div>
-        }) }
+        {review.photos.map(photo => {
+          return <ImgStyled key={photo.id} src={photo.url} alt={review.summary}/>
+        })}
       </ReviewPhotos>
       {hasClicked ? helpfulNoLink : helpfulLink}
     </ReviewContainer>

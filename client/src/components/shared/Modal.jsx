@@ -11,7 +11,6 @@ import {
 
 function ModalForm({
   type = '',
-  submitInModal = true,
   toggleModal = () => {},
   headerText,
   handleSubmit = () => {},
@@ -42,7 +41,6 @@ function ModalForm({
   }, [toggleModal]);
 
   const handleSubmitOnClick = e => {
-    e.preventDefault();
     handleSubmit(e);
     toggleModal();
   };
